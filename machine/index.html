@@ -1,0 +1,290 @@
+<!doctype html><html lang="he" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>מדריך המכונה · vaknin.ai</title>
+<meta property="og:title" content="מדריך המכונה">
+<meta property="og:description" content="5 שימושים + פרומפטים מוכנים להעתקה · vaknin.ai">
+<meta name="theme-color" content="#141210">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;600;700;800;900&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141210;--panel:#1A1613;--page:#F6F1E2;--coral:#D97757;--acc:#2C49F5}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--page);direction:rtl;
+  font-family:'Heebo',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+  line-height:1.62;overflow-x:hidden}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px 72px}
+.nb{white-space:nowrap}
+.hot{color:var(--coral);font-weight:800}
+.mk{color:var(--coral);font-weight:900}
+.ph{color:var(--coral);font-weight:700}
+a{color:inherit}
+/* section frame */
+.sec{padding:40px 0;border-top:1px solid rgba(246,241,226,.08)}
+.lbl{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-weight:700;
+  font-size:14px;letter-spacing:.02em;color:var(--coral);margin-bottom:12px}
+.lbl .sq{width:11px;height:11px;background:var(--coral);border-radius:3px;flex:none}
+h2{font-weight:900;font-size:clamp(27px,6.6vw,40px);line-height:1.05;letter-spacing:-.02em}
+h3{font-weight:900;font-size:clamp(21px,4.6vw,27px);margin-top:26px}
+.lead{margin-top:16px;font-size:clamp(16px,4vw,19px);line-height:1.62;color:rgba(246,241,226,.84)}
+.lead.sm{font-size:clamp(15px,3.7vw,18px)}
+/* hero */
+.hero{padding:46px 0 8px;text-align:right}
+.eyebrow{display:flex;align-items:center;gap:14px;font-family:'Roboto Mono',monospace;font-weight:700;
+  font-size:14px;letter-spacing:.08em;color:var(--coral);margin-bottom:18px}
+.eyebrow .ln{width:40px;height:2px;background:var(--coral)}
+.hero h1{font-weight:900;font-size:clamp(38px,10vw,66px);line-height:.98;letter-spacing:-.03em}
+.hsub{margin-top:20px;font-weight:800;font-size:clamp(20px,5.2vw,32px)}
+.htag{margin-top:14px;font-size:clamp(15px,3.8vw,19px);color:rgba(246,241,226,.68)}
+/* hero + chapter images: the FULL image melts into the page — no crop, no frame, edge-bleed
+   exactly to the .wrap edges (cancels its 20px padding); a band mask fades top+bottom into
+   #141210 so the dark-studio background merges seamlessly (the locked .frbg technique). */
+.heroimg,.chimg{margin-inline:-20px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 86%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 86%,transparent 100%)}
+.heroimg{margin-top:22px}
+.heroimg img,.chimg img{display:block;width:100%;height:auto}
+.by{margin-top:22px;font-weight:700;font-size:15px;color:rgba(246,241,226,.6)}
+/* idea card + steps + note (intro) */
+.idea{margin-top:24px;background:var(--panel);border-right:5px solid var(--coral);
+  border-radius:8px 18px 18px 8px;padding:18px 22px}
+.idea-t{font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;color:var(--coral);letter-spacing:.03em}
+.idea-b{margin-top:8px;font-weight:800;font-size:clamp(17px,4.2vw,22px);line-height:1.35}
+.steps{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;font-weight:600;font-size:clamp(15px,3.8vw,18px)}
+.steps li::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:10px;
+  background:rgba(217,119,87,.15);color:var(--coral);font-family:'Roboto Mono',monospace;font-weight:700;
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.note{margin-top:24px;background:rgba(44,73,245,.14);border-radius:14px;padding:15px 20px;
+  font-weight:700;font-size:clamp(14px,3.5vw,17px);line-height:1.5;color:#9db0ff}
+/* jump nav */
+.jump{margin-top:14px;background:var(--panel);border:1px solid rgba(217,119,87,.22);border-radius:20px;padding:22px 20px}
+.jump-t{font-weight:900;font-size:clamp(18px,4.4vw,22px);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chips a{display:inline-flex;align-items:center;gap:8px;background:rgba(217,119,87,.12);
+  border:1px solid rgba(217,119,87,.30);color:var(--page);border-radius:999px;padding:8px 14px;
+  font-weight:700;font-size:14px;text-decoration:none;transition:.15s}
+.chips a b{color:var(--coral)}
+.chips a:hover{background:rgba(217,119,87,.24)}
+.copyall{margin-top:16px;width:100%;display:flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--coral);color:var(--bg);border:none;border-radius:12px;padding:14px;cursor:pointer;
+  font-family:'Heebo',sans-serif;font-weight:800;font-size:clamp(15px,3.8vw,17px)}
+.copyall.ok{background:#28C840}
+/* chapter bits */
+.scen{margin-top:14px;font-size:clamp(15px,3.9vw,19px);color:rgba(246,241,226,.82)}
+.scen b{color:var(--coral);font-weight:800;margin-inline-end:8px}
+.chimg{margin-top:20px}
+/* prompt / code box */
+.pbox{margin-top:22px;background:#0F0D0B;border:1px solid rgba(217,119,87,.30);border-radius:18px;overflow:hidden}
+.pbar{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(246,241,226,.07)}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%}
+.plbl{font-family:'Roboto Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.18em;
+  color:rgba(246,241,226,.5);direction:ltr}
+.copy{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(217,119,87,.12);
+  border:1px solid rgba(217,119,87,.4);color:var(--coral);border-radius:999px;padding:7px 14px;cursor:pointer;
+  font-family:'Heebo',sans-serif;font-weight:700;font-size:14px;transition:.15s}
+.copy:hover{background:rgba(217,119,87,.22)}
+.copy.ok{color:#28C840;border-color:#28C840;background:rgba(40,200,64,.12)}
+.code{padding:20px 18px;font-family:'Roboto Mono',monospace;font-size:clamp(13px,3.4vw,15.5px);
+  line-height:1.75;color:var(--page);overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+.code[dir="ltr"]{text-align:left}
+.code.file{white-space:pre-wrap}
+.code>div{min-height:.6em}
+/* why / example / tip */
+.why{margin-top:22px;background:var(--panel);border-radius:16px;padding:20px 22px}
+.why-t{font-weight:900;font-size:clamp(17px,4.2vw,21px);margin-bottom:12px}
+.why-i{display:flex;gap:11px;margin-bottom:10px;font-size:clamp(15px,3.7vw,17px);line-height:1.4}
+.why-i:last-child{margin-bottom:0}
+.why-i .ck{color:var(--coral);font-weight:900;flex:none}
+.ex{margin-top:16px;font-size:clamp(14px,3.6vw,17px);line-height:1.5;color:rgba(246,241,226,.82)}
+.ex-l{display:inline-block;font-family:'Roboto Mono',monospace;font-weight:700;font-size:13px;
+  color:var(--coral);background:rgba(217,119,87,.15);border-radius:7px;padding:3px 10px;margin-inline-end:9px}
+.ex-l.big{font-size:15px;margin-bottom:12px}
+.tip{margin-top:16px;display:flex;align-items:baseline;gap:12px;font-size:clamp(15px,3.7vw,17px);
+  line-height:1.45;color:rgba(246,241,226,.72)}
+.tip .tl{flex:none;font-weight:800;font-size:14px;color:var(--bg);background:var(--coral);
+  border-radius:999px;padding:4px 14px}
+.tip .tl::before{content:"💡";margin-inline-end:7px;font-size:14px}
+.tomenu{display:inline-block;margin-top:20px;font-family:'Roboto Mono',monospace;font-weight:700;font-size:13px;
+  color:rgba(246,241,226,.45);text-decoration:none}
+.tomenu:hover{color:var(--coral)}
+/* framework grid */
+.fgrid{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fcard{background:var(--panel);border-radius:16px;padding:18px 18px}
+.fk{display:flex;align-items:center;gap:11px;font-weight:900;font-size:clamp(16px,3.9vw,20px);margin-bottom:9px}
+.fn{flex:none;width:32px;height:32px;border-radius:9px;background:rgba(217,119,87,.15);color:var(--coral);
+  font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.ft{font-size:clamp(14px,3.5vw,16px);line-height:1.4;color:rgba(246,241,226,.78)}
+.fw-ex{margin-top:22px}
+/* closing */
+.closing{padding:48px 0 8px;text-align:right;border-top:1px solid rgba(246,241,226,.08)}
+.closing h2{font-size:clamp(30px,7.6vw,46px)}
+.pill{margin-top:20px;display:inline-block;font-weight:900;font-size:clamp(18px,4.6vw,24px);
+  background:var(--coral);color:var(--bg);border-radius:12px;padding:11px 20px}
+.cnote{margin-top:18px;font-weight:800;font-size:clamp(16px,4vw,20px);color:var(--coral)}
+.dl{margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:transparent;
+  border:1.5px solid rgba(217,119,87,.5);color:var(--coral);border-radius:12px;padding:13px 22px;
+  font-weight:800;font-size:clamp(15px,3.8vw,17px);text-decoration:none;transition:.15s}
+.dl:hover{background:rgba(217,119,87,.12)}
+.cta{margin-top:26px;font-weight:600;font-size:clamp(15px,3.8vw,18px);line-height:1.5;color:rgba(246,241,226,.8)}
+.sign{margin-top:16px;font-weight:800;font-size:16px;color:var(--coral)}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+/* ferrari data points */
+.pts{margin-top:22px;display:flex;flex-direction:column;gap:15px}
+.pt{display:flex;gap:13px;align-items:flex-start;font-size:clamp(15px,3.9vw,18px);line-height:1.5}
+.pt-b{flex:none;width:9px;height:9px;border-radius:50%;background:var(--coral);margin-top:.55em}
+/* benchmark bars */
+.bsrc{margin-top:10px;font-family:'Roboto Mono',monospace;font-weight:700;font-size:13px;color:var(--coral);direction:ltr}
+.bench{margin-top:20px;display:flex;flex-direction:column;gap:11px}
+.brow{display:flex;align-items:center;gap:12px}
+.bname{flex:none;width:88px;font-weight:700;font-size:clamp(12px,3.2vw,15px);direction:ltr;text-align:left}
+.btrack{flex:1;height:30px;background:rgba(246,241,226,.07);border-radius:8px;overflow:hidden}
+.bfill{display:block;height:100%;background:rgba(217,119,87,.38);border-radius:8px}
+.bval{flex:none;width:54px;font-family:'Roboto Mono',monospace;font-weight:700;font-size:clamp(13px,3.4vw,16px);direction:ltr;text-align:left}
+.brow.me .bname,.brow.me .bval{color:var(--coral);font-weight:900}
+.brow.me .bfill{background:var(--coral)}
+.bfoot{margin-top:18px;font-weight:700;font-size:clamp(14px,3.6vw,17px);line-height:1.45}
+.bfoot2{margin-top:13px;font-weight:700;font-size:clamp(14px,3.6vw,17px);line-height:1.45}
+.bfoot2 .lbl{display:inline-block;font-weight:700;font-size:13px;color:var(--page);background:rgba(217,119,87,.2);border-radius:999px;padding:3px 12px;margin-inline-end:10px}
+/* timeline */
+.tline{margin-top:22px}
+.tlrow{position:relative;padding-inline-end:26px;padding-bottom:22px;border-inline-end:2px solid rgba(217,119,87,.25);margin-inline-end:7px}
+.tlrow:last-child{border-color:transparent;padding-bottom:2px}
+.tldot{position:absolute;inset-inline-end:-9px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px var(--bg)}
+.tlrow.here .tldot{background:var(--page);box-shadow:0 0 0 5px var(--bg),0 0 0 9px var(--coral)}
+.tldate{display:block;font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;color:var(--coral)}
+.tlrow.hot .tldate{display:inline-block;background:var(--coral);color:var(--bg);padding:2px 12px;border-radius:8px}
+.tltext{display:block;margin-top:4px;font-weight:600;font-size:clamp(15px,3.7vw,18px);line-height:1.4;color:rgba(246,241,226,.84)}
+.tlrow.here .tltext,.tlrow.hot .tltext{color:var(--page);font-weight:700}
+/* urgency banner */
+.urg{margin-top:22px;background:rgba(217,119,87,.13);border:1px solid rgba(217,119,87,.3);border-radius:14px;padding:14px 20px;font-weight:800;font-size:clamp(15px,3.9vw,18px);line-height:1.4;color:var(--coral)}
+/* print (PDF generated from this HTML) */
+@page{margin:12mm}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .copy,.copyall,.tomenu,.dl,.jump{display:none !important}
+  /* only the ATOMIC blocks resist splitting; sections flow naturally across pages (avoiding
+     .sec/.hero/.closing here bloats the PDF with whitespace once sections fit a page). */
+  .pbox,.why,.fcard,.idea,.tline,.bench,.pts,.heroimg,.chimg{break-inside:avoid}
+  /* screen keeps the big edge-to-edge melt; print caps image height so heading+image share a
+     page (no isolated-image pages / empty gaps) — centered, no bleed, aspect preserved. */
+  .heroimg,.chimg{margin-inline:0}
+  .heroimg img,.chimg img{max-height:480px;width:auto;max-width:100%;margin:0 auto}
+}
+</style>
+</head><body><div class="wrap">
+
+<section class="sec">
+    <div class="lbl"><span class="sq"></span>מה זה</div>
+    <h2>המכונה: <span class="mk">שלוש שכבות</span></h2>
+    <p class="lead">רוב האנשים מכירים רק את הצ'אט. מאחוריו יש שלוש שכבות - פלאגינים, סקילים ו-<span class="nb">MCP</span> - שכל אחד יכול להתקין, גם בלי רקע טכני. ככה בניתי מהן מכונה.</p>
+    <div class="idea"><div class="idea-t">הרעיון בשורה אחת</div><div class="idea-b">כל שכבה מוסיפה כוח משלה: צוות, ידע, וגישה חיה למערכות שלכם.</div></div>
+    <h3>שלוש השכבות</h3>
+    <ol class="steps"><li><span>פלאגין - צוות שלם בהתקנה אחת.</span></li><li><span>סקיל - ידע שנטען בדיוק כשצריך.</span></li><li><span><span class="nb">MCP</span> - גישה חיה למערכות שלכם.</span></li></ol>
+    <div class="note">מ-2026 סקילים הם תקן פתוח: אותו קובץ רץ גם ב-<span class="nb">Copilot</span>, ב-<span class="nb">Cursor</span> וגם ב-<span class="nb">Gemini</span> <span class="nb">CLI</span> - כ-40 כלים כבר תומכים.</div>
+    
+  </section>
+<nav class="jump" id="menu">
+    <div class="jump-t">5 השימושים - קפצו לאן שתרצו</div>
+    <div class="chips"><a href="#use-1"><b>1</b>פלאגין: צוות שלם בהתקנה אחת</a><a href="#use-2"><b>2</b>סקיל: ידע שנטען בדיוק כשצריך</a><a href="#use-3"><b>3</b>MCP: החיבורים החיים</a></div>
+    <button class="copyall" type="button"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="lbl">העתק את כל הפרומפטים</span></button>
+  </nav><section class="sec chap" id="use-1">
+    <div class="lbl"><span class="sq"></span>פלאגינים</div>
+    <h2>פלאגין: <span class="mk">צוות שלם</span> בהתקנה אחת</h2>
+    <p class="scen"><b>מתי</b> כשאתם רוצים להוסיף ל-<span class="nb">Claude</span> הרבה יכולת בבת אחת, בלי להרכיב הכל ידנית.</p>
+    
+    <div class="pbox">
+      <div class="pbar"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="plbl">PROMPT</span><button class="copy" type="button" data-id="use-1"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="lbl">העתקה</span></button></div>
+      <div class="code" dir="ltr"><div>/plugin install <span class="ph">[name]</span></div></div>
+    </div>
+    <div class="why"><div class="why-t">למה זה עובד</div><div class="why-i"><span class="ck">✓</span><span>פלאגין אחד מביא חבילה שלמה: סקילים, חיבורים ופקודות.</span></div><div class="why-i"><span class="ck">✓</span><span>אצלי רצים חמישה - טלגרם, זיכרון בין שיחות, ואפילו המודל של <span class="nb">OpenAI.</span></span></div><div class="why-i"><span class="ck">✓</span><span>במרקטפלייס הרשמי מחכים יותר מ-200.</span></div></div>
+    <div class="ex"><span class="ex-l">דוגמה</span>פלאגין <span class="nb">telegram</span> נותן לכם לשלוט ב-<span class="nb">Claude</span> מהטלפון, כמו בצ'אט רגיל.</div>
+    <div class="tip"><span class="tl">טיפ</span><span>מתחילים מפלאגין אחד שימושי, ומרחיבים לפי הצורך.</span></div>
+    <a class="tomenu" href="#menu">↑ חזרה לתפריט השימושים</a>
+  </section>
+<section class="sec">
+    <div class="lbl"><span class="sq"></span>פלאגינים</div>
+    <h2>8 הפלאגינים <span class="mk">המומלצים</span></h2>
+    <p class="lead sm">⭐ = האהובים ביותר עליי.</p>
+    <div class="fgrid"><div class="fcard"><div class="fk"><span class="fn">1</span><span>telegram ⭐</span></div><div class="ft">שולטים ב-<span class="nb">Claude</span> מהטלפון, כמו בצ'אט רגיל</div></div><div class="fcard"><div class="fk"><span class="fn">2</span><span>claude-mem ⭐</span></div><div class="ft">הוא זוכר אתכם גם אחרי שסגרתם את השיחה</div></div><div class="fcard"><div class="fk"><span class="fn">3</span><span>codex</span></div><div class="ft">מוסיף את המודל של <span class="nb">OpenAI</span> כעוזר נוסף</div></div><div class="fcard"><div class="fk"><span class="fn">4</span><span>superpowers</span></div><div class="ft">גורם לו לתכנן קודם ולבדוק בסוף, כמו מקצוען</div></div><div class="fcard"><div class="fk"><span class="fn">5</span><span>frontend-design ⭐</span></div><div class="ft">כל דף שהוא בונה יוצא יפה ומעוצב</div></div><div class="fcard"><div class="fk"><span class="fn">6</span><span>marketingskills</span></div><div class="ft">44 עוזרי שיווק: פוסטים, מיילים, קמפיינים</div></div><div class="fcard"><div class="fk"><span class="fn">7</span><span>hyperframes</span></div><div class="ft">הופך דפים פשוטים לסרטוני וידאו</div></div><div class="fcard"><div class="fk"><span class="fn">8</span><span>skill-creator ⭐</span></div><div class="ft">אומרים לו מה צריך, הוא בונה לכם סקיל חדש</div></div></div>
+    
+  </section>
+<section class="sec chap" id="use-2">
+    <div class="lbl"><span class="sq"></span>סקילים</div>
+    <h2>סקיל: <span class="mk">ידע</span> שנטען בדיוק כשצריך</h2>
+    <p class="scen"><b>מתי</b> כשאתם רוצים ש-<span class="nb">Claude</span> יעשה משהו ספציפי מצוין, רק כשצריך אותו.</p>
+    
+    <div class="pbox">
+      <div class="pbar"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="plbl">PROMPT</span><button class="copy" type="button" data-id="use-2"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="lbl">העתקה</span></button></div>
+      <div class="code" dir="ltr"><div>npx skills add <span class="ph">[repo]</span></div></div>
+    </div>
+    <div class="why"><div class="why-t">למה זה עובד</div><div class="why-i"><span class="ck">✓</span><span>סקיל הוא קובץ הוראות שנטען רק כשצריך אותו.</span></div><div class="why-i"><span class="ck">✓</span><span>יש לי 79, ו-14 מהם כתבתי בעצמי.</span></div><div class="why-i"><span class="ck">✓</span><span>טעות שתיקנתי פעם אחת - כבר לא חוזרת.</span></div></div>
+    <div class="ex"><span class="ex-l">דוגמה</span>סקיל <span class="nb">humanizer</span> גורם לטקסטים שלו להישמע כמו בן אדם.</div>
+    <div class="tip"><span class="tl">טיפ</span><span>מ-2026 סקילים הם תקן פתוח - אותו קובץ רץ גם ב-<span class="nb">Copilot</span>, ב-<span class="nb">Cursor</span> וגם ב-<span class="nb">Gemini</span> <span class="nb">CLI.</span></span></div>
+    <a class="tomenu" href="#menu">↑ חזרה לתפריט השימושים</a>
+  </section>
+<section class="sec">
+    <div class="lbl"><span class="sq"></span>סקילים</div>
+    <h2>8 הסקילים <span class="mk">המומלצים</span></h2>
+    <p class="lead sm">⭐ = האהובים ביותר עליי.</p>
+    <div class="fgrid"><div class="fcard"><div class="fk"><span class="fn">1</span><span>המסמכים של Anthropic</span></div><div class="ft">מכין לכם קבצים אמיתיים: <span class="nb">Word</span>, <span class="nb">Excel</span>, <span class="nb">PowerPoint</span></div></div><div class="fcard"><div class="fk"><span class="fn">2</span><span>humanizer</span></div><div class="ft">גורם לטקסטים שלו להישמע כמו בן אדם</div></div><div class="fcard"><div class="fk"><span class="fn">3</span><span>claude-seo</span></div><div class="ft">עוזר לאתר שלכם להופיע גבוה בגוגל</div></div><div class="fcard"><div class="fk"><span class="fn">4</span><span>caveman</span></div><div class="ft">עונה קצר ולעניין, וחוסך לכם כסף</div></div><div class="fcard"><div class="fk"><span class="fn">5</span><span>NotebookLM</span></div><div class="ft">עונה מתוך הפתקים והמחקרים ששמרתם</div></div><div class="fcard"><div class="fk"><span class="fn">6</span><span>watch ⭐</span></div><div class="ft">נותן לו עיניים: מסכם לכם כל סרטון</div></div><div class="fcard"><div class="fk"><span class="fn">7</span><span>brainstorming ⭐</span></div><div class="ft">עוצר לשאול שאלות לפני שרצים לבנות</div></div><div class="fcard"><div class="fk"><span class="fn">8</span><span>systematic-debugging ⭐</span></div><div class="ft">מוצא את התקלה צעד-צעד במקום לנחש</div></div></div>
+    
+  </section>
+<section class="sec chap" id="use-3">
+    <div class="lbl"><span class="sq"></span>חיבורים</div>
+    <h2><span class="nb">MCP</span>: <span class="mk">החיבורים</span> החיים</h2>
+    <p class="scen"><b>מתי</b> כשאתם רוצים ש-<span class="nb">Claude</span> יעבוד עם המערכות האמיתיות שלכם, לא רק ידבר עליהן.</p>
+    
+    <div class="pbox">
+      <div class="pbar"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="plbl">PROMPT</span><button class="copy" type="button" data-id="use-3"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="lbl">העתקה</span></button></div>
+      <div class="code" dir="ltr"><div>claude mcp add <span class="ph">[server]</span></div></div>
+    </div>
+    <div class="why"><div class="why-t">למה זה עובד</div><div class="why-i"><span class="ck">✓</span><span>השכבה שמחברת את <span class="nb">Claude</span> למערכות שלכם.</span></div><div class="why-i"><span class="ck">✓</span><span>אצלי: החנות, הדאטהבייס, המייל, היומן והחיפוש.</span></div><div class="why-i"><span class="ck">✓</span><span>הוא לא רק יודע על העסק - הוא עובד בתוכו.</span></div></div>
+    <div class="ex"><span class="ex-l">דוגמה</span>חיבור <span class="nb">Gmail</span> קורא את המייל, מנסח תשובות ועושה סדר.</div>
+    <div class="tip"><span class="tl">טיפ</span><span>לא בטרמינל? אותם חיבורים קיימים גם ב-<span class="nb">claude.ai</span> תחת <span class="nb">Connectors</span>, בלי שורת קוד.</span></div>
+    <a class="tomenu" href="#menu">↑ חזרה לתפריט השימושים</a>
+  </section>
+<section class="sec">
+    <div class="lbl"><span class="sq"></span>חיבורים</div>
+    <h2>8 החיבורים <span class="mk">המומלצים</span></h2>
+    <p class="lead sm">⭐ = האהובים ביותר עליי.</p>
+    <div class="fgrid"><div class="fcard"><div class="fk"><span class="fn">1</span><span>Zapier</span></div><div class="ft">מחבר אותו לאלפי אפליקציות במכה אחת</div></div><div class="fcard"><div class="fk"><span class="fn">2</span><span>Notion</span></div><div class="ft">קורא ומעדכן את הדפים שלכם לבד</div></div><div class="fcard"><div class="fk"><span class="fn">3</span><span>GitHub ⭐</span></div><div class="ft">רואה את הקוד שלכם ועובד עליו ישירות</div></div><div class="fcard"><div class="fk"><span class="fn">4</span><span>Gmail ⭐</span></div><div class="ft">קורא את המייל, מנסח תשובות ועושה סדר</div></div><div class="fcard"><div class="fk"><span class="fn">5</span><span>Google Drive ⭐</span></div><div class="ft">פותח כל קובץ שיש לכם ב-<span class="nb">Drive</span></div></div><div class="fcard"><div class="fk"><span class="fn">6</span><span>Supabase ⭐</span></div><div class="ft">מנהל את בסיס הנתונים של האפליקציות שלי</div></div><div class="fcard"><div class="fk"><span class="fn">7</span><span>Context7 ⭐</span></div><div class="ft">מביא לו הוראות עדכניות לכל כלי קוד</div></div><div class="fcard"><div class="fk"><span class="fn">8</span><span>Playwright</span></div><div class="ft">גולש באתרים ובודק אותם בשבילכם</div></div></div>
+    
+  </section>
+<section class="sec">
+    <div class="lbl"><span class="sq"></span>מתחילים היום</div>
+    <h2><span class="mk">שלוש</span> התקנות להתחיל</h2>
+    <p class="lead">אחת מכל שכבה, מהניסיון שלי. כל אחת לוקחת דקות ספורות, וכבר תרגישו את ההבדל.</p>
+    <div class="idea"><div class="idea-t">הקצב שעובד</div><div class="idea-b">כלי אחד בשבוע, עד שהוא מרגיש טבעי. ואז הבא.</div></div>
+    <h3>שלושת הצעדים הראשונים</h3>
+    <ol class="steps"><li><span>פלאגין <span class="nb">telegram</span> - שולטים ב-<span class="nb">Claude</span> מהטלפון.</span></li><li><span>סקיל <span class="nb">frontend-design</span> - כל מה שהוא בונה יוצא מעוצב.</span></li><li><span>חיבור <span class="nb">Gmail</span> - קורא ועונה על המייל בשבילכם.</span></li></ol>
+    <div class="note">אין צורך להתקין הכל ביום אחד. שכבה-שכבה, כלי-כלי - וזה מצטבר למכונה.</div>
+    
+  </section>
+
+</div><script>
+const COPY = {"use-1":"/plugin install [name]","use-2":"npx skills add [repo]","use-3":"claude mcp add [server]"};
+function flash(btn, ok){
+  const l = btn.querySelector('.lbl') || btn;
+  const prev = l.getAttribute('data-prev') ?? l.textContent;
+  l.setAttribute('data-prev', prev);
+  l.textContent = ok ? 'הועתק ✓' : 'שגיאה, בחרו וגזרו ידנית';
+  btn.classList.add('ok');
+  clearTimeout(btn._t);
+  btn._t = setTimeout(()=>{ l.textContent = prev; btn.classList.remove('ok'); l.removeAttribute('data-prev'); }, 1600);
+}
+async function doCopy(text, btn){
+  try{ await navigator.clipboard.writeText(text); flash(btn, true); return; }catch(e){}
+  try{ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    const ok=document.execCommand('copy'); ta.remove(); flash(btn, ok);
+  }catch(e){ flash(btn, false); }
+}
+document.querySelectorAll('.copy').forEach(b=> b.addEventListener('click', ()=> doCopy(COPY[b.dataset.id]||'', b)));
+document.querySelector('.copyall')?.addEventListener('click', function(){
+  const ids=[...document.querySelectorAll('.chap .copy')].map(b=>b.dataset.id);
+  const all=ids.map((id,i)=>'# שימוש '+(i+1)+'\n'+(COPY[id]||'')).join('\n\n');
+  doCopy(all, this);
+});
+</script></body></html>
