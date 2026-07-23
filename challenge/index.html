@@ -182,6 +182,11 @@ footer .logo{color:var(--ink);margin-bottom:8px}
 @media print{
   html,body{background:#fff;overflow:visible}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* Apple PDFKit can't clip gradients to text (paints a solid box) or render box-shadow
+     (paints a solid gray block) -> force solid brand color + drop shadows for the PDF. */
+  *{box-shadow:none!important}
+  .grad,.rule .big{background:none!important;-webkit-background-clip:border-box!important;
+    background-clip:border-box!important;-webkit-text-fill-color:#7C3AED!important;color:#7C3AED!important}
   nav{display:none}
   .hero-cta,.trigger,.dl{display:none!important}
   .hero{padding-top:48px}
