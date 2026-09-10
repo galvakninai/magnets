@@ -287,4 +287,9 @@ document.querySelector('.copyall')?.addEventListener('click', function(){
   const all=ids.map((id,i)=>'# שימוש '+(i+1)+'\n'+(COPY[id]||'')).join('\n\n');
   doCopy(all, this);
 });
-</script></body></html>
+</script><script>
+(function(){var U="https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+function ev(e){try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({magnet_key:"machine",event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
+ev("view");document.querySelectorAll('a.cta,a[download],a[href*=".pdf"]').forEach(function(a){a.addEventListener("click",function(){ev("download")})});})();
+</script>
+</body></html>
