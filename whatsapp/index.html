@@ -78,4 +78,9 @@ h1 .acc{display:inline-block;padding-bottom:9px;box-shadow:inset 0 -7px 0 0 #25D
     <span>מפת החיבור · ספטמבר 2026</span>
   </div>
 </div>
+<script>
+(function(){var U="https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+function ev(e){try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({magnet_key:"whatsapp",event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
+ev("view");var a=document.querySelector("a.cta");if(a)a.addEventListener("click",function(){ev("download")});})();
+</script>
 </body></html>
