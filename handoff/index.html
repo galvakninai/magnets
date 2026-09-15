@@ -250,6 +250,10 @@ document.querySelectorAll('a.cta,a[download],a[href*=".pdf"]').forEach(function(
            consent_required:"צריך לאשר את קבלת המיילים כדי שאשלח.",
            rate_limited:"יותר מדי נסיונות. נסה שוב בעוד דקה.",
            _:"משהו נתקע אצלי. נסה שוב בעוד רגע."};
+  /* שיוך מקור (15/09/2026): ?src=<ערוץ>-<משטח>-<slug>, למשל tt-post-handoff-crm.
+     שדה חדש לצד source, ש**לא** משנה משמעות. לינק ישן בלי הפרמטר ממשיך לעבוד
+     בדיוק כמו קודם ונרשם כלא-ידוע. */
+  var SRC=(function(){try{return (new URLSearchParams(location.search).get("src")||"").slice(0,120);}catch(_){return "";}})();
   function fail(k){ er.textContent=MSG[k]||MSG._; er.hidden=false; go.disabled=false; go.textContent="שלחו לי את החבילה"; }
   f.addEventListener("submit",function(e){
     e.preventDefault(); er.hidden=true;
@@ -259,7 +263,7 @@ document.querySelectorAll('a.cta,a[download],a[href*=".pdf"]').forEach(function(
     fetch("https://xhrhyqmuugpkxnfrwnoa.supabase.co/functions/v1/subscribe",{
       method:"POST",
       headers:{"Content-Type":"application/json","apikey":K,"Authorization":"Bearer "+K},
-      body:JSON.stringify({email:em.value.trim(),source:"handoff",
+      body:JSON.stringify({email:em.value.trim(),source:"handoff",src:SRC,
                            consent:true,company:f.company.value})
     }).then(function(r){return r.json().catch(function(){return{ok:false}})})
       .then(function(d){
