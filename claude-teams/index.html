@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>המדריך המעשי ל-Claude Agent Teams</title>
+<meta name="description" content="תהליך העבודה המלא, הפרומפט הראשי ורשימת הבדיקה, לפני שמקימים צוות Agents ב-Claude Code">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:#F6F1E2;color:#111111;direction:rtl;-webkit-font-smoothing:antialiased;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px);position:relative;overflow-x:hidden}
+.at{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.gA{position:absolute;top:-360px;right:-440px;width:1100px;height:1100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,245,176,.20) 0%,rgba(61,245,176,0) 60%)}
+.gB{position:absolute;bottom:-300px;left:-400px;width:1100px;height:1100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(44,73,245,.10) 0%,rgba(44,73,245,0) 58%)}
+.wrap{position:relative;z-index:1;max-width:560px;width:100%}
+.top{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:3px solid #111111}
+.wm{font-weight:900;font-size:20px;direction:ltr;letter-spacing:-.01em}
+.wm u{text-decoration:none;border-bottom:3px solid #2C49F5;padding-bottom:1px}
+.kicker{font-weight:700;font-size:15px;color:#5A544B}
+h1{font-weight:900;font-size:clamp(28px,6.4vw,42px);line-height:1.1;letter-spacing:-.03em;margin-top:28px}
+h1 .acc{display:inline-block;padding-bottom:7px;box-shadow:inset 0 -7px 0 0 #3DF5B0}
+.sub{font-weight:500;font-size:clamp(16px,4vw,19px);line-height:1.55;color:#5A544B;margin-top:16px}
+.cta{display:block;margin-top:28px;background:#3DF5B0;color:#111111;text-decoration:none;text-align:center;
+  font-weight:900;font-size:clamp(19px,4.6vw,25px);padding:20px 24px;border:3px solid #111111}
+.cta small{display:block;font-weight:600;font-size:14px;margin-top:5px;color:rgba(17,17,17,.66)}
+.note{margin-top:16px;font-weight:600;font-size:14px;color:#5A544B;text-align:center}
+.note b{font-weight:800;color:#111111}
+.bar{margin-top:10px;height:4px;background:rgba(17,17,17,.12);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#111111;animation:go 1.8s linear forwards}
+@keyframes go{to{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar i{animation:none;width:100%}}
+</style></head><body>
+<div class="at"><div class="gA"></div><div class="gB"></div></div>
+<div class="wrap">
+  <div class="top"><div class="wm"><u>vaknin</u>.ai</div><div class="kicker">המדריך שלך מוכן</div></div>
+  <h1>המדריך המעשי <span class="acc">ל-<bdi>Claude Agent Teams</bdi></span></h1>
+  <p class="sub">תהליך העבודה המלא, הפרומפט הראשי מוכן להעתקה, ורשימת הבדיקה לפני שמאשרים את התוצאה המאוחדת.</p>
+  <a class="cta" id="dl" href="https://ringed-trouser-030.notion.site/Claude-Agent-Teams-3e195969c19281a9a99ac7c79d2c1521" rel="noopener">
+    לפתיחת המדריך ←
+    <small>נפתח בעמוד חדש</small>
+  </a>
+  <p class="note">נפתח מעצמו עוד רגע. אם לא, <b>לחצו על הכפתור</b>.</p>
+  <div class="bar"><i></i></div>
+</div>
+<script>
+var U="https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+function ev(e){try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({magnet_key:"claude-teams",event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
+ev("view");
+// download נשלח פעם אחת בלבד, בין אם האדם לחץ ובין אם ההפניה האוטומטית פעלה.
+// בלי השומר הזה מי שלוחץ בדיוק כשהטיימר נגמר נספר פעמיים.
+var sent=false,dl=document.getElementById("dl");
+function go(auto){
+  if(sent)return; sent=true; ev("download");
+  if(auto){setTimeout(function(){location.href=dl.href},120)}
+}
+dl.addEventListener("click",function(){go(false)});
+setTimeout(function(){go(true)},1800);
+</script>
+<noscript><p style="text-align:center;margin-top:18px;font-weight:700">
+  <a href="https://ringed-trouser-030.notion.site/Claude-Agent-Teams-3e195969c19281a9a99ac7c79d2c1521">לפתיחת המדריך ←</a>
+</p></noscript>
+</body></html>
