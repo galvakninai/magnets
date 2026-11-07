@@ -1,0 +1,154 @@
+<!doctype html><html lang=he dir=rtl><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>כפיל משלכם | vaknin.ai</title>
+<meta name="description" content="פרומפט אחד ל-Claude שמראיין אתכם ובונה איתכם כפיל, צעד אחרי צעד.">
+<meta property="og:title" content="כפיל משלכם. בשיחה אחת.">
+<meta property="og:description" content="פרומפט אחד ל-Claude שמראיין אתכם ובונה איתכם כפיל, צעד אחרי צעד.">
+<meta name="theme-color" content="#000000"><style>@font-face{font-family:A;src:url(Assistant.ttf);font-weight:200 800}
+:root{--bg:#000;--ink:#F5F5F7;--mute:#86868B;--amb:#F2B84B;--amb2:#FFD98A;--win:#1C1C1E;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{color:var(--ink);font:500 17px/1.55 A,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+ background:radial-gradient(120% 60% at 50% -10%,#2a1f0c 0%,#000 55%) no-repeat,#000}
+.wrap{padding:64px 22px 56px;max-width:440px;margin:0 auto}
+h1{font-weight:800;font-size:52px;line-height:1.02;letter-spacing:-.025em;text-align:center}
+.grad{background:linear-gradient(180deg,#fff 10%,var(--amb2) 60%,var(--amb) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--mute);font-size:21px;line-height:1.4;font-weight:600;text-align:center;margin:20px auto 0;max-width:330px}
+.lede b{color:var(--ink);font-weight:700}
+/* the Mac window */
+.mac{margin-top:44px;border-radius:16px;background:linear-gradient(180deg,#26262A,#161618);
+ box-shadow:0 0 0 .5px rgba(255,255,255,.18) inset,0 1px 0 rgba(255,255,255,.12) inset,0 40px 80px -20px rgba(0,0,0,.9),0 0 0 1px #000;overflow:hidden}
+.tb{height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;direction:ltr;position:relative;
+ background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-bottom:1px solid #000;box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.tb i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.3)}
+.tb i:nth-child(1){background:#FF5F57}.tb i:nth-child(2){background:#FEBC2E}.tb i:nth-child(3){background:#28C840}
+.tb span{position:absolute;inset:0;display:grid;place-items:center;color:#9a9aa0;font-size:13px;font-weight:700;direction:rtl}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:60px;border:0;border-radius:14px;cursor:pointer;
+ background:linear-gradient(180deg,#FFCB6B,var(--amb));color:#1a1204;font:800 20px/1 A;letter-spacing:-.01em;
+ box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 -1px 0 rgba(0,0,0,.15) inset;transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn svg{width:20px;height:20px}
+.btn.done{background:linear-gradient(180deg,#3a3a3e,#2a2a2e);color:var(--ink)}
+.fine{color:#5c5c61;font-size:13px;text-align:center;margin-top:40px}
+.sig{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:48px}
+.sig .t{width:46px;height:46px;border-radius:12px;background:#fff;color:#000;display:grid;place-items:center;font-weight:800;font-size:14px;direction:ltr}
+.sig div{font-size:15px;color:var(--mute);line-height:1.3}.sig strong{display:block;color:var(--ink);font-size:17px}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.r{opacity:0;animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.r1{animation-delay:.05s}.r2{animation-delay:.2s}.r3{animation-delay:.38s}.r4{animation-delay:.55s}.r5{animation-delay:.7s}
+@media (prefers-reduced-motion:reduce){.r{animation:none;opacity:1}}
+</style><style>
+
+.chat{padding:18px 16px 20px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:82%;padding:10px 14px;border-radius:12px;font-size:16px;line-height:1.45;opacity:0;transform:translateY(8px) scale(.98);animation:pop .5s cubic-bezier(.2,.8,.2,1) forwards}
+.q{align-self:flex-start;background:#2C2C30;color:#EDEDF0;border-bottom-right-radius:4px}
+.a{align-self:flex-end;background:var(--amb);color:#1a1204;font-weight:700;border-bottom-left-radius:4px}
+.m.c1{animation-delay:1s}.m.c2{animation-delay:2s}.m.c3{animation-delay:2.9s}.m.c4{animation-delay:3.9s}
+.who{font-size:12px;color:#8a8a90;font-weight:700;margin-bottom:2px}
+@keyframes pop{to{opacity:1;transform:none}}
+.peek{margin-top:28px;border-radius:14px;background:#0f0f11;box-shadow:0 0 0 1px var(--line) inset}
+.peek summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:16px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:after{content:"+";color:var(--amb);font-size:22px;font-weight:600}
+.peek[open] summary:after{content:"−"}
+.peek pre{font:500 15px/1.7 A;white-space:pre-wrap;color:#cfcfd4;padding:0 18px 18px}
+.cta{margin-top:16px}
+
+.sec{margin-top:64px}
+.sec h2{font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.1;text-align:center}
+.need{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px}
+.need div{text-align:center;padding:0 6px;border-inline-start:1px solid var(--line)}
+.need div:first-child{border-inline-start:0}
+.need svg{width:34px;height:34px;color:var(--amb);display:block;margin:0 auto 12px}
+.need b{display:block;font-size:17px;font-weight:800}
+.need span{display:block;color:var(--mute);font-size:14px;line-height:1.35;margin-top:4px}
+.faq{margin-top:22px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 2px;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";width:9px;height:9px;border-left:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(-45deg);transition:transform .25s;margin-inline-end:4px}
+.faq details[open] summary:after{transform:rotate(135deg)}
+.faq p{color:var(--mute);font-size:16px;padding:0 2px 20px}
+.twin{display:flex;align-items:flex-end;gap:10px;margin-top:72px}
+.twin img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 2px #000,0 0 0 3.5px var(--amb)}
+.bub{background:#2C2C30;color:var(--ink);border-radius:20px;border-bottom-right-radius:6px;padding:14px 18px;font-size:18px;line-height:1.4;font-weight:600}
+.bub small{display:block;color:var(--mute);font-size:13px;font-weight:700;margin-bottom:3px}
+.tw{margin:72px auto 0;width:250px;padding:9px;border-radius:44px;background:linear-gradient(160deg,#3a3a3e,#111);box-shadow:0 0 0 1px #555 inset,0 40px 80px -20px rgba(0,0,0,.9);position:relative}
+.tw .sc{border-radius:36px;overflow:hidden;aspect-ratio:9/19.5;position:relative;background:#000}
+.tw .sc img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+.tw .di{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:76px;height:22px;border-radius:12px;background:#000;z-index:2}
+.tw .sc:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.8))}
+.tw p{position:absolute;z-index:1;inset-inline:16px;bottom:22px;font-size:16px;font-weight:800;line-height:1.3;text-align:center}</style><body><main class=wrap>
+<h1 class="r r1">כפיל משלכם.<br><span class=grad>בשיחה אחת.</span></h1>
+<p class="lede r r2">פרומפט אחד ל-<bdi>Claude</bdi> שמראיין אתכם ובונה איתכם כפיל, צעד אחרי צעד.</p>
+<div class="mac r r3"><div class=tb><i></i><i></i><i></i><span>Claude</span></div>
+<div class=chat>
+<div class="m q c1">בשביל מה אתה צריך כפיל דיגיטלי, ואיפה הוא יופיע?</div>
+<div class="m a c2">לרילס באינסטגרם</div>
+<div class="m q c3">באיזו שפה הכפיל ידבר?</div>
+<div class="m a c4">עברית</div>
+</div></div>
+<div class="cta r r4"><button class=btn style="margin-top:28px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> העתיקו את הפרומפט</button></div>
+<details class="peek r r4"><summary>מה כתוב בפרומפט</summary><pre id=p>אתה המדריך שלי לבניית כפיל דיגיטלי: סרטון שבו דמות שנראית כמוני מדברת בקול שלי. אני רוצה לסיים את השיחה הזאת עם הסרטון הראשון שלי, גם אם אין לי רקע טכני.
+
+איך אתה עובד:
+- שואל אותי שאלה אחת בכל פעם, ומחכה לתשובה לפני הצעד הבא.
+- מדבר איתי בעברית פשוטה, ומשאיר שמות של כלים וכפתורים באנגלית, כמו שהם מופיעים באתר.
+- אחרי כל צעד מחכה שאכתוב "סיימתי". אם משהו לא עובד, עוזר לי לתקן לפני שממשיכים.
+- לא ממציא מחירים, מגבלות או יכולות. המידע למטה נבדק ב-7 בנובמבר 2026. כשאני שואל על מחיר, תגיד לי לבדוק בעמוד המחירים של הכלי, כי זה משתנה.
+- לא מבטיח כמה זמן ייקח שלב, כי זה תלוי בכלים ובתורים אצלם.
+
+שלב 1: תראיין אותי. חמש שאלות, אחת בכל פעם:
+1. בשביל מה אני צריך כפיל, ואיפה הוא יופיע?
+2. באיזו שפה הכפיל ידבר?
+3. אני רוצה קודם לנסות בחינם, או שאני מוכן לשלם כדי לפרסם?
+4. יש לי טלפון שמצלם טוב וחדר שקט?
+5. כמה זמן יש לי היום?
+
+שלב 2: תמליץ על מסלול לפי התשובות, ותסביר למה במשפט אחד.
+ברירת המחדל: HeyGen לכפיל, ו-ElevenLabs לקול.
+- אם אני רוצה רק לנסות: HeyGen מאפשר להתחיל בחינם, עד דקה לסרטון ועם סימן מים. בתוכנית החינמית שלו יש גם שכפול קול אחד. שכפול קול בעברית בתוך HeyGen לא נבדק, אז ננסה ונשמע. אם זה לא נשמע כמוני, עוברים ל-ElevenLabs.
+- כדי לפרסם בלי סימן מים: HeyGen Creator, $29 לחודש לפי עמוד המחירים בנובמבר 2026.
+- קול משוכפל ב-ElevenLabs מתחיל ב-Starter, $6 לחודש. בתוכנית החינמית אין שכפול קול, ואין בה רישיון לשימוש מסחרי.
+- אם הכפיל ידבר עברית: ב-ElevenLabs עברית נתמכת ב-Eleven v3 וב-Eleven v4, ולא במודלים הישנים יותר.
+
+שלב 3: תלווה אותי בהקלטה.
+- סרטון לכפיל: בערך 2 דקות (לפחות 15 שניות), באיכות 1080p. אני לבד מול המצלמה, הפנים שלי בפריים כל הזמן, בחדר שקט בלי מוזיקה. תכתוב לי טקסט קצר להקריא, כדי שלא אצטרך לאלתר.
+- סרטון הסכמה: HeyGen מבקש סרטון קצר, פחות מ-30 שניות, שבו אני מקריא את הטקסט שמופיע על המסך. מצלמים אותו בזמן אמת.
+- אין לי זמן לצלם? אפשר להתחיל מתמונה אחת: חזיתית וברורה, כל הראש בפריים, ורק אני בתמונה.
+- הקלטת קול ל-ElevenLabs: דקה עד שתיים של דיבור רגיל, בלי רעשי רקע. יותר משלוש דקות לא משפר.
+
+שלב 4: תבנה איתי את הסרטון הראשון.
+- תכתוב איתי תסריט של 30 שניות על הנושא שבחרתי בשלב 1. תשאל אותי מה אני רוצה להגיד, ואל תמציא עובדות בשמי.
+- תסביר לי צעד אחרי צעד איך מייצרים את הקול ב-ElevenLabs, מכניסים אותו ל-HeyGen ומייצרים את הסרטון. [גל: ככה עבדתי בפיילוט]
+- בסוף תשאל אותי מה הייתי משנה, ותציע שיפור אחד לסרטון הבא.
+
+תתחיל עכשיו בשאלה הראשונה.</pre></details>
+<section class="sec r r5"><h2>מה צריך לפני.</h2><div class=need>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b>חשבון <bdi>Claude</bdi></b><span>שם מדביקים את הפרומפט</span></div>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5l5-3v9l-5-3"/></svg><b>סרטון שלכם</b><span>בערך 2 דקות מול המצלמה. אין זמן? גם תמונה אחת עובדת</span></div>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><b>הקלטת קול</b><span>דקה עד שתיים של דיבור רגיל, בחדר שקט</span></div>
+</div></section>
+<section class="sec r r5"><h2>שאלות קצרות.</h2><div class=faq>
+<details><summary><span>זה עולה כסף?</span></summary><p>אפשר להתחיל בחינם: ב-<bdi>HeyGen</bdi> עד דקה לסרטון, עם סימן מים. בלי סימן מים: <bdi>HeyGen Creator</bdi> ב-$29 לחודש. קול משוכפל ב-<bdi>ElevenLabs</bdi>: מ-$6 לחודש. המחירים נכונים לנובמבר 2026.</p></details>
+<details><summary><span>זה עובד גם ב-<bdi>ChatGPT</bdi>?</span></summary><p>כן. אפשר להדביק אותו גם ב-<bdi>ChatGPT</bdi> או ב-<bdi>Codex</bdi>.</p></details>
+<details><summary><span>כמה זמן זה לוקח?</span></summary><p>הצילום: בערך 2 דקות. הקלטת הקול: דקה עד שתיים. את השאר הפרומפט עושה איתכם צעד אחרי צעד. זמן העיבוד תלוי בכלים עצמם.</p></details>
+</div></section>
+<div class="tw r r5"><div class=sc><div class=di></div><img src="twin10.jpg" alt="הכפיל של גל"><p>אני הכפיל של גל. עכשיו גם אתם יכולים ליצור כפיל משלכם.</p></div></div></main>
+<script>
+var K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+function ev(e){try{fetch("https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",{method:"POST",keepalive:true,
+ headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},
+ body:JSON.stringify({magnet_key:"twin",event:e,ref:(document.referrer||"").slice(0,200),
+ ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
+ev("view");
+function legacyCopy(t){var a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");
+ a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);
+ var ok=false;try{ok=document.execCommand("copy")}catch(_){}document.body.removeChild(a);return ok}
+var b=document.querySelector(".btn"),h=b.innerHTML,sent=false;
+function done(ok){b.classList.add("done");b.innerHTML=ok?"הועתק. עכשיו מדביקים ב-Claude":"לא הצלחתי להעתיק. פתחו את \"מה כתוב בפרומפט\" והעתיקו משם";
+ if(!ok){var d=document.querySelector(".peek");if(d)d.open=true}
+ setTimeout(function(){b.classList.remove("done");b.innerHTML=h},3200)}
+b.onclick=function(){var t=document.getElementById("p").textContent;
+ if(!sent){sent=true;ev("download")}
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(legacyCopy(t))})}
+ else done(legacyCopy(t))};
+</script>
