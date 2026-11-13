@@ -1,0 +1,51 @@
+/* vaknin.ai · פס ההרשמה לניוזלטר (13/11/2026). עיצוב: פס רוחבי 2 "סגול עמוק", תמונה בלי מסגרת.
+   מקור: vaknin.ai/VIDEO-QUEUE/trial-reels/magnet/design/signup/strip-cut.tpl.html
+   הכל תחת .vk-su כדי לא להתנגש בעיצוב של אף דף מגנט (חלקם עושים *{margin:0;padding:0}). */
+.vk-su{--vk-gold:#fdb927;box-sizing:border-box;display:block;margin:72px 0 28px;padding:0;border:0;
+ container:vksu/inline-size;color:#fff;font-family:inherit;direction:rtl;text-align:right}
+/* הפריסה נקבעת לפי הרוחב שהפס מקבל בדף ולא לפי רוחב המסך: יש דפי מגנט עם עמודה צרה גם במחשב. */
+.vk-su .vk-in{display:flex;align-items:center;gap:22px;position:relative;isolation:isolate;padding:16px 22px;border-radius:22px;
+ background:linear-gradient(100deg,#2a1260,#4b1fb0 60%,#6a35e8)}
+.vk-su *{box-sizing:border-box}
+.vk-su .vk-bg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:-1}
+.vk-su .vk-bg::after{content:"";position:absolute;right:30%;top:-60%;width:300px;height:300px;
+ background:radial-gradient(closest-side,rgba(253,185,39,.28),transparent)}
+.vk-su img.vk-cut{flex:none;align-self:flex-end;width:auto;height:178px;margin:-72px 0 -16px;display:block;
+ filter:drop-shadow(0 10px 18px rgba(42,18,96,.18))}
+.vk-su .vk-cp{flex:1 1 220px;min-width:0}
+.vk-su .vk-cp b{display:block;margin:0;font-size:22px;font-weight:800;line-height:1.15;color:#fff}
+.vk-su .vk-cp span{display:block;margin:3px 0 0;font-size:15px;line-height:1.4;color:rgba(255,255,255,.78)}
+.vk-su form{flex:1.4 1 420px;display:grid;grid-template-columns:1fr 1.3fr auto;gap:8px;align-items:center;margin:0;
+ padding:8px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.vk-su input[type=text],.vk-su input[type=email]{font-family:inherit;font-size:16px;font-weight:500;line-height:1.2;height:46px;border-radius:12px;
+ padding:0 14px;min-width:0;width:100%;margin:0;background:rgba(255,255,255,.95);border:0;color:#1d1d1f;-webkit-appearance:none;appearance:none}
+.vk-su input[type=email]{direction:ltr;text-align:left}
+.vk-su input::placeholder{color:#8e8e93}
+.vk-su input[type=email]::placeholder{text-align:right}
+.vk-su .vk-go{font-family:inherit;font-size:16px;font-weight:800;line-height:1;height:46px;border:0;border-radius:12px;padding:0 22px;margin:0;
+ cursor:pointer;white-space:nowrap;background:#fff;color:#3b1d7a}
+.vk-su .vk-go:disabled{opacity:.55;cursor:not-allowed}
+.vk-su .vk-go:focus-visible,.vk-su input:focus-visible,.vk-su .vk-ok a:focus-visible{outline:2px solid var(--vk-gold);outline-offset:2px}
+.vk-su .vk-ok{grid-column:1/-1;display:flex;gap:8px;align-items:flex-start;margin:0;padding:2px 4px 0;font-size:13px;line-height:1.4;
+ color:rgba(255,255,255,.78);cursor:pointer}
+.vk-su .vk-ok input{flex:none;width:16px;height:16px;margin:1px 0 0;accent-color:var(--vk-gold)}
+.vk-su .vk-ok a{color:inherit;text-decoration:underline;white-space:nowrap}
+.vk-su .vk-hp{position:absolute!important;top:0;right:0;width:1px!important;height:1px!important;padding:0!important;border:0!important;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
+.vk-su .vk-msg{grid-column:1/-1;margin:0;padding:0 4px;font-size:14px;font-weight:700;color:#ffd77a}
+.vk-su .vk-msg:empty{display:none}
+.vk-su .vk-done{display:none;margin:0;font-size:17px;font-weight:800;color:#fff}
+.vk-su.vk-sent form{display:none}
+.vk-su.vk-sent .vk-done{display:block;flex:1.4 1 420px}
+
+/* פס צר (טלפון, או עמודה צרה במחשב): עדיין פס, בשתי קומות */
+@container vksu (max-width:819px){
+ .vk-su .vk-in{flex-wrap:wrap;gap:12px;padding:14px}
+ .vk-su img.vk-cut{height:112px;margin:-50px 0 0}
+ .vk-su .vk-cp{flex:1 1 0;align-self:center}
+ .vk-su .vk-cp b{font-size:18px}
+ .vk-su .vk-cp span{font-size:14px}
+ .vk-su form{flex:1 1 100%;grid-template-columns:1fr 1fr}
+ .vk-su .vk-go{grid-column:1/-1}
+ .vk-su.vk-sent .vk-done{flex:1 1 100%}
+}

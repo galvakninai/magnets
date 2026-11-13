@@ -1,0 +1,266 @@
+<!doctype html><html lang=he dir=rtl><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>תפסיקו לנחש איזה ריל יעבוד | vaknin.ai</title>
+<meta name="description" content="הצ'קליסט, הפרומפט ותבנית 5 ההוקים לבדיקת רילס עם Trial Reels של אינסטגרם. מעתיקים ל-Claude ומתחילים.">
+<meta property="og:title" content="תפסיקו לנחש איזה ריל יעבוד">
+<meta property="og:description" content="הצ'קליסט, הפרומפט ותבנית 5 ההוקים מהסרטון.">
+<meta name="theme-color" content="#F5F5F7">
+<!-- direction B "the toggle" (Gal 13/11): magnet 19 language + the Trial switch from the video. Built from index.tpl.html, prompt from ../../vaknin.ai/VIDEO-QUEUE/trial-reels/magnet/prompt-v3.txt -->
+<style>
+@font-face{font-family:A;src:url(Assistant.ttf);font-weight:200 800;font-display:swap}
+:root{--bg:#F5F5F7;--card:#fff;--ink:#1d1d1f;--mut:#6e6e73;--hair:rgba(0,0,0,.08);--fill:#e9e9ed;--blue:#0071e3;--ok:#34c759;
+ --sh:0 1px 2px rgba(0,0,0,.05),0 14px 36px rgba(0,0,0,.08);--f:A,-apple-system,"SF Hebrew",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{color:var(--ink);font:500 17px/1.55 var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+.draft{background:#fff1e8;color:#a3401c;font-size:14px;font-weight:700;text-align:center;padding:9px 16px}
+.gnav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;height:52px;
+ padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left));
+ background:rgba(245,245,247,.75);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.gnav b{font-size:19px;font-weight:800}
+.nbtn{height:34px;padding:0 16px;border-radius:10px;display:inline-flex;align-items:center;background:var(--blue);color:#fff;font-weight:800;font-size:15px;text-decoration:none}
+.wrap{max-width:640px;margin:0 auto;padding:28px max(20px,env(safe-area-inset-right)) 56px max(20px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:44px}
+:focus-visible{outline:3px solid rgba(0,113,227,.45);outline-offset:3px;border-radius:12px}
+.tag{font-size:16px;font-weight:700;color:var(--blue)}
+h1{font-size:clamp(38px,10vw,56px);line-height:1.04;font-weight:800;letter-spacing:-.01em;margin:6px 0 12px;text-wrap:balance}
+.hero p{color:var(--mut);font-size:19px;line-height:1.45}
+.toggle{margin-top:22px;background:var(--card);border-radius:20px;box-shadow:var(--sh);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.toggle b{font-size:21px;font-weight:800;display:block}
+.toggle span{color:var(--mut);font-size:15px}
+.big{flex:none;width:64px;height:38px;border-radius:999px;background:var(--fill);position:relative;animation:on 2.4s .7s ease forwards}
+.big::after{content:"";position:absolute;top:3px;right:3px;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);animation:knob 2.4s .7s ease forwards}
+@keyframes on{0%,40%{background:var(--fill)}60%,100%{background:var(--ok)}}
+@keyframes knob{0%,40%{right:3px}60%,100%{right:29px}}
+@media (prefers-reduced-motion:reduce){.big{animation:none;background:var(--ok)}.big::after{animation:none;right:29px}}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.jump a{font-size:15px;font-weight:700;color:var(--blue);text-decoration:none;background:rgba(0,113,227,.1);border-radius:999px;padding:7px 14px}
+h2{font-size:30px;font-weight:800;line-height:1.15;margin-bottom:6px;text-wrap:balance}
+.lede{color:var(--mut);font-size:17px;line-height:1.5;margin-bottom:16px}
+.sub{font-size:14px;font-weight:700;color:var(--mut);margin:18px 6px 8px}
+.group{background:var(--card);border-radius:20px;box-shadow:var(--sh);overflow:hidden}
+.row{display:flex;gap:14px;align-items:center;padding:15px 18px;border-bottom:1px solid var(--hair);font-size:17px;line-height:1.45;cursor:pointer;user-select:none}
+.row:last-child{border-bottom:0}
+.row .t{min-width:0;flex:1}
+.en{white-space:nowrap;unicode-bidi:isolate}
+.sw{flex:none;width:51px;height:31px;border-radius:999px;background:var(--fill);position:relative;transition:background .25s}
+.sw::after{content:"";position:absolute;top:2px;right:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:right .25s}
+.row.on .sw{background:var(--ok)}
+.row.on .sw::after{right:22px}
+.row.on .t{color:var(--mut)}
+.count{font-size:15px;color:var(--mut);margin:12px 6px 0;font-variant-numeric:tabular-nums}
+.prompt{background:var(--card);border-radius:20px;box-shadow:var(--sh);overflow:hidden}
+.prompt pre{white-space:pre-wrap;font:500 15.5px/1.6 var(--f);padding:18px 20px;max-height:420px;overflow:auto;background:#fbfbfd;border-bottom:1px solid var(--hair)}
+.copy{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px}
+.copy span{color:var(--mut);font-size:15px}
+.btn{font:800 17px/1 var(--f);border:0;border-radius:14px;background:var(--blue);color:#fff;padding:14px 22px;cursor:pointer;white-space:nowrap;box-shadow:0 10px 24px -8px rgba(0,113,227,.55)}
+.btn:active,.row:active{transform:scale(.98)}
+.step{background:var(--card);border-radius:16px;box-shadow:var(--sh);padding:14px 16px}
+.step b{display:block;font-size:17px}
+.step span{color:var(--mut);font-size:15px;line-height:1.4}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:16px 20px 0}
+.ph b{font-size:19px;font-weight:800}.ph span{color:var(--mut);font-size:15px}
+.prompt+.prompt{margin-top:14px}
+.fields{display:flex;flex-direction:column;gap:6px;padding:14px 20px 4px}
+.fields label{font-size:14px;font-weight:700;color:var(--mut);margin-top:6px}
+.fields input{font:500 17px/1.3 var(--f);border:1px solid var(--hair);background:#fbfbfd;border-radius:12px;padding:12px 14px;width:100%;color:var(--ink)}
+.fields input:focus{outline:2px solid rgba(0,113,227,.45);border-color:transparent}
+.fnote{font-size:13px;color:var(--mut);line-height:1.45;margin-top:4px}
+.prompt pre{margin-top:12px;border-top:1px solid var(--hair)}
+.ex{background:var(--card);border-radius:20px;box-shadow:var(--sh);padding:18px 20px}
+.ex+.ex{margin-top:14px}
+.exh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.exh b{font-size:19px;font-weight:800;white-space:nowrap}.exh span{color:var(--mut);font-size:15px;text-align:left;min-width:0}
+.badge{background:rgba(255,149,0,.14);color:#b25e00 !important;font-weight:800;border-radius:8px;padding:2px 10px}
+.v1{list-style:none;counter-reset:v;display:flex;flex-direction:column;gap:10px}
+.v1 li{counter-increment:v;font-size:16px;line-height:1.45;padding-right:30px;position:relative}
+.v1 li::before{content:counter(v);position:absolute;right:0;top:0;font-weight:800;color:var(--blue);font-size:18px}
+.v1 .k{display:block;font-size:13px;font-weight:700;color:var(--mut)}
+.exn{font-size:14px;color:var(--mut);line-height:1.5;margin-top:12px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:92px 1fr 40px;gap:10px;align-items:center;font-size:14px;font-variant-numeric:tabular-nums}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--fill);overflow:hidden}
+.bar i b{display:block;height:100%;background:#c7c7cc;border-radius:5px}
+.bar.win i b{background:var(--ok)}
+.bar.win{font-weight:800}
+.exs{font-size:13px;color:var(--mut);margin-top:8px}
+.exq{font-size:16px;font-weight:700;line-height:1.5;margin-top:12px}
+.hooks{display:flex;flex-direction:column;gap:10px}
+.hook{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:3px 16px}
+.hook .n{grid-row:span 3;font-size:30px;font-weight:800;color:var(--blue);line-height:1}
+.hook .k{font-size:14px;font-weight:700;color:var(--mut)}
+.hook .q{font-size:19px;font-weight:800;line-height:1.35}
+.hook .w{font-size:15px;color:var(--mut)}
+.sign{display:flex;gap:14px;align-items:center;font-size:17px;line-height:1.45}
+.av{flex:none;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px}
+.note{font-size:14px;color:var(--mut);line-height:1.55}
+</style>
+<div class=draft>טיוטה - לא פורסם</div>
+<nav class=gnav><b>vaknin.ai</b><a class=nbtn href="#prompt">לפרומפט</a></nav>
+<main class=wrap>
+ <header class=hero>
+  <div class=tag>מהסרטון על בדיקת רילס</div>
+  <h1>תפסיקו לנחש איזה ריל יעבוד</h1>
+  <p>הצ'קליסט, הפרומפט ותבנית 5 ההוקים מהסרטון. מעתיקים ל-Claude ומתחילים.</p>
+  <div class=toggle><div><b>Trial</b><span>מוצג קודם רק למי שלא עוקב אחריכם</span></div><div class=big aria-hidden=true></div></div>
+  <div class=jump><a href="#check">הצ'קליסט</a><a href="#prompt">הפרומפט</a><a href="#example">דוגמה</a><a href="#hooks">5 ההוקים</a></div>
+ </header>
+
+ <section id=check>
+  <h2>הצ'קליסט</h2>
+  <p class=lede>לוחצים על כל שורה כשהיא מוכנה.</p>
+  <div class=sub>לפני שמפרסמים</div>
+  <div class=group id=g1></div>
+  <div class=sub>אחרי השיתוף</div>
+  <div class=group id=g2></div>
+  <p class=count id=count></p>
+ </section>
+
+ <section id=prompt>
+  <h2>הפרומפט</h2>
+  <p class=lede>שני פרומפטים: אחד להיום ואחד למחר. כל אחד עובד גם בשיחה חדשה ב-Claude.</p>
+  <div class=prompt>
+   <div class=ph><b>שלב 1, היום</b><span>חמש גרסאות לאותו רעיון</span></div>
+   <div class=fields>
+    <label for=f-idea>הרעיון, במשפט אחד</label><input id=f-idea autocomplete=off placeholder="למשל: קודים קצרים שמשנים את התשובה של ChatGPT">
+    <label for=f-aud>למי הוא מיועד</label><input id=f-aud autocomplete=off placeholder="למשל: מי שמשתמש ב-ChatGPT בעבודה">
+    <label for=f-val>מה הצופה מקבל בסוף</label><input id=f-val autocomplete=off placeholder="למשל: רשימת קודים להעתקה">
+    <p class=fnote>השדות נכנסים לפרומפט ונשארים רק בדפדפן שלכם. שדה ריק נשאר בסוגריים, ו-Claude ישאל עליו.</p>
+   </div>
+   <pre id=p1>אתה עוזר לי לבדוק בעזרת Trial Reels רעיון לריל באינסטגרם.
+ה-Trial Reel מוצג קודם רק למי שלא עוקב אחריי, ואחרי בערך יממה אני רואה את המספרים שלו.
+
+שלב 1: חמש גרסאות לאותו רעיון
+הרעיון: [משפט אחד]
+למי הוא מיועד: [הקהל]
+מה הצופה מקבל בסוף: [הערך]
+
+כתוב 5 גרסאות לאותו רעיון. כל גרסה היא ריל חדש, לא עריכה של אחר.
+בכל גרסה משתנים שני דברים: הפתיחה (3 השניות הראשונות), ודבר אחד בגוף: הדוגמה, הסדר או מה שרואים על המסך.
+כל פתיחה בסוג אחר, לפי הסדר:
+1. עצירה: "תפסיקו ל[הרגל נפוץ]."
+2. חיסכון זמן: "ככה [משימה] ב-[זמן קצר] במקום [זמן ארוך]."
+3. חדש: "[כלי או פיצ'ר] השתנה, ורוב האנשים לא שמו לב."
+4. מבפנים: "ככה אני [עושה X] בעצמי."
+5. תוצאה קודם: "זה [התוצאה]. הנה איך הגעתי לזה."
+אם סוג מסוים לא מתאים לרעיון, החלף אותו באחד מאלה ותגיד למה:
+6. שאלה: "[שאלה שהקהל שואל את עצמו]?"
+7. לפני ואחרי: "ככה זה נראה לפני, וככה אחרי."
+
+לכל גרסה תן:
+- המשפט הראשון שאני אומר, עד 12 מילים
+- הטקסט על המסך בשנייה הראשונה, עד 6 מילים
+- מה רואים בפריים הראשון
+- מה משתנה בגוף לעומת הגרסאות האחרות
+- מה הגרסה הזאת בודקת, בשורה אחת
+
+אל תמציא עובדות, מספרים או הבטחות שלא נתתי לך. אם תבנית דורשת מספר שלא נתתי, תשאיר אותו בסוגריים.
+פתיחה מסוג "חדש" רק אם באמת משהו השתנה, ופתיחה מסוג "מבפנים" רק אם אני באמת עושה את זה. אם לא, החלף בסוג 6 או 7.
+אם חסר הרעיון, הקהל או הערך, תשאל לפני שאתה כותב.
+בסוף שלב 1 תן טבלה קצרה: מספר הגרסה, סוג הפתיחה, מה השתנה בגוף. אותה אדביק בשלב 2, אחרי שיעברו בערך 24 שעות.</pre>
+   <div class=copy><span id=m1>בסוף Claude ייתן טבלה. שמרו אותה למחר</span><button class=btn type=button id=c1>העתקת שלב 1</button></div>
+  </div>
+  <div class=prompt>
+   <div class=ph><b>שלב 2, אחרי יממה</b><span>מה להעביר לעוקבים</span></div>
+   <pre id=p2>אתה עוזר לי לקרוא את המספרים של Trial Reels באינסטגרם.
+העליתי כמה גרסאות של אותו רעיון כ-Trial Reels, שמוצגים קודם רק למי שלא עוקב אחריי. עברה בערך יממה.
+
+הטבלה מהשלב הקודם (גרסה, סוג פתיחה, מה השתנה בגוף):
+[הדביקו כאן את הטבלה]
+
+המספרים של כל גרסה: צפיות, לייקים, תגובות ושיתופים.
+גרסה 1: [צפיות, לייקים, תגובות, שיתופים]
+גרסה 2: [...]
+גרסה 3: [...]
+גרסה 4: [...]
+גרסה 5: [...]
+
+0. אם לא הדבקתי טבלה, קודם תשאל איזו פתיחה הייתה בכל גרסה, ורק אחר כך תמשיך.
+1. חשב לכל גרסה לייקים, תגובות ושיתופים לכל 1,000 צפיות.
+2. הצג טבלה מסודרת לפי שיתופים לכל 1,000 צפיות, מהגבוה לנמוך. אם גרסה אחרת מובילה בלייקים או בתגובות, תציין את זה בשורה.
+3. אם הגרסה שבראש הטבלה מובילה בפער ברור ויש לה מספיק צפיות, אמור במשפט אחד להעביר אותה לעוקבים, ולמה.
+   אם הפער קטן או שיש מעט צפיות, אל תכריז על מנצחת. תגיד שזה עוד לא חד, ואילו שתי גרסאות להמשיך לבדוק.
+4. הצע 2 גרסאות חדשות לסבב הבא: אותו סוג פתיחה כמו המובילה, עם שינוי אחר בגוף.
+
+אתה לא רואה את החשבון שלי, רק את מה שאני מדביק. אל תנחש מספרים שחסרים.</pre>
+   <div class=copy><span id=m2>מדביקים את הטבלה משלב 1 ואת המספרים</span><button class=btn type=button id=c2>העתקת שלב 2</button></div>
+  </div>
+ </section>
+
+ <section id=example>
+  <h2>ככה זה נראה</h2>
+  <p class=lede>שלב 1 רץ באמת על רעיון מסרטון קודם שלנו. שלב 2 רץ על מספרים לדוגמה. התשובות מקוצרות.</p>
+  <div class=ex>
+   <div class=exh><b>שלב 1</b><span>הרעיון: קודים קצרים שמשנים את התשובה של ChatGPT</span></div>
+   <ol class=v1>
+    <li><span class=k>עצירה</span>"תפסיקו לבקש מ-ChatGPT 'מה דעתך' ולקבל מחמאות."</li>
+    <li><span class=k>חיסכון זמן</span>"ככה מקבלים ביקורת אמיתית על טקסט ב-[זמן קצר] במקום [זמן ארוך]."</li>
+    <li><span class=k>שאלה, במקום "חדש"</span>"מתי ChatGPT אמר לך בפעם האחרונה שהטקסט שלך לא טוב?"</li>
+    <li><span class=k>לפני ואחרי, במקום "מבפנים"</span>"ככה זה נראה לפני, וככה אחרי."</li>
+    <li><span class=k>תוצאה קודם</span>"זו תשובה ישרה בלי מחמאות. הנה איך הגעתי לזה."</li>
+   </ol>
+   <p class=exn>Claude החליף שני סוגים בעצמו, כי לא אמרנו לו שמשהו השתנה או שאנחנו עושים את זה בעצמנו. את הזמנים הוא השאיר בסוגריים במקום להמציא.</p>
+  </div>
+  <div class=ex>
+   <div class=exh><b>שלב 2</b><span class=badge>מספרים לדוגמה</span></div>
+   <div class=bars>
+    <div class="bar win"><span>3 שאלה</span><i><b style="width:100%"></b></i><span>21.8</span></div>
+    <div class=bar><span>1 עצירה</span><i><b style="width:18%"></b></i><span>3.9</span></div>
+    <div class=bar><span>5 תוצאה</span><i><b style="width:17%"></b></i><span>3.7</span></div>
+    <div class=bar><span>2 זמן</span><i><b style="width:16%"></b></i><span>3.5</span></div>
+    <div class=bar><span>4 לפני/אחרי</span><i><b style="width:15%"></b></i><span>3.3</span></div>
+   </div>
+   <p class=exs>שיתופים לכל 1,000 צפיות</p>
+   <p class=exq>"גרסה 3 (פתיחת שאלה) מנצחת בפער ברור, פי 5.6 שיתופים מהשנייה על 3,400 צפיות, ולכן כדאי להעביר אותה לעוקבים."</p>
+   <p class=exn>ובריצה עם מספרים קרובים, 21 שיתופים מול 22, הוא כתב "עוד לא חד" ולא בחר מנצחת.</p>
+  </div>
+ </section>
+
+ <section id=hooks>
+  <h2>תבנית 5 ההוקים</h2>
+  <p class=lede>כל גרסה נפתחת בסוג אחר. ככה רואים על מה הקהל שלכם באמת עוצר.</p>
+  <div class=hooks id=hk></div>
+ </section>
+
+ <footer class=sign><div class=av aria-hidden=true>ג</div><div>אני גל, מקים vaknin.ai. ניסיתם? ספרו לי בפרטי איזו גרסה ניצחה 🙌</div></footer>
+ <p class=note>Claude לא מתחבר לאינסטגרם ולא רואה את החשבון שלכם, רק את מה שאתם מדביקים לו. הפרומפט נבדק על רעיון אמיתי ועל מספרים לדוגמה, לא על Trial Reel אמיתי. העובדות על Trial Reels מדפי העזרה הרשמיים של אינסטגרם, נכון ל-13 בנובמבר 2026.</p>
+</main>
+<script>
+const LS={get(k){try{return localStorage.getItem("trial-"+k)}catch(e){return null}},set(k,v){try{localStorage.setItem("trial-"+k,v)}catch(e){}}};
+const before=[
+"החשבון ציבורי. חשבון Professional צריך 200 עוקבים לפחות, חשבון אישי צריך 1,000.",
+"החשבון זכאי להופיע בהמלצות. חשבון שלא זכאי מאבד את הגישה ל-Trial Reels עד שהוא חוזר להיות זכאי.",
+"בודקים ב-Account Status שבהגדרות שאין לחשבון מגבלות חשיפה.",
+"הריל חדש. אם אינסטגרם מזהה תוכן שכבר שיתפתם, החשיפה שלו מוגבלת.",
+"יש לכם 5 גרסאות מהפרומפט. כל אחת היא ריל חדש, עם פתיחה אחרת ושינוי אחד בגוף.",
+"מקליטים את הריל, ולפני השיתוף לוחצים Trial, ואז Next ו-Share כרגיל.",
+"רוצים שאינסטגרם תעביר לעוקבים לבד? מתחת ל-Trial לוחצים Trial settings ומדליקים את Share to everyone automatically, וזה נשאר לכל ה-Trial Reels הבאים."];
+const after=[
+"מחכים בערך יממה, ורק אז קוראים את המספרים. ל-Trial Reels לפעמים לוקח יותר זמן לצבור צפיות.",
+"מדביקים ל-Claude צפיות, לייקים, תגובות ושיתופים של כל גרסה, לפי שלב 2.",
+"הצליח? מעבירים לעוקבים: פרופיל, טאב הרילס, הריל, View insights ואז Share to everyone, או נותנים לאינסטגרם להעביר לבד לפי 72 השעות הראשונות.",
+"עד שמשתפים לכולם, הריל לא מופיע בפרופיל. עוקבים עדיין יכולים לראות אותו אם שלחו להם בפרטי, בדף של האודיו או בחיפוש.",
+"נכשל? אין נזק. Trial Reels נמדדים בנפרד ולא משפיעים על הרילס הרגילים שלכם."];
+const hooks=[["עצירה","תפסיקו ל[הרגל נפוץ].","כשיש טעות שרוב הקהל עושה"],
+["חיסכון זמן","ככה [משימה] ב-[זמן קצר] במקום [זמן ארוך].","כשיש משימה מעצבנת שאתם מקצרים"],
+["חדש","[כלי או פיצ'ר] השתנה, ורוב האנשים לא שמו לב.","רק כשבאמת משהו השתנה"],
+["מבפנים","ככה אני [עושה X] בעצמי.","רק על משהו שאתם באמת עושים"],
+["תוצאה קודם","זה [התוצאה]. הנה איך הגעתי לזה.","כשהתוצאה נראית טוב כבר בפריים הראשון"]];
+const total=before.length+after.length;
+function count(){document.getElementById("count").textContent=document.querySelectorAll(".row.on").length+" מתוך "+total+" מוכנים"}
+function rows(id,list){const g=document.getElementById(id);list.forEach(t=>{const r=document.createElement("div");r.className="row";r.setAttribute("role","switch");r.setAttribute("aria-checked","false");r.tabIndex=0;
+ const s=document.createElement("span");s.className="t";t.split(/([A-Za-z][A-Za-z0-9 \-]*[A-Za-z0-9])/).forEach((part,i)=>{if(i%2){const x=document.createElement("bdi");x.className="en";x.textContent=part;s.appendChild(x)}else if(part)s.appendChild(document.createTextNode(part))});const w=document.createElement("span");w.className="sw";r.append(s,w);
+ const key="row-"+id+"-"+g.children.length;if(LS.get(key)==="1"){r.classList.add("on");r.setAttribute("aria-checked","true")}
+ const tg=()=>{r.classList.toggle("on");const on=r.classList.contains("on");r.setAttribute("aria-checked",on);LS.set(key,on?"1":"0");count()};r.onclick=tg;r.onkeydown=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tg()}};g.appendChild(r)})}
+rows("g1",before);rows("g2",after);count();
+const H=document.getElementById("hk");hooks.forEach((h,i)=>{const d=document.createElement("div");d.className="hook";
+ for(const [c,v] of [["n",i+1],["k",h[0]],["q",h[1]],["w",h[2]]]){const e=document.createElement("div");e.className=c;e.textContent=v;d.appendChild(e)}H.appendChild(d)});
+const P1=document.getElementById("p1").textContent;
+const F=[["f-idea","[משפט אחד]"],["f-aud","[הקהל]"],["f-val","[הערך]"]];
+function fill(){let s=P1;for(const [id,ph] of F){const v=document.getElementById(id).value.trim();if(v)s=s.replace(ph,v)}document.getElementById("p1").textContent=s}
+for(const [id] of F){const el=document.getElementById(id);el.value=LS.get(id)||"";el.addEventListener("input",()=>{LS.set(id,el.value);fill()})}
+fill();
+function copyBtn(btn,pre,msg){document.getElementById(btn).onclick=async()=>{const m=document.getElementById(msg),p=document.getElementById(pre);
+ try{await navigator.clipboard.writeText(p.textContent);m.textContent="הועתק. הדביקו ב-Claude"}catch(e){const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);m.textContent="סומן. העתיקו ידנית"}}}
+copyBtn("c1","p1","m1");copyBtn("c2","p2","m2");
+</script>
+
+<script src="../_shared/signup.js" defer></script>
