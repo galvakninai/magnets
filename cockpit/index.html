@@ -1,0 +1,492 @@
+<!doctype html><html lang=he dir=rtl><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>הפוסטים שלכם עולים לבד | vaknin.ai</title>
+<meta name="description" content="פרומפט אחד ל-Claude Code שבונה איתכם מערכת שמפרסמת לאינסטגרם בשעה שקבעתם, גם כשהמחשב כבוי.">
+<meta property="og:title" content="הפוסטים שלכם. עולים לבד.">
+<meta property="og:description" content="פרומפט אחד ל-Claude Code שבונה איתכם מערכת שמפרסמת לאינסטגרם בשעה שקבעתם, גם כשהמחשב כבוי.">
+<meta property="og:image" content="https://galvakninai.github.io/magnets/cockpit/og-image.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#000000"><style>@font-face{font-family:A;src:url(Assistant.ttf);font-weight:200 800;font-display:swap}
+:root{--bg:#000;--ink:#F5F5F7;--mute:#86868B;--amb:#F2B84B;--amb2:#FFD98A;--amb-ink:#1a1204;--line:rgba(255,255,255,.08);--ok:#34C759;--card:#151517}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{color:var(--ink);font:500 17px/1.55 A,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:#000}
+.wrap{padding:72px 24px 56px;max-width:440px;margin:0 auto;overflow-x:clip}
+h1{font-weight:800;font-size:54px;line-height:1;letter-spacing:-.03em;text-align:center}
+.grad{background:linear-gradient(180deg,#fff 5%,var(--amb2) 55%,var(--amb) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--mute);font-size:20px;line-height:1.45;font-weight:600;text-align:center;margin:22px auto 0;max-width:320px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:60px;border:0;border-radius:16px;cursor:pointer;
+ background:linear-gradient(180deg,#FFCB6B,var(--amb));color:var(--amb-ink);font:800 20px/1 A,sans-serif;letter-spacing:-.01em;
+ box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 -1px 0 rgba(0,0,0,.15) inset,0 20px 50px -18px rgba(242,184,75,.55);transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible,summary:focus-visible,.chip:focus-visible{outline:2px solid var(--amb2);outline-offset:3px}
+.btn svg{width:20px;height:20px}
+.btn.done{background:linear-gradient(180deg,#3a3a3e,#2a2a2e);color:var(--ink);box-shadow:none}
+.meta{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:14px;color:var(--mute);font-size:14px;font-weight:600}
+.meta span+span:before{content:"·";margin-inline-end:18px;color:#3a3a3e}
+
+/* hero phone: one week, played */
+.hero{position:relative;margin:44px auto 0;width:268px;max-width:100%}
+.hero:before{content:"";position:absolute;inset:8% -30% 20%;background:radial-gradient(closest-side,rgba(242,184,75,.32),transparent);filter:blur(20px);z-index:0}
+.ph{position:relative;z-index:1;padding:9px;border-radius:48px;background:linear-gradient(160deg,#3c3c40,#121214 60%);box-shadow:0 0 0 1px #4a4a4e inset,0 50px 90px -30px rgba(0,0,0,1)}
+.sc{position:relative;border-radius:40px;overflow:hidden;aspect-ratio:9/19.5;background:radial-gradient(90% 55% at 70% 18%,#4a300a 0%,transparent 70%),radial-gradient(80% 50% at 20% 92%,#2e1206 0%,transparent 70%),#0a0806}
+.di{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:23px;border-radius:12px;background:#000;z-index:3}
+.dt{position:absolute;top:50px;inset-inline:0;text-align:center;font-size:13px;font-weight:600;color:rgba(255,255,255,.78);transition:opacity .25s}
+.ck{position:absolute;top:62px;inset-inline:0;text-align:center;font-size:68px;font-weight:300;letter-spacing:-.02em;color:#fff;direction:ltr;font-variant-numeric:tabular-nums;transition:opacity .25s}
+.fade{opacity:0}
+.stack{position:absolute;top:168px;inset-inline:11px;display:flex;flex-direction:column;gap:8px}
+.nt{display:flex;gap:9px;align-items:center;padding:10px 11px;border-radius:19px;background:rgba(58,52,46,.6);-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
+ box-shadow:0 0 0 .5px rgba(255,255,255,.14) inset;opacity:0;transform:translateY(-14px) scale(.96);transition:opacity .45s,transform .6s cubic-bezier(.2,.9,.25,1.12)}
+.nt.in{opacity:1;transform:none}
+.nt.out{opacity:0;transform:scale(.94)}
+.nt .ic{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(180deg,#FFCB6B,var(--amb));font-size:15px}
+.nt .ic.me{background:#2C2C30;color:var(--amb);font-weight:800;font-size:13px}
+.nt .bd{min-width:0;flex:1}
+.nt .r1{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:rgba(255,255,255,.66);font-weight:700}
+.nt .r2{font-size:13.5px;font-weight:700;line-height:1.3;color:#fff}
+.nt .th{width:32px;height:40px;border-radius:6px;object-fit:cover;flex:none;box-shadow:0 0 0 .5px rgba(255,255,255,.2)}
+.step{min-height:46px;margin-top:22px;text-align:center;color:var(--mute);font-size:16px;font-weight:600;line-height:1.4;transition:opacity .25s}
+.step b{color:var(--ink)}
+.dots{display:flex;justify-content:center;gap:7px;margin-top:10px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#2C2C30;transition:background .3s,width .3s}
+.dots i.on{background:var(--amb);width:20px;border-radius:4px}
+
+/* sections */
+.sec{margin-top:96px}
+.sec h2{font-weight:800;font-size:34px;letter-spacing:-.025em;line-height:1.08;text-align:center;text-wrap:balance}
+.sec .sub{color:var(--mute);font-size:18px;text-align:center;margin:14px auto 0;max-width:320px;line-height:1.45}
+
+/* say it in words */
+.box{margin-top:28px;border-radius:22px;background:var(--card);box-shadow:0 0 0 1px var(--line) inset;padding:18px}
+.lbl{font-size:14px;color:var(--mute);font-weight:700;margin:0 0 8px}
+.lbl+.chips{margin-bottom:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:700 15px/1 A,sans-serif;padding:10px 14px;border-radius:11px;border:0;background:#2C2C30;color:var(--ink);cursor:pointer;direction:inherit}
+.chip.on{background:var(--amb);color:var(--amb-ink)}
+.cv{margin-top:6px;display:flex;flex-direction:column;gap:8px}
+.bb{max-width:92%;padding:10px 13px;border-radius:16px;font-size:16px;line-height:1.4}
+.bb.me{align-self:flex-start;background:var(--amb);color:var(--amb-ink);font-weight:700;border-bottom-right-radius:5px}
+.bb.cl{align-self:flex-end;background:#2C2C30;color:#EDEDF0;border-bottom-left-radius:5px}
+.cmd{margin-top:12px;border-radius:12px;background:#0b0b0c;box-shadow:0 0 0 1px var(--line) inset}
+.cmd summary{cursor:pointer;list-style:none;padding:11px 13px;font-size:14px;font-weight:700;color:var(--mute)}
+.cmd summary::-webkit-details-marker{display:none}
+.cmd code{display:block;padding:0 13px 13px;font:500 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--amb2);direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* takeoff chart */
+.chart{position:relative;margin-top:30px}
+.chart svg{width:100%;height:auto;display:block}
+.chart .nt{position:absolute;top:0;inset-inline-end:0;width:200px}
+.lg{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:14px;color:var(--mute);margin-top:12px}
+.lg span{display:inline-flex;align-items:center;gap:7px}
+.lg i{display:inline-block;width:18px;height:3px;border-radius:2px;background:var(--c)}
+.note{color:#5c5c61;font-size:13px;text-align:center;margin-top:8px}
+
+/* the week fills up */
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;position:relative;margin-top:30px;padding-bottom:24px}
+.wk .dy{text-align:center;font-size:13px;font-weight:800;color:var(--mute);padding-bottom:7px}
+.wk .col{position:relative;height:230px;border-radius:11px;background:#0e0e10;box-shadow:0 0 0 1px var(--line) inset}
+.wk .pc{position:absolute;inset-inline:3px;aspect-ratio:3/4;border-radius:7px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.1);transition:box-shadow .3s,transform .4s}
+.wk .pc img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.35) brightness(.55);transition:filter .3s}
+.wk .pc.done{box-shadow:0 0 0 2px var(--amb);transform:scale(1.05)}
+.wk .pc.done img{filter:none}
+.wk .pc i{position:absolute;bottom:2px;inset-inline:0;text-align:center;font-style:normal;font-size:10px;font-weight:800;color:#fff;text-shadow:0 1px 3px #000;direction:ltr}
+.wk .tk{position:absolute;top:3px;inset-inline-start:3px;width:15px;height:15px;border-radius:50%;background:var(--ok);color:#03210c;font-size:10px;font-weight:900;display:grid;place-items:center;opacity:0;transition:opacity .25s}
+.wk .pc.done .tk{opacity:1}
+.now{position:absolute;top:24px;bottom:24px;width:2px;background:var(--amb);box-shadow:0 0 12px var(--amb);right:0}
+.now:before{content:"עכשיו";position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:var(--amb);white-space:nowrap}
+
+.need{display:grid;grid-template-columns:repeat(3,1fr);margin-top:32px}
+.need div{text-align:center;padding:0 6px;border-inline-start:1px solid var(--line);min-width:0}
+.need div:first-child{border-inline-start:0}
+.need svg{width:32px;height:32px;color:var(--amb);display:block;margin:0 auto 12px}
+.need b{display:block;font-size:17px;font-weight:800}
+.need span{display:block;color:var(--mute);font-size:14px;line-height:1.35;margin-top:4px}
+.faq{margin-top:26px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 2px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:18px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"";width:9px;height:9px;border-left:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(-45deg);transition:transform .25s;margin-inline-end:4px;flex:none}
+.faq details[open] summary:after{transform:rotate(135deg)}
+.faq p{color:var(--mute);font-size:16px;padding:0 2px 20px}
+.end{margin-top:96px;text-align:center}
+.end h2{font-weight:800;font-size:34px;letter-spacing:-.025em;line-height:1.08}
+.end .btn{margin-top:26px}
+.peek{margin-top:14px;border-radius:14px;background:#0d0d0f;box-shadow:0 0 0 1px var(--line) inset;text-align:start}
+.peek summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:16px}
+.peek summary::-webkit-details-marker{display:none}
+.peek summary:after{content:"+";color:var(--amb);font-size:22px;font-weight:600}
+.peek[open] summary:after{content:"-"}
+.peek pre{font:500 14px/1.65 A,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;color:#cfcfd4;padding:0 18px 18px;unicode-bidi:plaintext;text-align:start;max-height:60vh;overflow:auto}
+.sign{display:flex;gap:14px;align-items:center;font-size:17px;line-height:1.45;margin-top:72px}
+.sign .av{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--amb);color:var(--amb-ink);font-weight:800;font-size:20px}
+
+/* floating copy button on phones, between the hero button and the closing one */
+.float{position:fixed;inset-inline:0;bottom:0;z-index:20;padding:12px max(16px,env(safe-area-inset-left,0px)) calc(12px + env(safe-area-inset-bottom,0px));
+ background:linear-gradient(180deg,transparent,rgba(0,0,0,.85) 35%);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.float.show{transform:none;pointer-events:auto}
+.float .btn{max-width:440px;margin:0 auto;height:54px;font-size:18px}
+
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.r{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.r1{animation-delay:.05s}.r2{animation-delay:.18s}.r3{animation-delay:.32s}.r4{animation-delay:.46s}
+@media (prefers-reduced-motion:reduce){.r{animation:none}.nt,.wk .pc,.float{transition:none}}
+</style><body><main class=wrap>
+
+<h1 class="r r1">הפוסטים שלכם.<br><span class=grad>עולים לבד.</span></h1>
+<p class="lede r r2">פרומפט אחד ל-<bdi>Claude Code</bdi> בונה איתכם מערכת שמפרסמת לאינסטגרם בשעה שקבעתם. גם כשהמחשב כבוי.</p>
+
+<div class="hero r r3"><div class=ph><div class=sc><div class=di></div><div class=dt id=hd>יום ראשון</div><div class=ck id=hc>18:30</div><div class=stack id=hs></div></div></div></div>
+<p class="step r r3" id=hp></p>
+<div class="dots r r3" id=hdots aria-hidden=true></div>
+
+<div class="r r4" style="margin-top:34px"><button class="btn" id=b0><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> העתיקו את הפרומפט</button>
+<div class=meta><span>בערך 40 דקות</span><span>$0 נוספים</span><span>בלי לכתוב קוד</span></div></div>
+
+<section class=sec><h2>מאז, אומרים לו<br><span class=grad>במילים.</span></h2>
+<p class=sub>בוחרים מה עולה ומתי, ורואים מה עונים לכם.</p>
+<div class=box>
+<p class=lbl>מה עולה?</p><div class=chips id=k4></div>
+<p class=lbl>מתי?</p><div class=chips id=d4></div>
+<p class=lbl>באיזו שעה?</p><div class=chips id=t4></div>
+<div class=cv id=cv4 aria-live=polite></div>
+<details class=cmd><summary>מה הוא מריץ מאחורי הקלעים</summary><code id=cm4></code></details>
+</div></section>
+
+<section class=sec><h2>ויודעים מתי<br><span class=grad>להיכנס להגיב.</span></h2>
+<p class=sub>בשלב השני הוא משווה כל פוסט לרגיל שלכם, באותו גיל. פי 2 מהרגיל, ומגיעה הודעה.</p>
+<div class=chart id=ch></div>
+<div class=lg><span style="--c:#55555a"><i></i>הרגיל שלכם</span><span style="--c:#d8d8dc"><i style="background:repeating-linear-gradient(90deg,#d8d8dc 0 4px,transparent 4px 7px)"></i>פי 2</span><span style="--c:var(--amb)"><i></i>הפוסט הזה</span></div>
+<p class=note>המספרים לדוגמה. ההתראה נשלחת פעם אחת לפוסט, מ-100 צפיות.</p>
+</section>
+
+<section class=sec><h2>שבוע שלם.<br><span class=grad>אפס העלאות ידניות.</span></h2>
+<p class=sub>מכינים פעם אחת. כל פוסט עולה ביום ובשעה שלו.</p>
+<div class=wk id=wk></div>
+</section>
+
+<section class=sec><h2>מה צריך לפני.</h2><div class=need>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg><b><bdi>Claude Code</bdi></b><span>מנוי <bdi>Claude</bdi> בתשלום, Pro ומעלה</span></div>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><b>אינסטגרם</b><span>חשבון Professional: Business או Creator</span></div>
+<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg><b>3 חשבונות חינמיים</b><span><bdi>Supabase</bdi>, טלגרם וחשבון מפתח במטא</span></div>
+</div></section>
+
+<section class=sec><h2>שאלות קצרות.</h2><div class=faq>
+<details><summary><span>זה עולה כסף?</span></summary><p>אפס דולר נוספים. המערכת רצה על התוכניות החינמיות של <bdi>Supabase</bdi>, מטא וטלגרם. את הבנייה עושים ב-<bdi>Claude Code</bdi>, שדורש מנוי <bdi>Claude</bdi> בתשלום (Pro ומעלה). יש לכם Pro? זה נכלל במנוי, בכפוף למגבלות שלו.</p></details>
+<details><summary><span>אני לא טכני. זה בשבילי?</span></summary><p>כן. <bdi>Claude</bdi> כותב את כל הקוד. אתם עושים כמה צעדים קצרים במסכים של <bdi>Supabase</bdi>, טלגרם ומטא, והוא מסביר כל אחד ובודק שעבד לפני שממשיכים.</p></details>
+<details><summary><span>הוא יפרסם משהו בלי לשאול?</span></summary><p>לא. שום דבר לא עולה לאינסטגרם בלי "כן" שלכם לאותו פוסט, גם לא בבדיקה. הבדיקה האחרונה היא סטורי אחד, שנעלם אחרי 24 שעות.</p></details>
+<details><summary><span>המפתחות שלי עוברים בצ'אט?</span></summary><p>לא. <bdi>Claude</bdi> יוצר קובץ במחשב שלכם, ואתם מדביקים בו את המפתחות בעצמכם.</p></details>
+<details><summary><span>מה אין בגרסה הזאת?</span></summary><p>דשבורד, יותר מחשבון אינסטגרם אחד, תגובה ראשונה, מוזיקה לרילס ומחיקה של פוסט שכבר עלה. את שני האחרונים הממשק של אינסטגרם לא מאפשר.</p></details>
+</div></section>
+
+<section class=end id=end><h2>הפוסט הבא שלכם<br><span class=grad>כבר יכול לעלות לבד.</span></h2>
+<button class=btn><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> העתיקו את הפרומפט</button>
+<details class=peek><summary>מה כתוב בפרומפט</summary><pre id=p># הקוקפיט: הפוסטים שלכם עולים לבד
+
+הדביקו את כל הטקסט הזה ב-Claude Code (צריך מנוי Claude בתשלום, Pro ומעלה).
+Claude יבנה איתכם מערכת שמפרסמת לאינסטגרם בשעה שקבעתם, דרך הממשק הרשמי של מטא, ושולחת לכם הודעה בטלגרם.
+בשלב השני היא גם מתריעה כשפוסט ממריא, מזכירה כשעבר זמן מהפוסט האחרון, ואוספת נתונים.
+
+מה צריך: חשבון Professional באינסטגרם (Business או Creator), וחשבונות חינמיים ב-Supabase, ב-Meta for Developers ובטלגרם.
+כמה זמן: בערך 40 דקות. ברוב הזמן Claude עובד, ובכמה צעדים קצרים הוא יבקש מכם ללחוץ במסך של מטא.
+כמה זה עולה: אפס דולר נוספים. הכל רץ על תוכניות חינמיות (לא כולל מנוי Claude).
+
+---
+
+You are setting up **cockpit**: a personal Instagram scheduler for one account. Finished posts go into a queue with one command, publish themselves at the scheduled time through Meta's official Instagram API, and report to the user on Telegram. It runs in the cloud on free tiers (Supabase + Telegram), so it works while the user's computer is off.
+
+Speak to the user in Hebrew, in short plain sentences. Write all code, file names and commands in English.
+
+## 0. Ground rules
+
+- Build exactly the contract in sections 3 to 5. Command names, arguments, table and column names are fixed. Do not rename or "improve" them. Internal code structure is up to you.
+- **Nothing is published to the user's Instagram without their explicit "yes" for that exact post.** This includes tests. Posts published through the API cannot be deleted through the API, so every test publish is a story (it disappears after 24 hours).
+- **Secrets never pass through the chat.** Create `~/cockpit/.env` from a template, tell the user which line to fill, and let them paste the value into the file themselves. Never print a token, key or secret, not even partly. `.env` is in `.gitignore` and has mode 600.
+- Never run `sudo`. If something needs an admin password, stop and give the user the exact one line to run themselves.
+- One manual step at a time. Explain it in 2-3 short lines, wait for the user to say it is done, then verify it yourself before moving on (section 2 says how).
+- Never declare the system ready before the acceptance test in section 7 passes in full. If a check fails, fix the cause and rerun the whole test. Show the real error, never claim success.
+- Meta renames buttons often. If a screen does not match the words below, ask the user what they see and find the closest match. Never invent a step.
+
+## 1. Preflight (check and report before anything else)
+
+One short Hebrew list:
+1. Node.js 20 or newer (`node --version`). Missing: point to https://nodejs.org and stop.
+2. git (`git --version`).
+3. The Supabase CLI runs with `npx supabase --version` (no global install).
+4. Ask: is the Instagram account professional (Business or Creator)? If not: Instagram app, Settings, Account type and tools, Switch to professional account. It is free and reversible.
+
+## 2. The user's manual steps (one at a time, in this order)
+
+**A. Supabase (5 min).** Sign up at https://supabase.com, create a new project on the Free plan, choose the region closest to the user, save the database password in their password manager. Then the user runs `npx supabase login` in the terminal. You verify: `npx supabase projects list` shows the project. Save the project ref in `.env` as `SUPABASE_PROJECT_REF`. The user pastes the `service_role` key (Project Settings, API) into `.env` as `SUPABASE_SERVICE_ROLE_KEY`.
+
+**B. Telegram bot (3 min).** In Telegram, open `@BotFather`, send `/newbot`, pick a name. The user pastes the token into `.env` as `TELEGRAM_BOT_TOKEN`, then sends any message to the new bot. You read the chat id from `https://api.telegram.org/bot&lt;token&gt;/getUpdates` (in code, never echo the token) and write `TELEGRAM_CHAT_ID`. You verify: send "הבוט מחובר" and ask the user if it arrived.
+
+**C. Meta app (10-15 min).**
+1. https://developers.facebook.com, My Apps, Create App. On "Add use cases" choose the Instagram one: **"Manage messaging &amp; content on Instagram"** (in the docs it is called "Instagram API with Instagram Login"). Skip the business portfolio screen. The app stays in **Development mode**. For the user's own account this is enough, no App Review.
+2. App roles, Roles, Add People, **Instagram Tester**, enter the account's username. Then in the Instagram app: Settings, Website permissions, Apps and websites, Tester invites, accept.
+   - "Insufficient developer role" later always means this step is missing.
+3. Instagram, API setup with Instagram business login, section "Generate access tokens": click **Generate token** next to the account and approve. A token from the dashboard is long-lived (60 days), so no login server is needed. The user pastes it into `.env` as `IG_ACCESS_TOKEN`.
+4. You verify: `GET {IG_API}/me?fields=user_id,username` with the token returns the right username. Tell the user the username you see. Save `IG_USER_ID`.
+
+## 3. Architecture (fixed)
+
+```
+~/cockpit/                 git repo: CLI, SQL migrations, edge functions, .env (ignored)
+~/cockpit/bin/cockpit      the CLI (Node 20, no npm dependencies, built-in fetch)
+~/cockpit/supabase/        migrations/ and functions/ for `npx supabase`
+~/.claude/skills/cockpit/SKILL.md   the skill (section 6, verbatim)
+```
+
+Cloud (the user's Supabase project):
+- Tables in section 3.2, RLS enabled on all of them with **no policies** (only the service role reads and writes).
+- Storage: one public bucket `media`. Instagram fetches media from a public URL, so files must be there before publishing. Object names are random (uuid), so nobody can guess them.
+- Edge functions (Deno, deployed with `--no-verify-jwt`, each refuses any request without the header `x-cron-secret` equal to the `CRON_SECRET` secret):
+  - `publish-due`: every minute.
+  - `refresh-token`: daily at 10:00 user time, refreshes when the token is older than 7 days, and on Sundays sends the heartbeat (3.5).
+  - `remind`: daily at 09:00 user time (phase 2).
+  - `metrics`: hourly (phase 2).
+- Schedules: `pg_cron` + `pg_net` call the functions. `CRON_SECRET` is stored once in Supabase Vault (`vault.create_secret`) and read by the cron SQL at fire time, so it never lands in git. Same value set as a function secret with `npx supabase secrets set`.
+- Telegram: one shared helper `sendTelegram(text)` in `functions/_shared/`.
+
+### 3.1 Instagram publishing (fixed, these choices prevent known breakage)
+- Host is `https://graph.instagram.com`, **not** graph.facebook.com. Keep the version in one constant, `IG_API = "https://graph.instagram.com/v27.0"` (the version in Meta's docs examples, Nov 2026). If a call fails with a version error, read the version in https://developers.facebook.com/docs/instagram-platform/content-publishing and update the constant; `v23.0` is known to work.
+- Flow: create container(s) with `POST {IG_API}/{IG_USER_ID}/media`, wait until the container's `status_code` is `FINISHED`, then `POST {IG_API}/{IG_USER_ID}/media_publish` with `creation_id`. Then read `permalink` from the new media id. Use the account id, never `/me`, for these two calls.
+- Types: one image = `image_url` (**JPEG only**, Meta supports no other image format), one video = `media_type=REELS` + `video_url`, story = `media_type=STORIES` with `image_url` or `video_url`, carousel = 2-20 children each created with `is_carousel_item=true`, then a parent with `media_type=CAROUSEL` and `children=&lt;ids comma separated&gt;`. A carousel counts as one post.
+- Video processing can take minutes. **Never wait inside one function run.** Store the container id, set status `processing`, and check `status_code` once per minute on the following runs (Meta's recommendation). `ERROR` or `EXPIRED` means failed. A container expires after 24 hours.
+- Publishing limit: Meta's own page says both 100 and 50 posts per 24 hours, so design for **50**. Before publishing, check `GET {IG_API}/{IG_USER_ID}/content_publishing_limit` and if the quota is used up, leave the post scheduled and tell the user once on Telegram.
+
+### 3.2 Schema (one migration, `0001_cockpit.sql`)
+
+```sql
+create table posts (
+  id            uuid primary key default gen_random_uuid(),
+  short_id      text unique not null,            -- 6 chars, what the CLI shows
+  kind          text not null check (kind in ('image','carousel','reel','story')),
+  caption       text not null default '',
+  media         jsonb not null,                  -- [{"path":"media/&lt;uuid&gt;.jpg","url":"https://...","type":"image"}]
+  publish_at    timestamptz,                     -- null = draft
+  status        text not null default 'scheduled'
+                check (status in ('draft','scheduled','publishing','processing','published','failed','canceled')),
+  container_id  text,
+  ig_media_id   text,
+  permalink     text,
+  attempts      int not null default 0,
+  last_error    text,
+  claimed_at    timestamptz,
+  published_at  timestamptz,
+  created_at    timestamptz not null default now()
+);
+create index on posts (status, publish_at);
+
+create table events (                             -- append only, the audit trail
+  id bigint generated always as identity primary key,
+  post_id uuid references posts(id),
+  kind text not null,                             -- created|scheduled|claimed|processing|published|retry|failed|canceled|token_refreshed|alert_sent|reminded
+  detail jsonb,
+  at timestamptz not null default now()
+);
+
+create table tokens (
+  id int primary key default 1 check (id = 1),    -- one account, one row
+  access_token text not null,
+  refreshed_at timestamptz not null default now(),
+  expires_at timestamptz
+);
+
+create table metrics (                            -- phase 2
+  post_id uuid references posts(id),
+  ig_media_id text not null,
+  taken_at timestamptz not null default now(),
+  age_hours numeric not null,
+  views int, reach int, likes int, comments int, saved int, shares int
+);
+create index on metrics (ig_media_id, taken_at);
+```
+
+`IG_ACCESS_TOKEN` from `.env` is copied into `tokens` once during setup. From then on `tokens` is the only source, and only the functions read it.
+
+### 3.3 The publish engine (`publish-due`, every minute)
+1. **Atomic claim.** An RPC `claim_due(p_limit int default 2)` flips due rows (`status='scheduled' and publish_at &lt;= now()`) to `publishing` with `claimed_at = now()` and `attempts = attempts + 1`, using `for update skip locked`. Two overlapping runs can never claim the same post. This prevents double posting.
+2. For each claimed post: create the container(s), save `container_id`, set `processing`.
+3. Every run also checks all `processing` posts: `FINISHED` means publish now, save `ig_media_id`, `permalink`, `published_at`, status `published`, send Telegram `✅ פורסם` with the permalink. `ERROR`/`EXPIRED` means status `failed`.
+4. Transient errors (network, 5xx, rate limit) put the post back to `scheduled` with `publish_at = now() + 2 minutes`, up to 3 attempts. After that: `failed` and Telegram `❌ לא פורסם` with the post's short id and the real error message from Instagram.
+5. Reaper: a post in `publishing` or `processing` for more than 15 minutes goes back to `scheduled` (one retry) and is logged.
+6. Every state change writes a row to `events`.
+
+### 3.4 Token
+Permissions: `instagram_business_basic` and `instagram_business_content_publish` (publishing), plus `instagram_business_manage_insights` (phase 2 numbers). `refresh-token` calls `GET https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&amp;access_token=...` (the token must be at least 24 hours old and not expired; a token not refreshed for 60 days is dead for good), stores the new token and `expires_at`. If refresh fails, or the token expires in under 10 days: Telegram `🔑 החיבור לאינסטגרם עומד לפוג` with what to do (generate a new token as in step 2C.3, then `cockpit token`).
+
+### 3.5 Keeping the free project awake
+Supabase may pause a Free project after 7 days of low activity, and then everything stops silently. Its docs say real requests to the project count as activity, but they never say whether `pg_cron` does. So:
+- The cron jobs call the functions through the project's public URL (`https://&lt;ref&gt;.supabase.co/functions/v1/...`), as real HTTP requests.
+- `refresh-token` also sends a weekly heartbeat every Sunday at 10:00 user time: `💓 הקוקפיט ער. בתור: &lt;n&gt; פוסטים`. Tell the user: **if Sunday's heartbeat did not arrive, open the Supabase dashboard and click Restore project.** Opening the dashboard also counts as activity.
+- `cockpit status` reports if the project is paused.
+
+## 4. The CLI (`cockpit`)
+
+Every command prints a short Hebrew result. `--json` prints JSON instead. **An unknown command or argument exits with code 2 and a clear message.** Times are the user's local time zone (read it from the system), stored as UTC.
+
+| Command | Does |
+|---|---|
+| `cockpit add &lt;file...&gt; --at "YYYY-MM-DD HH:MM" [--caption "..." \| --caption-file f.txt] [--story] [--draft]` | Detects the kind: one `.jpg`/`.jpeg` = image, 2-20 images = carousel (in the given order), one `.mp4`/`.mov` = reel, `--story` = story. Converts nothing silently: a PNG is refused with a message on how to convert. Uploads to `media/&lt;uuid&gt;.&lt;ext&gt;`, inserts the post, prints its short id and the local publish time. `--draft` saves without a time. A time in the past is refused |
+| `cockpit list` | Upcoming and recent posts: short id, kind, local time, status, first words of the caption |
+| `cockpit show &lt;id&gt;` | One post with its events |
+| `cockpit move &lt;id&gt; --at "..."` | New time for a scheduled or draft post |
+| `cockpit cancel &lt;id&gt;` | Cancels a post that has not been published. A published post cannot be canceled (say so) |
+| `cockpit status` | Token days left, last `publish-due` run (from `cron.job_run_details`), queue size, posts published this week, quota left |
+| `cockpit token` | Copies a new `IG_ACCESS_TOKEN` from `.env` into `tokens` after the user replaced it |
+| `cockpit stats` | Phase 2: the last 10 published posts with views, saves and shares, best first |
+| `cockpit selftest` | Runs section 7, part 1 |
+
+## 5. Phase 2: it tells you what to do (only after phase 1 passes, ask the user first)
+
+- `metrics` (hourly): for every post published in the last 7 days, read its insights (`GET {IG_API}/&lt;media id&gt;/insights?metric=views,reach,likes,comments,saved,shares`; do not ask for `impressions`, Meta retired it for new media) and add a row to `metrics` with its age in hours.
+- **Takeoff alert** (inside `metrics`): when a post between 1 and 6 hours old has views at least 2 times the median of the user's own previous 10 posts at the same age, and at least 100 views, send once ever per post: `🚀 הפוסט ממריא. זה הזמן להיכנס להגיב` with the permalink. Fewer than 5 previous posts: no alert yet (no baseline).
+- **Reminder** (`remind`, daily 09:00): if no post was published in the last 4 days and nothing is scheduled for today, send once that day: `♟️ עבר זמן מהפוסט האחרון. יש משהו בתור?`.
+- Log every alert in `events` (`alert_sent`, `reminded`), so nothing is sent twice.
+
+## 6. The skill (write this file verbatim to `~/.claude/skills/cockpit/SKILL.md`)
+
+```markdown
+---
+name: cockpit
+description: Schedules Instagram posts with the user's own cockpit (Supabase + Instagram API): queue a finished post, move, cancel, check status and stats. Triggers: תכניס לתור, תתזמן את הפוסט, מה בתור, מה עבד, schedule this post.
+---
+
+# cockpit: one command and it is in the queue
+
+1. Make sure the post is final: files in the right format (JPEG for images, MP4 for video), caption text agreed with the user.
+2. Confirm the time with the user in their words ("מחר ב-20:00") and turn it into `YYYY-MM-DD HH:MM`.
+3. `cockpit add &lt;files&gt; --at "&lt;time&gt;" --caption-file &lt;file&gt;`. Read back the short id and time it printed.
+4. Tell the user in Hebrew: what goes up, when, and that Telegram will confirm.
+5. For "מה בתור": `cockpit list`. For "מה עבד": `cockpit stats`. For a problem: `cockpit status` and `cockpit show &lt;id&gt;`.
+
+Rules: only use commands that `cockpit --help` lists. Never publish anything immediately without the user's explicit yes. Show real errors, never claim success.
+```
+
+## 7. Acceptance test (must pass before you say the system is ready)
+
+**Part 1, `cockpit selftest` (nothing is published):** print each line as pass or fail.
+- The token works: `/me` returns the expected username.
+- All four tables exist, RLS is on, and an anon request to `posts` returns nothing.
+- `cron.job` lists the jobs, and `cron.job_run_details` shows a successful `publish-due` run in the last 3 minutes.
+- Each function returns 401 without `x-cron-secret` and 200 with it.
+- `cockpit add` with a fake argument exits with code 2. A time in the past is refused. A PNG is refused.
+- A draft added with `--draft` appears in `list` and is removed by `cancel`.
+- `claim_due` run twice in parallel on one test row claims it exactly once (then the test row is deleted).
+- Telegram: send `בדיקה: הקוקפיט מחובר` and ask the user to confirm they got it.
+
+**Part 2, one real story (only with the user's explicit yes):** ask the user to pick any photo they are fine showing as a story for 24 hours, convert it to JPEG 1080x1920 if needed (ask before converting), and run `cockpit add &lt;file&gt; --story --at &lt;now + 3 minutes&gt;`. Watch `cockpit show` until `published`. If the story fails with an account-type error, stop and tell the user the real error. Never fall back to a feed post as a test (a feed post cannot be deleted through the API). Pass only when: status is `published`, `ig_media_id` and `permalink` are set, the user confirms the story is on their profile, and the Telegram `✅ פורסם` arrived.
+
+Only when both parts pass: tell the user, in Hebrew, that the cockpit is ready, and that from now on they can say "תכניס את הפוסט הזה לתור למחר ב-20:00". Then offer phase 2.
+
+## 8. Not in this version
+
+No web dashboard, one Instagram account only, no comment or DM automation, no first comment, no collaborators, no music on reels (the API does not add music), no editing a caption after publishing, no deleting published posts (the API does not support it). If the user asks, say it is not in this version.</pre></details>
+</section>
+<footer class=sign><div class=av aria-hidden=true>ג</div><div>אני גל, מקים vaknin.ai. בניתם? ספרו לי בפרטי מה הפוסט הראשון שעלה לבד 🙌</div></footer>
+</main>
+<div class=float id=fl aria-hidden=true><button class=btn tabindex=-1><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> העתיקו את הפרומפט</button></div>
+<script>
+var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function nt(o){var d=document.createElement("div");d.className="nt";
+ d.innerHTML='<div class="ic'+(o.me?' me':'')+'">'+o.icon+'</div><div class=bd><div class=r1><span></span><span dir=ltr>עכשיו</span></div><div class=r2></div></div>'+(o.thumb?'<img class=th alt="" src="'+o.thumb+'">':'');
+ d.querySelector(".r1 span").textContent=o.who||"הקוקפיט · טלגרם";d.querySelector(".r2").textContent=o.title;return d}
+function land(s,n){s.prepend(n);requestAnimationFrame(function(){requestAnimationFrame(function(){n.classList.add("in")})})}
+
+// hero: one week. Every message is the exact text from the prompt.
+var WEEK=[
+ {d:"יום ראשון",t:"18:30",icon:"💬",me:1,who:"אתם ל-Claude Code",title:"תכניס את הריל הזה לתור לרביעי ב-20:00",cap:"<b>ראשון.</b> משפט אחד, והריל בתור."},
+ {d:"יום רביעי",t:"20:00",icon:"✅",title:"פורסם",thumb:"covers/c1.jpg",cap:"<b>רביעי, 20:00.</b> הוא עולה לבד, גם כשהמחשב כבוי."},
+ {d:"יום רביעי",t:"21:40",icon:"🚀",title:"הפוסט ממריא. זה הזמן להיכנס להגיב",cap:"<b>שעה וארבעים אחר כך.</b> פי 2 מהרגיל שלכם."},
+ {d:"יום ראשון",t:"10:00",icon:"💓",title:"הקוקפיט ער. בתור: 2 פוסטים",cap:"<b>כל יום ראשון.</b> סימן שהכל רץ."},
+ {d:"יום שני",t:"09:00",icon:"♟️",title:"עבר זמן מהפוסט האחרון. יש משהו בתור?",cap:"<b>4 ימים בלי פוסט.</b> תזכורת אחת."}];
+(function hero(){var s=document.getElementById("hs"),dEl=document.getElementById("hd"),cEl=document.getElementById("hc"),pEl=document.getElementById("hp"),dots=document.getElementById("hdots");
+ WEEK.forEach(function(){dots.appendChild(document.createElement("i"))});
+ function show(k){var w=WEEK[k];[dEl,cEl].forEach(function(e){e.classList.add("fade")});
+  setTimeout(function(){dEl.textContent=w.d;cEl.textContent=w.t;dEl.classList.remove("fade");cEl.classList.remove("fade")},250);
+  pEl.innerHTML=w.cap;[].forEach.call(dots.children,function(x,j){x.classList.toggle("on",j===k)});
+  var n=nt(w);land(s,n);var all=s.querySelectorAll(".nt");for(var i=3;i<all.length;i++)all[i].remove();}
+ if(RM){for(var k=0;k<3;k++){var n=nt(WEEK[k]);n.classList.add("in");s.prepend(n)}dEl.textContent=WEEK[2].d;cEl.textContent=WEEK[2].t;pEl.innerHTML=WEEK[2].cap;dots.children[2].classList.add("on");return}
+ var k=0;function tick(){if(k===0)s.innerHTML="";show(k);k=(k+1)%WEEK.length;setTimeout(tick,k===0?4200:2800)}
+ setTimeout(tick,700)})();
+
+// say it in words: mirrors the CLI in the prompt (add --at, --story, JPEG only, a time in the past is refused)
+(function say(){var K=[["ריל","הריל הזה","reel.mp4",""],["קרוסלה","הקרוסלה הזאת","1.jpg 2.jpg 3.jpg",""],["תמונה","התמונה הזאת","post.jpg",""],["סטורי","הסטורי הזה","story.jpg"," --story"]];
+ var D=["היום","מחר","שישי"],T=["09:00","13:00","20:00"],k=0,d=1,t=2;
+ function mk(id,arr,set){var el=document.getElementById(id);arr.forEach(function(x,i){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=Array.isArray(x)?x[0]:x;b.onclick=function(){set(i);draw()};el.appendChild(b)});return el}
+ var kE=mk("k4",K,function(i){k=i}),dE=mk("d4",D,function(i){d=i}),tE=mk("t4",T,function(i){t=i});
+ var cv=document.getElementById("cv4"),cm=document.getElementById("cm4");
+ function when(){var n=new Date(),x=new Date(n);if(d===1)x.setDate(n.getDate()+1);if(d===2){var add=(5-n.getDay()+7)%7||7;x.setDate(n.getDate()+add)}
+  var hm=T[t].split(":");x.setHours(+hm[0],+hm[1],0,0);return x}
+ function pad(n){return String(n).padStart(2,"0")}
+ function draw(){[[kE,k],[dE,d],[tE,t]].forEach(function(p){[].forEach.call(p[0].children,function(c,j){c.classList.toggle("on",j===p[1]);c.setAttribute("aria-pressed",j===p[1])})});
+  var x=when(),past=x<=new Date(),dw=D[d]==="שישי"?"לשישי":D[d]==="היום"?"להיום":"למחר";
+  cv.innerHTML="";var me=document.createElement("div");me.className="bb me";me.textContent="תכניס את "+K[k][1]+" לתור "+dw+" ב-"+T[t];
+  var cl=document.createElement("div");cl.className="bb cl";
+  cl.textContent=past?"השעה "+T[t]+" היום כבר עברה, ואני לא קובע זמן שעבר. לאיזו שעה לקבוע?":"בתור. "+K[k][0]+", "+D[d]+" ב-"+T[t]+". טלגרם יאשר כשזה עולה.";
+  cv.appendChild(me);cv.appendChild(cl);
+  var st=x.getFullYear()+"-"+pad(x.getMonth()+1)+"-"+pad(x.getDate())+" "+T[t];
+  cm.textContent=past?"cockpit add "+K[k][2]+K[k][3]+' --at "'+st+'"\n# refused: the time is in the past':"cockpit add "+K[k][2]+K[k][3]+' --at "'+st+'"'+(K[k][3]?"":" --caption-file caption.txt")}
+ draw()})();
+
+// takeoff chart: the prompt's rule, 2x the median at the same age. Example numbers.
+(function chart(){var S=document.getElementById("ch"),w=340,h=210,L=38,R=10,T=12,B=32;
+ function X(t){return L+(t/6)*(w-L-R)}function Y(v){return T+(1-v/1800)*(h-T-B)}
+ function m(t){return 400*Math.pow(t/3,.8)}function c(t){return m(t)*(1+1.4*Math.pow(t/6,.8))}
+ function path(f,t1){var d="";for(var i=0;i<=60;i++){var t=t1*i/60;d+=(i?"L":"M")+X(t).toFixed(1)+" "+Y(Math.min(f(t),1800)).toFixed(1)}return d}
+ var g='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="צפיות לפי שעות מאז שהפוסט עלה: הרגיל שלכם, פי 2, והפוסט הזה שחוצה את פי 2">';
+ [0,600,1200,1800].forEach(function(v){g+='<line x1="'+L+'" x2="'+(w-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="rgba(255,255,255,.06)"></line><text x="'+(L-7)+'" y="'+(Y(v)+4)+'" fill="#6e6e73" font-size="10.5" text-anchor="end" font-family="A,sans-serif">'+v+'</text>'});
+ for(var t=0;t<=6;t++)g+='<text x="'+X(t)+'" y="'+(h-14)+'" fill="#6e6e73" font-size="10.5" text-anchor="middle" font-family="A,sans-serif">'+t+'</text>';
+ g+='<text x="'+((L+w-R)/2)+'" y="'+(h-1)+'" fill="#6e6e73" font-size="11" text-anchor="middle" font-family="A,sans-serif">שעות מאז שעלה</text>';
+ g+='<path d="'+path(m,6)+'" fill="none" stroke="#55555a" stroke-width="3" stroke-linecap="round"></path>';
+ g+='<path d="'+path(function(t){return 2*m(t)},6)+'" fill="none" stroke="#d8d8dc" stroke-width="1.5" stroke-dasharray="4 3" opacity=".75"></path>';
+ g+='<path id="cp" fill="none" stroke="#F2B84B" stroke-width="3.5" stroke-linecap="round"></path><circle id="cd" r="5.5" fill="#F2B84B"></circle></svg>';
+ S.innerHTML=g;var p=S.querySelector("#cp"),dot=S.querySelector("#cd"),n=nt({icon:"🚀",title:"הפוסט ממריא. זה הזמן להיכנס להגיב"});S.appendChild(n);
+ var tx=6*Math.pow(1/1.4,1.25),D=5200,HOLD=3000,t0=0,seen=false;
+ function draw(tt){p.setAttribute("d",path(c,Math.max(tt,.01)));dot.setAttribute("cx",X(tt));dot.setAttribute("cy",Y(Math.min(c(tt),1800)));n.classList.toggle("in",tt>=tx)}
+ draw(6);
+ if(RM||!("IntersectionObserver" in window))return;
+ function frame(ts){if(!t0)t0=ts;var e=(ts-t0)%(D+HOLD);draw(Math.min(e/D,1)*6);requestAnimationFrame(frame)}
+ new IntersectionObserver(function(es){if(es[0].isIntersecting&&!seen){seen=true;requestAnimationFrame(frame)}},{threshold:.4}).observe(S)})();
+
+// the week fills up: real covers of published vaknin.ai carousels
+(function week(){var W=document.getElementById("wk"),days=["א","ב","ג","ד","ה","ו","ש"];
+ var P={0:["20:00",2],2:["13:00",3],3:["20:00",4],5:["10:00",5],6:["21:00",6]};
+ days.forEach(function(d){var e=document.createElement("div");e.className="dy";e.textContent=d;W.appendChild(e)});
+ var cols=days.map(function(d,i){var c=document.createElement("div");c.className="col";W.appendChild(c);
+  if(P[i]){var h=+P[i][0].slice(0,2),pc=document.createElement("div");pc.className="pc";pc.style.top=((h-8)/14)*(230-70)+"px";
+   pc.innerHTML='<img alt="" loading="lazy" src="covers/c'+P[i][1]+'.jpg"><span class=tk>✓</span><i>'+P[i][0]+'</i>';c.appendChild(pc);c._pc=pc;c._h=h}return c});
+ var now=document.createElement("div");now.className="now";W.appendChild(now);
+ function set(x){now.style.right="calc("+x+"% - 1px)";cols.forEach(function(c,i){if(!c._pc)return;var pos=(i+(c._h-8)/14)/7*100;c._pc.classList.toggle("done",x>=pos)})}
+ set(99);
+ if(RM||!("IntersectionObserver" in window))return;
+ var D=9000,t0=0,seen=false;function frame(ts){if(!t0)t0=ts;set(((ts-t0)%D)/D*100);requestAnimationFrame(frame)}
+ new IntersectionObserver(function(es){if(es[0].isIntersecting&&!seen){seen=true;requestAnimationFrame(frame)}},{threshold:.3}).observe(W)})();
+
+// floating copy button: shown after the hero button scrolls away, hidden near the closing button
+(function(){var fl=document.getElementById("fl"),b0=document.getElementById("b0"),end=document.getElementById("end"),fb=fl.querySelector(".btn"),last=null;
+ function up(){var on=b0.getBoundingClientRect().bottom<0&&end.getBoundingClientRect().top>innerHeight*.9;if(on===last)return;last=on;
+  fl.classList.toggle("show",on);fl.setAttribute("aria-hidden",!on);fb.tabIndex=on?0:-1}
+ addEventListener("scroll",up,{passive:true});addEventListener("resize",up);up()})();
+</script>
+<script>
+var K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+var LIVE=location.hostname==="galvakninai.github.io";
+function ev(e){if(!LIVE)return;try{fetch("https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",{method:"POST",keepalive:true,
+ headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},
+ body:JSON.stringify({magnet_key:"cockpit",event:e,ref:(document.referrer||"").slice(0,200),
+ ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
+ev("view");
+function legacyCopy(t){var a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");
+ a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);
+ var ok=false;try{ok=document.execCommand("copy")}catch(_){}document.body.removeChild(a);return ok}
+var sent=false;
+document.querySelectorAll(".btn").forEach(function(b){var h=b.innerHTML;
+ function done(ok){b.classList.add("done");b.innerHTML=ok?"הועתק. עכשיו מדביקים ב-Claude Code":"לא הצלחתי להעתיק. פתחו את \"מה כתוב בפרומפט\" והעתיקו משם";
+  if(!ok){var d=document.querySelector(".peek");if(d)d.open=true}
+  setTimeout(function(){b.classList.remove("done");b.innerHTML=h},3200)}
+ b.onclick=function(){var t=document.getElementById("p").textContent;
+  if(!sent){sent=true;ev("download")}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(legacyCopy(t))})}
+  else done(legacyCopy(t))}});
+</script>
+<script src="../_shared/signup.js" defer></script>
