@@ -49,3 +49,7 @@
  .vk-su .vk-go{grid-column:1/-1}
  .vk-su.vk-sent .vk-done{flex:1 1 100%}
 }
+/* 19/11/2026: when the strip sits directly in body (a magnet page with no main and no footer.sign),
+   stretch it inside centered flex columns and keep a side gutter, so it never collapses to zero width. */
+body>.vk-su{align-self:stretch;width:auto}
+.vk-su.vk-edge{margin-inline:max(16px,env(safe-area-inset-left,0px))}

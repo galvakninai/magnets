@@ -48,7 +48,7 @@
   box0.appendChild(el("img", { "class": "vk-cut", src: base + "gal-cut.png", alt: "גל ווקנין",
     width: "354", height: "420", loading: "lazy", decoding: "async" }));
   var cp = el("div", { "class": "vk-cp" });
-  cp.appendChild(el("b", {}, "המגנט הבא, ישר למייל"));
+  cp.appendChild(el("b", {}, "העדכון הבא, ישר למייל"));
   cp.appendChild(el("span", {}, "מייל אחד בשבוע ממני, עם מה שחדש אצלי."));
   box0.appendChild(cp);
 
@@ -108,6 +108,12 @@
     var main = document.querySelector("main") || document.body;
     main.appendChild(sec);
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
-  else mount();
+  // 19/11/2026: a page with no side padding would put the strip edge to edge; give it a gutter there only.
+  function edge() {
+    var w = document.documentElement.clientWidth, r = sec.getBoundingClientRect();
+    if (r.width && r.left <= 1 && r.right >= w - 1) sec.classList.add("vk-edge");
+  }
+  function start() { mount(); requestAnimationFrame(edge); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
 })();

@@ -152,3 +152,5 @@ b.onclick=function(){var t=document.getElementById("p").textContent;
  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(legacyCopy(t))})}
  else done(legacyCopy(t))};
 </script>
+
+<script src="../_shared/signup.js" defer></script>

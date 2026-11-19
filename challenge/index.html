@@ -386,6 +386,7 @@ footer .logo{color:var(--ink);margin-bottom:8px}
   </div>
 </div></section>
 
+<div data-signup-here></div>
 <footer><div class="wrap">
   <div class="logo">vaknin<b style="color:var(--blue)">.ai</b></div>
   אתגר העיצוב · מדריך חינם · בנוי עם ui-ux-pro-max
@@ -396,5 +397,6 @@ footer .logo{color:var(--ink);margin-bottom:8px}
 function ev(e){try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({magnet_key:"design-challenge",event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(function(){})}catch(_){}}
 ev("view");document.querySelectorAll('a.cta,a[download],a[href*=".pdf"]').forEach(function(a){a.addEventListener("click",function(){ev("download")})});})();
 </script>
+<script src="../_shared/signup.js" defer></script>
 </body>
 </html>
