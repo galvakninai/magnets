@@ -96,6 +96,49 @@ code{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Menlo,monospace
 .end{text-align:center;padding:110px 0 90px}.end .h2{font-size:clamp(44px,7vw,84px)}
 .end .row{justify-content:center;margin-top:26px}
 p.sign{margin-top:30px;color:var(--mut);font-weight:800}
+/* stars pill */
+.stars{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.7);box-shadow:var(--sh);font-weight:700;font-size:15px;color:var(--mut)}
+.stars b{color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.stars svg{flex:none}
+/* app window (built in code, inspired by the OpenMausBot UI) */
+.app{margin-top:40px;background:#16171b;border-radius:26px;box-shadow:var(--shl),0 0 0 1px rgba(255,255,255,.06) inset;overflow:hidden;color:#f2f2f4;max-width:860px;margin-inline:auto}
+.app .bar{display:flex;align-items:center;gap:8px;height:46px;padding:0 18px;background:#1e1f24;border-bottom:1px solid rgba(255,255,255,.07);direction:ltr}
+.app .bar i{width:12px;height:12px;border-radius:50%;display:block}
+.app .bar span{flex:1;text-align:center;font-weight:700;font-size:14px;color:#a1a1a6;margin-right:44px}
+.app .body{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:760px){.app .body{grid-template-columns:260px 1fr}}
+.app .list{padding:14px;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid rgba(255,255,255,.07)}
+@media (min-width:760px){.app .list{border-bottom:0;border-left:1px solid rgba(255,255,255,.07)}}
+@media (max-width:759px){.app .list{display:grid;grid-template-columns:1fr 1fr;gap:4px}.app .lh{grid-column:1/-1}.ag{gap:9px;padding:8px}.ag .av{width:34px;height:34px}.ag .dot{display:none}.app .room{min-height:0}.card{margin-top:4px}}
+.app .lh{font-size:13px;font-weight:800;color:#8e8e93;padding:4px 8px 6px}
+.ag{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;opacity:0;transform:translateX(18px);transition:opacity .5s,transform .5s cubic-bezier(.3,1.4,.5,1),background .2s}
+.app.play .ag{opacity:1;transform:none}
+.ag.on{background:rgba(255,255,255,.07)}
+.ag .av{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.ag b{display:block;font-size:16px;font-weight:800;direction:ltr;text-align:right}.ag small{display:block;color:#a1a1a6;font-size:13px;font-weight:600}
+.ag .dot{margin-inline-start:auto;width:8px;height:8px;border-radius:50%;background:#34c759;box-shadow:0 0 0 3px rgba(52,199,89,.18)}
+.app .room{padding:18px;display:flex;flex-direction:column;gap:12px;min-height:330px}
+.msg{max-width:88%;padding:12px 15px;border-radius:18px;font-size:15px;line-height:1.45;opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+.app.play .msg{opacity:1;transform:none}
+.msg.me{align-self:flex-start;background:#0a84ff;color:#fff;border-bottom-right-radius:6px}
+.msg.bot{align-self:flex-end;background:#2a2b31;border-bottom-left-radius:6px}
+.msg.bot em{display:block;font-style:normal;font-weight:800;font-size:13px;color:#c4b5fd;margin-bottom:2px;direction:ltr;text-align:right}
+.card{margin-top:auto;background:#fff;color:var(--ink);border-radius:20px;padding:16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.6);opacity:0;transform:translateY(40px) scale(.96);transition:opacity .6s,transform .6s cubic-bezier(.3,1.5,.5,1)}
+.app.play .card{opacity:1;transform:none}
+.card .h{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.card .h small{color:var(--mut);font-weight:700;font-size:13px;margin-inline-start:auto}
+.card p{color:#3a3a3c;font-size:15px;margin:8px 0 12px}
+.card .acts{display:flex;gap:8px}
+.card button{flex:1;height:44px;border:0;border-radius:12px;font:800 16px/1 A,sans-serif;cursor:pointer}
+.card .no{background:var(--fill);color:var(--ink)}.card .yes{background:var(--ok);color:#fff}
+.card.done .acts{display:none}.card .ok{display:none;align-items:center;gap:8px;font-weight:800;color:#1f8f3a}.card.done .ok{display:flex}
+.app-note{color:var(--mut);font-size:15px;text-align:center;margin-top:16px}
+/* checklist icons */
+.ico{flex:none;width:34px;height:34px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center}
+.it .tt{display:flex;align-items:center;gap:10px}
+/* builder: real mascots */
+.m3{width:96px;height:96px;border-radius:26px;box-shadow:var(--sh);display:block}
+@media (prefers-reduced-motion:reduce){.ag,.msg,.card{opacity:1!important;transform:none!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 <body>
@@ -105,6 +148,7 @@ p.sign{margin-top:30px;color:var(--mut);font-weight:800}
  <div class="stick">
   <canvas id="seq" aria-hidden="true"></canvas>
   <div class="top">
+   <p class="stars"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#F2B84B"/></svg><b id="stars">26,583</b> כוכבים בגיטהאב · נכון ל-22/11/2026</p>
    <h1>מעוזר אחד ל<span class="grad">צוות</span></h1>
    <p class="lede">OpenMausBot נותן לכם צוות של סוכני AI, ולכל אחד תפקיד, מודל ואפליקציות משלו. כאן תקבלו את מה שצריך כדי להקים צוות לעסק שלכם: פרומפט שבונה אותו, קובץ מוכן ו-9 בדיקות לפני ההתקנה.</p>
    <div class="btns"><a class="btn" href="#prompt">לפרומפט</a><a class="btn ghost" href="#download">להורדת קובץ צוות</a></div>
@@ -126,6 +170,28 @@ p.sign{margin-top:30px;color:var(--mut);font-weight:800}
    <div class="st rv"><span class="n">4</span><b>אתם מקבלים כרטיס ומחליטים.</b><p>שום תשובה לא יוצאת בלי שתאשרו, גם מהטלפון.</p></div>
   </div>
  </div>
+</div></section>
+
+<section class="sec" id="app" style="padding-top:20px"><div class="wrap">
+ <h2 class="h2 rv">ככה נראה צוות ב-<bdi>OpenMausBot</bdi></h2>
+ <p class="sub rv">צוות הפיתוח מהספרייה הרשמית: ראש צוות, שני מפתחים ובודק. כל סוכן מופיע כמו איש קשר, עם תפקיד וצבע משלו.</p>
+ <div class="app" id="appWin">
+  <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>Engineering Room</span></div>
+  <div class="body">
+   <div class="list" id="agList"><div class="lh">הצוות שלי</div></div>
+   <div class="room">
+    <div class="msg me" style="transition-delay:.9s">תוסיפו כפתור ייצוא לדוח החודשי.</div>
+    <div class="msg bot" style="transition-delay:1.6s"><em>Ada</em>מחלקת: <bdi>Lin</bdi> על השרת, <bdi>Pixel</bdi> על המסך, ו-<bdi>Rigel</bdi> בודק לפני שחרור.</div>
+    <div class="card" id="apCard" style="transition-delay:2.5s">
+     <div class="h"><span class="av" id="apAv"></span><bdi>Pixel</bdi> מבקש אישור<small>עכשיו</small></div>
+     <p>לפתוח Pull Request עם הכפתור החדש במאגר של העסק.</p>
+     <div class="acts"><button class="no" type="button">דחייה</button><button class="yes" type="button">אישור</button></div>
+     <div class="ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span id="apOk">אושר. <bdi>Pixel</bdi> ממשיך.</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <p class="app-note rv">שחזור בקוד בהשראת הממשק הרשמי, לא צילום מסך. השמות, התפקידים והצבעים מהתבנית הרשמית, השיחה והבקשה להמחשה.</p>
 </div></section>
 
 <section class="sec" id="gallery" style="padding-top:20px"><div class="wrap">
@@ -435,6 +501,17 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   for (let i = 0; i < N; i++) { const im = new Image(); im.decoding = 'async'; im.onload = () => { if (i === 0 || Math.abs(i - last) < 3) draw(); }; im.src = `seq-${dir}/f${String(i).padStart(3, '0')}.webp`; imgs.push(im); }
   addEventListener('scroll', () => requestAnimationFrame(draw), { passive: true }); addEventListener('resize', fit); fit();
 })();
+// stars count-up (GitHub API, 22/11/2026)
+(function () { const el = document.getElementById('stars'), T = 26583; if (RM) return; const t0 = performance.now(), D = 1400;
+  const f = t => { const p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(T * e).toLocaleString('en-US'); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); })();
+// app window (engineering template: milind-soni/openmausbot-teams, names, titles and colors as published)
+const AG = [['Ada', 'ראש צוות טכני', '#a78bfa'], ['Lin', 'מפתח צד שרת', '#3ad07a'], ['Pixel', 'מפתח ממשק', '#22c7e0'], ['Rigel', 'בדיקות ושחרור', '#ff9f43']];
+document.getElementById('agList').insertAdjacentHTML('beforeend', AG.map(([n, t, c], i) => `<div class="ag${i === 2 ? ' on' : ''}" style="transition-delay:${.15 + i * .14}s"><span class="av" style="background:${c}33">${M(c, 30)}</span><div><b>${n}</b><small>${t}</small></div><span class="dot"></span></div>`).join(''));
+document.getElementById('apAv').innerHTML = M('#22c7e0', 26);
+const appWin = document.getElementById('appWin');
+new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { appWin.classList.add('play'); o.disconnect(); } }), { threshold: .3 }).observe(appWin);
+document.querySelector('#apCard .acts').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const c = document.getElementById('apCard');
+  document.getElementById('apOk').innerHTML = b.classList.contains('yes') ? 'אושר. <bdi>Pixel</bdi> ממשיך.' : 'נדחה. שום דבר לא נפתח.'; c.classList.add('done'); });
 // gallery (official taglines, translated; source: milind-soni/openmausbot-teams)
 const G = [['100x-marketing', 'השקת קמפיין', 4, 'מוצאים מיצוב חד, מכינים את חומרי ההשקה, מפיצים, ומחליטים אם לעצור או להגדיל.'],
   ['competitor-watch', 'מעקב אחרי מתחרים', 2, 'עוקבים אחרי המתחרים שבחרתם, והופכים שינוי משמעותי לסיכום החלטה קצר.'],
@@ -451,8 +528,8 @@ document.querySelectorAll('.chips').forEach(g => g.addEventListener('click', e =
   g.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); sel[g.dataset.q] = b.dataset.v; showTeam(); }));
 function showTeam() {
   if (!sel.biz || !sel.task || !sel.ch) return;
-  const r = ROLES[sel.task], mem = [['ראש הצוות', COL[0]], [`${r[0]} ב${sel.ch}`, COL[1]], [r[1], COL[3]]];
-  document.getElementById('teamOut').innerHTML = mem.map(([n, c], i) => `<div class="mem" style="animation-delay:${i * .12}s">${M(c, 84)}<b>${n}</b></div>`).join('');
+  const r = ROLES[sel.task], mem = [['ראש הצוות', 'amber'], [`${r[0]} ב${sel.ch}`, 'blue'], [r[1], 'green']];
+  document.getElementById('teamOut').innerHTML = mem.map(([n, c], i) => `<div class="mem" style="animation-delay:${i * .12}s"><img class="m3" src="m-${c}.webp" width="96" height="96" alt=""><b>${n}</b></div>`).join('');
   document.getElementById('res').classList.add('on');
 }
 // copy
@@ -470,11 +547,15 @@ const CK = [['מורידים רק מהמאגר הרשמי.', 'github.com/milind-
  ['מייבאים צוות? עוברים על מסך הבדיקה.', 'ייבוא צוות מקובץ אחד פותח מסך בדיקה לפני שהבוטים נוצרים. החיבורים כבויים עד שתאשרו, והמשימות הקבועות מגיעות מושהות. החבילה לא כוללת סיסמאות, הרשאות או גישה למחשב.', R + '/blob/main/docs/team-sharing.md'],
  ['מתעלמים ממטבעות קריפטו.', 'לפרויקט אין מטבע. מטבע בשם OpenMausBot, Maus או SupaMaus לא קשור אליו, וזה כתוב במאגר הרשמי עצמו.', R + '#readme'],
  ['זוכרים שזה פרויקט צעיר.', 'הוא נפתח באוגוסט 2026, הגרסה היא 0.1, ומפתח עיקרי אחד כותב את רוב הקוד. מתחילים בסוכן אחד ובמשימה אחת, לא נותנים לו את כל העסק ביום הראשון.', R + '/graphs/contributors']];
+// one icon per check (line icons, drawn here)
+const IC = ['<path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M5 19h14"/>', '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 10 3 2-3 2M12 15h5"/>', '<path d="M7 18a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.4 1.6A3.7 3.7 0 0 1 17.5 18z"/>', '<path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/>', '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>', '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/>', '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/>', '<circle cx="12" cy="12" r="8"/><path d="m9 9 6 6M15 9l-6 6"/>', '<path d="M12 21v-8M12 13c0-4 3-6 7-6 0 4-3 6-7 6zM12 15c0-3-2-5-6-5 0 3 2 5 6 5z"/>'];
+const ICC = ['#4d8dff', '#1d1d1f', '#22c7e0', '#a78bfa', '#3ad07a', '#F2B84B', '#ff9f43', '#ff5a5f', '#34c759'];
+const ico = i => `<span class="ico" style="background:${ICC[i]}1f"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${ICC[i] === '#1d1d1f' ? '#1d1d1f' : ICC[i]}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[i]}</svg></span>`;
 const KEY = 'tsevet-checks'; let done = [];
 try { done = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
 const ck = document.getElementById('ck');
 const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-ck.innerHTML = CK.map(([t, d, u], i) => `<div class="it" data-i="${i}"><button class="chk" type="button" aria-pressed="false" aria-label="סימון: ${esc(t)}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><div><b>${i + 1}. ${esc(t)}</b><p>${esc(d).replace(/(github\.com\/milind-soni\/OpenMausBot|OpenMausBot\/OpenMausBot|openmausbot setup|config\.json|Claude Code|OpenMausBot|SupaMaus|Composio|Releases|Windows|Ubuntu|GitHub|Codex|macOS|Gmail|Slack|Grok|Boat|Maus|xAI|API|VM)/g, '<bdi dir="ltr">$1</bdi>')}</p><a href="${u}" rel="noopener">מקור</a></div></div>`).join('');
+ck.innerHTML = CK.map(([t, d, u], i) => `<div class="it" data-i="${i}"><button class="chk" type="button" aria-pressed="false" aria-label="סימון: ${esc(t)}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></button><div><b class="tt">${ico(i)}<span>${i + 1}. ${esc(t)}</span></b><p>${esc(d).replace(/(github\.com\/milind-soni\/OpenMausBot|OpenMausBot\/OpenMausBot|openmausbot setup|config\.json|Claude Code|OpenMausBot|SupaMaus|Composio|Releases|Windows|Ubuntu|GitHub|Codex|macOS|Gmail|Slack|Grok|Boat|Maus|xAI|API|VM)/g, '<bdi dir="ltr">$1</bdi>')}</p><a href="${u}" rel="noopener">מקור</a></div></div>`).join('');
 function paint() { ck.querySelectorAll('.it').forEach(it => { const on = done.includes(+it.dataset.i); it.classList.toggle('done', on); it.querySelector('.chk').setAttribute('aria-pressed', on ? 'true' : 'false'); });
   document.getElementById('bar').style.width = (done.length / 9 * 100) + '%'; document.getElementById('progt').textContent = `סימנתם ${done.length} מתוך 9`; }
 ck.addEventListener('click', e => { const b = e.target.closest('.chk'); if (!b) return; const i = +b.closest('.it').dataset.i;
