@@ -1,0 +1,272 @@
+<!doctype html><html lang=he dir=rtl><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>מומחה בכיס | vaknin.ai</title>
+<meta name="description" content="כמה שאלות על המשימה שלכם, ותדעו אם שווה להפעיל את היועץ של Claude Code. ובנוסף: סקיל שעושה את הבדיקה בשבילכם.">
+<meta property="og:title" content="שווה להפעיל יועץ?">
+<meta property="og:description" content="בודק חי, סקיל ל-Claude Code, ומה שהתיעוד באמת אומר על advisor.">
+<meta name="theme-color" content="#F5F5F7">
+<!-- v2 23/11 (v1 = index.v1.html): ringing call hero from the reel, one-question wizard, examples, real skill run, paste-in-Claude-Code install. White UI cards, amber only on dark chips. -->
+<style>
+@font-face{font-family:A;src:url(Assistant.ttf);font-weight:200 800}
+:root{--bg:#F5F5F7;--card:#fff;--ink:#16181c;--mut:#6e6e73;--hair:rgba(0,0,0,.08);--fill:#f2f2f4;--amb:#F2B84B;--ok:#34c759;--err:#ff3b30;
+ --sh:0 1px 2px rgba(0,0,0,.05),0 14px 36px rgba(0,0,0,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 18px/1.55 A,-apple-system,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+section{padding:52px 0}
+bdi,.en{unicode-bidi:isolate}
+code{font-family:Menlo,Consolas,monospace;font-size:.86em;direction:ltr;unicode-bidi:isolate;background:var(--fill);padding:2px 7px;border-radius:6px}
+pre{background:var(--ink);color:#f5f5f7;border-radius:12px;padding:12px 14px;font:14px/1.7 Menlo,Consolas,monospace;direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px}
+.h1{font:800 clamp(40px,9vw,68px)/1.02 A;letter-spacing:-.02em;text-wrap:balance}
+.h2{font:800 clamp(28px,6vw,40px)/1.1 A;letter-spacing:-.01em;margin-bottom:18px;text-wrap:balance}
+.lead{font-size:20px;color:var(--mut);margin-top:16px;max-width:36ch;text-wrap:pretty}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:14px;background:var(--ink);color:#fff;font:800 18px/1 A;text-decoration:none;border:0;cursor:pointer;transition:transform .12s}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.btn:active{transform:scale(.97)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--sh);padding:22px}
+.queen{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--ink);color:var(--amb);font-size:19px;line-height:1;vertical-align:-6px}
+.muted{color:var(--mut)}
+.src{font-size:13px;color:var(--mut);margin-top:10px}
+/* hero */
+.hero{padding-top:40px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--mut);margin-bottom:26px}
+.brand img{width:30px;height:30px;border-radius:8px}
+.call{margin-top:30px;max-width:380px;animation:shake 2.4s infinite}
+@keyframes shake{0%,70%,100%{transform:none}74%{transform:rotate(-1.4deg)}78%{transform:rotate(1.4deg)}82%{transform:rotate(-1deg)}86%{transform:rotate(1deg)}90%{transform:none}}
+.call .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.call .who{display:flex;align-items:center;gap:12px}
+.call .who img{width:46px;height:46px;border-radius:12px}
+.call b{display:block;font-size:21px;line-height:1.1}.call small{color:var(--mut);font-size:15px}
+.call .acts{display:flex;gap:12px}
+.call .acts a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:22px}
+.call .no{background:var(--err)}
+.call .yes{background:var(--ok);animation:ring 1.6s infinite}
+@keyframes ring{0%,100%{box-shadow:0 0 0 0 rgba(52,199,89,.5)}60%{box-shadow:0 0 0 14px rgba(52,199,89,0)}}
+.call .hint{margin-top:12px;font-size:15px;color:var(--mut)}
+.call.answered{animation:none}
+/* examples */
+.ex{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.ex button{min-height:40px;padding:6px 14px;border-radius:999px;border:0;background:#fff;box-shadow:inset 0 0 0 1.5px var(--hair);font:600 15px A;color:var(--ink);cursor:pointer}
+.ex span{width:100%;font-size:15px;color:var(--mut)}
+/* wizard */
+.prog{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:14px;color:var(--mut)}
+.prog .bar{flex:1;height:6px;border-radius:3px;background:var(--fill);overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .35s}
+.qq{font:800 24px/1.2 A}
+.qq small{display:block;font:400 16px/1.4 A;color:var(--mut);margin-top:6px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.opts button{min-height:54px;padding:10px 18px;border-radius:14px;border:0;background:var(--fill);color:var(--ink);font:700 18px A;text-align:right;cursor:pointer;transition:transform .12s,background .2s}
+.opts button:hover{background:#e8e8ec}
+.opts button:active{transform:scale(.98)}
+.back{margin-top:14px;background:none;border:0;color:var(--mut);font:600 15px A;cursor:pointer;padding:6px 0}
+.step{animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.v{font:800 28px/1.1 A}
+.v .queen{margin-inline-end:8px}
+.verdict ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.verdict .lbl{margin-top:14px;font-weight:800}
+.note{font-size:15px;color:var(--mut);margin-top:10px}
+.cp{margin-top:10px;height:40px;padding:0 16px;border-radius:12px;border:0;background:var(--fill);font:800 15px A;cursor:pointer;color:var(--ink)}
+/* terminal (real run) */
+.term{background:#1b1c20;border-radius:16px;overflow:hidden;box-shadow:var(--sh)}
+.term .tb{display:flex;gap:6px;padding:12px 14px;direction:ltr;border-bottom:1px solid #2a2c31;align-items:center}
+.term .tb i{width:11px;height:11px;border-radius:50%;display:block;background:#ff5f57}.term .tb i:nth-child(2){background:#febc2e}.term .tb i:nth-child(3){background:#28c840}
+.term .tb span{margin-left:auto;color:#8b8d93;font-size:13px}
+.term .body{padding:14px 16px;color:#e8e8ea;font-size:15px;line-height:1.6}
+.term .you{color:#b9bbc1;border-inline-start:3px solid #3a3c42;padding-inline-start:10px;margin-bottom:12px}
+.term .ln{display:flex;gap:8px}
+.term .k{color:#8b8d93;flex:none}
+.term .ok{color:#4cd964}
+.term .head{font:800 20px A;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.term .cmd{font-family:Menlo,Consolas,monospace;direction:ltr;text-align:left;color:var(--amb);margin-top:8px;font-size:14px}
+/* receipt + dots */
+.receipt .r{display:flex;justify-content:space-between;gap:12px;padding:8px 0}
+.receipt .r+.r{border-top:1px dashed #d2d2d7}
+.receipt .big{font:800 34px/1 A}
+.dots20{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:340px;margin:14px 0}
+.dots20 i{aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 2px #c7c7cc;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.grid .card b{display:block;font-size:19px;margin-bottom:4px}
+.grid .card span{color:var(--mut);font-size:16px}
+/* install */
+.paste p{font-weight:800}
+.paste pre{direction:rtl;text-align:right;font-family:A,Arial,sans-serif;font-size:16px}
+.paste pre bdi{font-family:Menlo,Consolas,monospace;font-size:14px}
+details.manual{margin-top:14px}
+details.manual summary{cursor:pointer;font-weight:700;color:var(--mut)}
+ol.steps{list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:s;margin-top:12px}
+ol.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start}
+ol.steps li:before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+ol.steps li div{flex:1;min-width:0}
+.faq details{background:#fff;border-radius:16px;box-shadow:var(--sh);padding:16px 18px;margin-top:10px}
+.faq summary{cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-size:24px;line-height:1}
+.faq details[open] summary:after{content:"-"}
+.faq details div{margin-top:8px;color:#3a3a3c;font-size:16px}
+.end{text-align:center;padding-bottom:40px}
+.end .cta{justify-content:center}
+footer.sign{text-align:center;color:var(--mut);padding:24px 0 48px;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<body>
+<main>
+<section class=hero><div class=wrap>
+ <div class=brand><img src="claude-tile.svg" alt=""><span><bdi>Claude Code</bdi> · <bdi>advisor</bdi></span></div>
+ <h1 class=h1>מומחה בכיס.<br>אבל לא לכל משימה.</h1>
+ <p class=lead>היועץ של <bdi>Claude Code</bdi> נכנס רק ברגעים הקשים. כמה שאלות על המשימה שלכם, ותדעו אם שווה להפעיל אותו, ואיך.</p>
+ <div class="card call" id=call>
+  <div class=row>
+   <div class=who><img src="claude-tile.svg" alt=""><div><small>נתקעתם?</small><b class=en>Fable</b><small>המומחה שלכם</small></div></div>
+   <div class=acts><a class=no href="#install" aria-label="לדלג להתקנה">✕</a><a class=yes href="#check" id=answer aria-label="לענות ולבדוק את המשימה"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a></div>
+  </div>
+  <p class=hint>לחצו על הירוק כדי לבדוק אם המשימה שלכם שווה מומחה.</p>
+ </div>
+</div></section>
+
+<section id=check><div class=wrap>
+ <h2 class=h2>שווה להפעיל יועץ?</h2>
+ <div class=ex><span>או נסו דוגמה:</span><button type=button data-ex=refactor>ריפקטור גדול</button><button type=button data-ex=typo>תיקון שגיאת כתיב</button><button type=button data-ex=bug>באג שחוזר</button></div>
+ <div class=card>
+  <div class=prog><span id=pt>שאלה 1 מתוך 5</span><span class=bar><i id=pb></i></span></div>
+  <div id=wz aria-live=polite></div>
+ </div>
+</div></section>
+
+<section><div class=wrap>
+ <h2 class=h2>ככה זה נראה בקלוד קוד</h2>
+ <div class=term>
+  <div class=tb><i></i><i></i><i></i><span>advisor-check · ריצה אמיתית, 23/11</span></div>
+  <div class=body>
+   <p class=you>אני רוצה להעביר אפליקציית <bdi>Next.js</bdi> של 40 קבצים מ-<bdi>Pages Router</bdi> ל-<bdi>App Router</bdi>. רוב העבודה זה להזיז קבצים ולעדכן <bdi>imports</bdi>, אבל אני לא בטוח איך לטפל באימות ובשכבת הנתונים.</p>
+   <p class=head><span class=queen>♛</span>פסק דין: להפעיל</p>
+   <p class=ln><span class=k>ארוכה:</span><span><span class=ok>כן</span> - 40 קבצים, ריפקטור גדול</span></p>
+   <p class=ln><span class=k>רובה שגרה:</span><span><span class=ok>כן</span> - הזזת קבצים ועדכון <bdi>imports</bdi></span></p>
+   <p class=ln><span class=k>רגע קשה:</span><span><span class=ok>כן</span> - איך לטפל באימות ובשכבת הנתונים</span></p>
+   <p class=cmd>/model sonnet<br>/advisor fable</p>
+  </div>
+ </div>
+ <p class=src>הקלט והפלט מריצת בדיקה של הסקיל, בקיצור. בפלט המלא יש גם שורת "לבדוק לפני", משפט לפרומפט ואיך לכבות.</p>
+</div></section>
+
+<section><div class=wrap>
+ <h2 class=h2>למה לא פשוט להפעיל תמיד?</h2>
+ <div class="card receipt">
+  <p class=muted style="font-size:15px">הדוגמה של אנתרופיק, מחיר המשימה</p>
+  <div class=r><span><bdi>Fable</bdi> על כל המשימה</span><span class=en>100%</span></div>
+  <div class=r><b><bdi>Sonnet</bdi> + יועץ <bdi>Fable</bdi></b><span class="big en">63%</span></div>
+  <p class=src>בטווח 10% מהציון · SWE-bench Pro · <bdi>Sonnet 5 + Fable 5</bdi> · Anthropic. נמדד על הדורות הקודמים, ולא מבטיח כלום לגבי המשימה שלכם.</p>
+ </div>
+ <div class=card style="margin-top:14px">
+  <b style="font-size:19px">אבל: 20 בעיות, 0 התייעצויות.</b>
+  <div class=dots20 aria-hidden=true><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <p>המודל הראשי מחליט לבד מתי לקרוא ליועץ, ואין הגדרה שמכריחה אותו. בבדיקה של אנתרופיק, <bdi>Sonnet 5.5</bdi> בהגדרות ברירת המחדל לא התייעץ אף פעם ב-20 בעיות. וכשהוא כמעט לא התייעץ, הזוג קיבל ציון דומה ל-<bdi>Sonnet</bdi> לבד, או נמוך ממנו.</p>
+  <p style="margin-top:10px">הפתרון מהתיעוד: לבקש בפרומפט.</p>
+  <pre>consult the advisor before you commit to an approach</pre>
+  <p class=src>Sonnet 5.5 · ברירת מחדל · SWE-bench Pro · מתוך התיעוד של Anthropic</p>
+ </div>
+</div></section>
+
+<section><div class=wrap>
+ <h2 class=h2>מה עושה הסקיל</h2>
+ <div class=grid>
+  <div class=card><b>בודק את המשימה</b><span>שלושה תנאים וחמישה דגלים אדומים, ופסק: להפעיל, לא שווה, או אפשר לנסות.</span></div>
+  <div class=card><b>בוחר זוג מודלים</b><span>לפי הטבלה הרשמית: מי יכול לייעץ למי. כולל חלופה כש-<bdi>Fable</bdi> לא זמין לכם.</span></div>
+  <div class=card><b>מוודא שהיועץ נקרא</b><span>משפט לפרומפט, איך רואים שהוא נכנס, ואיך בודקים מה זה עלה.</span></div>
+ </div>
+</div></section>
+
+<section id=install><div class=wrap>
+ <h2 class=h2>התקנה: משפט אחד</h2>
+ <div class="card paste">
+  <p>פותחים <bdi>Claude Code</bdi>, מדביקים את זה, וזהו:</p>
+  <pre id=inst>תוריד את הסקיל מהכתובת הזאת:
+<bdi>https://galvakninai.github.io/magnets/mumche/advisor-check.zip</bdi>
+תפתח אותו לתוך <bdi>~/.claude/skills/</bdi> כך שייווצר <bdi>~/.claude/skills/advisor-check/SKILL.md</bdi>, ותגיד לי כשהסקיל מותקן.</pre>
+  <button class=cp id=cpi type=button>העתקה</button>
+  <p class=note>אחר כך שואלים: "שווה להפעיל יועץ על המשימה הזאת?" ומתארים אותה.</p>
+  <details class=manual><summary>מעדיפים להתקין לבד?</summary>
+   <ol class=steps>
+    <li><div>מורידים את <a href="advisor-check.zip" download>advisor-check.zip</a> ופותחים אותו.</div></li>
+    <li><div>מעבירים את התיקייה <code>advisor-check</code> אל <code>~/.claude/skills/</code></div></li>
+    <li><div>בודקים גרסה: <code>claude --version</code>. יועץ <bdi>Fable 5.2</bdi> דורש 2.1.321 ומעלה. ישנה? <code>claude update</code></div></li>
+   </ol>
+   <p style="margin-top:12px"><a href="SKILL.md" target=_blank>לקובץ הסקיל המלא</a></p>
+  </details>
+ </div>
+</div></section>
+
+<section class=faq><div class=wrap>
+ <h2 class=h2>לפני שמפעילים</h2>
+ <details><summary><span>זה עולה לי מהמנוי?</span></summary><div>במנוי, שימוש ביועץ נספר במגבלות התוכנית. חוץ מ-<bdi>Fable</bdi>: בחלק מהתוכניות <bdi>Fable</bdi>, גם כיועץ, יורד מקרדיטי שימוש. צריך לאשר את זה פעם אחת דרך <code>/model fable</code>. לא רוצים? <code>/advisor opus</code>.</div></details>
+ <details><summary><span>הפעלתי ולא ראיתי אותו נכנס</span></summary><div>זה צפוי: הוא מחליט לבד. כשהוא כן נקרא, מופיעה בשיחה שורה עם המילה <bdi>Advising</bdi>, ובלחיצה על <bdi>Ctrl+O</bdi> רואים מה הוא אמר. רוצים שיתייעץ? בקשו בפרומפט.</div></details>
+ <details><summary><span>זה יציב?</span></summary><div>הפיצ'ר מסומן ניסיוני. אנתרופיק כותבת שההתנהגות, התמחור והזמינות יכולים להשתנות.</div></details>
+ <details><summary><span>זה עובד אצלי?</span></summary><div>לא ב-<bdi>Amazon Bedrock</bdi>, ב-<bdi>Agent Platform</bdi> של <bdi>Google Cloud</bdi> וב-<bdi>Microsoft Foundry</bdi>. וגם לא בסשן עם <code>DISABLE_TELEMETRY</code>.</div></details>
+ <details><summary><span>שיחה ארוכה מייקרת את זה?</span></summary><div>כן. כל קריאה ליועץ קוראת את כל השיחה מחדש, בלי קאש בין קריאות.</div></details>
+ <details><summary><span>איך מכבים?</span></summary><div><code>/advisor off</code></div></details>
+</div></section>
+
+<section class=end><div class=wrap>
+ <h2 class=h2>המומחה בכיס.<br>רק כשהוא שווה את זה.</h2>
+ <div class=cta><a class=btn href="#check">לבדוק משימה</a><a class="btn ghost" href="#install">להתקנה</a></div>
+</div></section>
+</main>
+<footer class=sign>גל · vaknin.ai</footer>
+
+<script>
+const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const QS=[
+ {k:'long',q:'המשימה ארוכה?',s:'הרבה צעדים, לא שאלה אחת או תיקון בשורה אחת',o:[['y','כן, הרבה צעדים'],['n','לא, משהו קצר'],['u','לא בטוח']]},
+ {k:'hard',q:'כמה רגעים קשים יש בה?',s:'החלטה שקובעת הכל: גישה, ארכיטקטורה, שגיאה עמומה',o:[['some','אחד או שניים'],['all','כל צעד קשה'],['none','אין רגע קשה']]},
+ {k:'routine',q:'רוב הצעדים הם שגרה?',s:'לכתוב, להריץ, לתקן. דיבאג של שגיאה שחוזרת נחשב כן',o:[['y','כן'],['n','לא'],['u','לא בטוח']]},
+ {k:'prov',q:'איך אתם מחוברים ל-Claude Code?',s:'',o:[['ok','מנוי Claude או API של Anthropic'],['no','Bedrock, Google Cloud או Foundry']]},
+ {k:'model',q:'מה המודל הראשי שלכם?',s:'רואים אותו בפקודה /model',o:[['sonnet','Sonnet'],['opus','Opus'],['haiku','Haiku'],['fable','Fable'],['u','לא יודע']]}
+];
+const EX={refactor:{long:'y',hard:'some',routine:'y',prov:'ok',model:'sonnet'},typo:{long:'n'},bug:{long:'y',hard:'some',routine:'y',prov:'ok',model:'u'}};
+let S={},i=0;
+const wz=document.getElementById('wz'),pb=document.getElementById('pb'),pt=document.getElementById('pt');
+function stop(){ // returns a "not worth it" verdict as soon as one answer decides it
+ if(S.long==='n')return['משימה קצרה: אין מה לתכנן, והיועץ מוסיף מעט.','פשוט להריץ כרגיל, בלי יועץ ובלי להחליף מודל.'];
+ if(S.hard==='none')return['אין רגע קשה שהיועץ יכול לעזור בו.','פשוט להריץ כרגיל, בלי יועץ.'];
+ if(S.hard==='all')return['כשכל צעד קשה, התיעוד ממליץ להחליף את המודל הראשי ולא להוסיף יועץ.','להריץ הכל על המודל החזק: /model fable, או /model opus אם אין גישה ל-Fable.'];
+ if(S.prov==='no')return['היועץ לא זמין בספק שלכם.','להעביר חלק קשה אחד לסוכן משנה עם מודל חזק, או opusplan (המודל החזק רק במצב תכנון) אם הוא זמין לכם.'];
+ return null;
+}
+function prog(n,done){pb.style.width=(done?100:n/QS.length*100)+'%';pt.textContent=done?'הפסק':'שאלה '+(n+1)+' מתוך '+QS.length}
+function ask(){
+ const st=stop();if(st)return no(st);
+ if(i>=QS.length)return yes();
+ const q=QS[i];prog(i);
+ wz.innerHTML=`<div class=step><p class=qq>${esc(q.q)}${q.s?`<small>${esc(q.s)}</small>`:''}</p><div class=opts>${q.o.map(([v,t])=>`<button type=button data-v="${v}">${esc(t)}</button>`).join('')}</div>${i?'<button class=back type=button id=bk>חזרה</button>':''}</div>`;
+ wz.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{S[q.k]=b.dataset.v;i++;ask()});
+ const bk=document.getElementById('bk');if(bk)bk.onclick=()=>{i--;delete S[QS[i].k];ask()};
+}
+function again(){return '<button class=back type=button id=rs>לבדוק משימה אחרת</button>'}
+function wire(){document.getElementById('rs').onclick=()=>{S={};i=0;ask()}}
+function no([why,alt]){prog(0,1);
+ wz.innerHTML=`<div class="step verdict"><p class=v>לא שווה</p><ul><li><b>למה:</b> ${esc(why)}</li><li><b>במקום:</b> ${esc(alt)}</li></ul>${again()}</div>`;wire()}
+function pair(m){
+ if(m==='opus')return{main:'opus',adv:'fable',alt:'אין גישה ל-Fable? Opus שני שבודק את הראשון:'};
+ if(m==='haiku')return{main:'haiku',adv:'opus'};
+ if(m==='fable')return{main:'fable',adv:'fable'};
+ return{main:'sonnet',adv:'fable',alt:'אין גישה ל-Fable, או לא רוצים שזה ירד מקרדיטי שימוש?',chk:m==='u'};
+}
+function yes(){prog(0,1);
+ const go=S.long==='y'&&S.routine==='y';
+ const p=pair(S.model),cmd=`/model ${p.main}\n/advisor ${p.adv}`,PR='consult the advisor before you commit to an approach';
+ const unk=[S.long==='u'&&'אם המשימה באמת ארוכה',S.routine!=='y'&&'אם רוב הצעדים שגרה'].filter(Boolean);
+ wz.innerHTML=`<div class="step verdict"><p class=v><span class=queen>♛</span>${go?'להפעיל':'אפשר לנסות'}</p><ul>${go?'':`<li><b>מה יכריע:</b> ${esc(unk.join(', '))}.</li>`}${p.chk?'<li>בדקו את המודל שלכם ב-<code>/model</code>. אם הוא לא Sonnet, היועץ צריך להיות בדרגה שלו או מעליו.</li>':''}</ul>
+ <p class=lbl>להפעלה</p><pre>${esc(cmd)}</pre><button class=cp type=button data-c="${esc(cmd)}">העתקה</button>${p.alt?`<p class=note>${esc(p.alt)} <code>/advisor opus</code></p>`:''}
+ <p class=lbl>משפט לפרומפט, כדי שבאמת יתייעץ</p><pre>${PR}</pre><button class=cp type=button data-c="${PR}">העתקה</button>
+ <ul><li>איך לוודא שהוא נקרא: בשיחה תופיע שורה עם המילה <bdi>Advising</bdi>, ובלחיצה על <bdi>Ctrl+O</bdi> רואים מה הוא אמר.</li><li>כמה זה עלה: <code>/usage</code></li><li>לכבות: <code>/advisor off</code></li></ul>
+ <p class=note>יועץ <bdi>Fable 5.2</bdi> דורש <bdi>Claude Code</bdi> 2.1.321 ומעלה.</p>${again()}</div>`;
+ wz.querySelectorAll('.cp').forEach(cp);wire()}
+function cp(b){b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.c)}catch(_){}b.textContent='הועתק';setTimeout(()=>b.textContent='העתקה',1600)}}
+document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{S={...EX[b.dataset.ex]};i=QS.length;ask();wz.scrollIntoView({block:'center',behavior:'smooth'})});
+document.getElementById('answer').addEventListener('click',()=>document.getElementById('call').classList.add('answered'));
+const ib=document.getElementById('cpi');ib.dataset.c=document.getElementById('inst').textContent;cp(ib);
+ask();
+</script>
+<script src="../_shared/signup.js" defer></script>
+</body></html>
