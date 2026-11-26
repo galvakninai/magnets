@@ -5,6 +5,11 @@
 <meta property="og:description" content="ערכת פתק ל-Claude Code: התבנית, הפקודה, וה-hook שטוען את הפתק בכל פתיחה. נבדק בסשן נקי.">
 <meta property="og:url" content="https://galvakninai.github.io/magnets/patak/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://galvakninai.github.io/magnets/patak/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="note-tile.svg" type="image/svg+xml">
 <meta name="theme-color" content="#EDE3D1">
 <!-- vaknin.ai web magnet "patak". Built from magnet-landing/template (reference: magnets/chakira). Source: _src/page.html + build.py. -->
 <style>
@@ -189,6 +194,8 @@ code{font-family:ui-monospace,Menlo,monospace;direction:ltr;unicode-bidi:isolate
 .cmd .cp{align-self:stretch;height:auto;border-radius:0;background:var(--term2);color:#8FB0FF}
 .cmd .cp.ok{background:#1f3a26;color:#7ee29a}
 .st li>code,.faq code,.ins code,.q3 code{background:var(--fill);padding:2px 7px;border-radius:7px;font-size:14px}
+.faq .cmd code{background:none;padding:13px 14px;border-radius:0}
+.faq .cmd{margin-top:12px}
 .exp{color:var(--okt);font-size:15.5px;font-weight:700;margin-top:6px}
 .inside{max-width:860px;margin:36px auto 0;display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:760px){.inside{grid-template-columns:1fr 1fr}}
@@ -405,6 +412,7 @@ SKILL&gt;&gt;&gt;
 - אם הוא קיים: קודם גבה אותו ל-~/.claude/settings.json.bak-patak. אחר כך הוסף את האובייקט הבא כאיבר חדש בסוף המערך hooks.SessionStart (צור את hooks ו-SessionStart אם הם לא קיימים). אל תשנה, תמחק או תסדר מחדש שום דבר אחר בקובץ.
 - אם הוא לא קיים: צור אותו עם {"hooks": {"SessionStart": [האובייקט]}}.
 - אם כבר יש ב-SessionStart hook שהפקודה שלו מכילה "STATE.md": אל תוסיף שוב.
+- את הגיבוי עשה עם פקודת cp אחת. את העריכה עצמה עשה בכלי עריכת הקבצים (Edit), לא בפקודות shell או python.
 האובייקט:
 {
   "matcher": "startup|resume|clear|compact",
@@ -421,7 +429,7 @@ SKILL&gt;&gt;&gt;
 צעד 4 - סיכום. תגיד לי בשתי שורות מה הותקן, ושמעכשיו: בסוף סשן כותבים /פתק, ובסשן הבא פשוט שואלים "איפה עצרנו?".</code></div></li></ol></div>
   <div class="card st" data-step=3><header><button class=chk aria-label="סימון צעד 3"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
    <div><h3>מאשרים</h3><p class=why><bdi>Claude</bdi> יבקש אישור כמה פעמים, כי הוא כותב בתיקיית ההגדרות שלו.</p></div></header>
-   <ol><li>בבדיקה שלי היו ארבע בקשות: לקרוא את ההגדרות, ליצור את הסקיל, לעדכן את <code>settings.json</code>, ולבדוק שהכל תקין. בכל אחת בוחרים באפשרות 1.</li>
+   <ol><li>בבדיקות שלי היו בין 4 ל-6 בקשות: לקרוא את ההגדרות, לגבות אותן, ליצור את הסקיל, לערוך את <code>settings.json</code>, ולבדוק שהכל תקין. לפעמים בקשה מגיעה עם אזהרה טכנית באנגלית על הפקודה. בכל אחת בוחרים באפשרות 1.</li>
    <li>בסוף <bdi>Claude</bdi> כותב בשתי שורות מה הותקן.</li></ol></div>
   <div class="card st" data-step=4><header><button class=chk aria-label="סימון צעד 4"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
    <div><h3>בודקים</h3><p class=why>פותחים סשן חדש בפרויקט, עובדים קצת, וכותבים:</p></div></header>
@@ -450,7 +458,18 @@ SKILL&gt;&gt;&gt;
   <details><summary><span><bdi>/פתק</bdi> לא מופיע</span></summary><div>פתחו סשן חדש. הסקיל יושב בתיקייה <code>~/.claude/skills/פתק</code> בתוך תיקיית הבית.</div></details>
   <details><summary><span>כבר יש לי <bdi>CLAUDE.md</bdi></span></summary><div>משאירים אותו. ב-<bdi>CLAUDE.md</bdi> כותבים איך אתם עובדים, ובפתק כותבים איפה עצרתם.</div></details>
   <details><summary><span>להכניס את STATE.md לגיט?</span></summary><div>אם הפרויקט בגיט, כדאי. ככה הפתק נשמר יחד עם ההיסטוריה.</div></details>
-  <details><summary><span>איך מסירים</span></summary><div>מוחקים את התיקייה <code>~/.claude/skills/פתק</code>, ומוחקים מ-<code>settings.json</code> את ה-hook שהפקודה שלו מכילה <code>STATE.md</code>, ורק אותו.</div></details>
+  <details><summary><span>איך מסירים</span></summary><div>מדביקים את הפרומפט הזה ב-<bdi>Claude Code</bdi>. הוא מסיר רק את מה שהערכה הוסיפה, ולא נוגע בקובצי STATE.md שלכם.<div class="cmd he"><button class=cp aria-label="העתקת פרומפט ההסרה">העתקה</button><code>הסר את ערכת "פתק" מ-Claude Code. בצע בדיוק את הצעדים האלה:
+
+צעד 1 - הסקיל. מחק את התיקייה ~/.claude/skills/פתק, ורק אותה.
+
+צעד 2 - ה-hook. הקובץ הוא ~/.claude/settings.json.
+- קודם גבה אותו ל-~/.claude/settings.json.bak-patak-remove.
+- אחר כך מחק מהמערך hooks.SessionStart רק את האובייקט שהפקודה שלו מכילה "STATE.md" ו"הפתק של הפרויקט". אם SessionStart נשאר ריק, מחק גם את המפתח SessionStart. אל תשנה שום דבר אחר בקובץ.
+- את הגיבוי עשה עם פקודת cp אחת. את העריכה עצמה עשה בכלי עריכת הקבצים (Edit), לא בפקודות shell או python.
+
+צעד 3 - בדיקה. ודא שהקובץ ~/.claude/settings.json הוא JSON תקין, שה-hook של הפתק כבר לא בו, ושמספר ה-hooks בכל אירוע אחר נשאר כמו לפני. אם משהו לא תקין, שחזר מהגיבוי ותגיד לי.
+
+צעד 4 - סיכום. קובצי STATE.md שבפרויקטים שלי נשארים במקום, אל תיגע בהם. תגיד לי בשתי שורות מה הוסר.</code></div></div></details>
  </div>
 </div></section>
 
@@ -493,6 +512,18 @@ document.querySelectorAll('.cp').forEach(b=>b.onclick=async()=>{const el=b.paren
  f.forEach(x=>x.addEventListener('input',build));build();
  $('bcopy').onclick=async()=>{const b=$('bcopy');flash(b,await copyText(out.textContent,out),'העתקה')};
  $('bdl').onclick=()=>{const u=URL.createObjectURL(new Blob([out.textContent],{type:'text/markdown;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='STATE.md';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}})();
+/* counts: view, zip download, prompt copies, builder use. Live site only, never from local preview (same pattern as rama) */
+(()=>{const live=/github\.io$/.test(location.hostname)&&!/[?&]preview/.test(location.search);if(!live)return;
+ const K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+ function ev(key,e){try{fetch("https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",{method:"POST",keepalive:true,
+  headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},
+  body:JSON.stringify({magnet_key:key,event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(()=>{})}catch(_){}}
+ ev("patak","view");
+ document.querySelectorAll('a[href="patak.zip"]').forEach(a=>a.addEventListener('click',()=>ev("patak","download")));
+ const on=(sel,key)=>{const b=document.querySelector(sel);if(b)b.addEventListener('click',()=>ev(key,"download"))};
+ on('[aria-label="העתקת פרומפט ההתקנה"]','patak-install');on('[aria-label="העתקת פרומפט ההסרה"]','patak-uninstall');
+ document.querySelectorAll('.tq .cp').forEach((b,k)=>b.addEventListener('click',()=>ev("patak-try"+(k+1),"download")));
+ on('#bdl','patak-build');on('#bcopy','patak-build');})();
 </script>
 
 <script src="../_shared/signup.js" defer></script>

@@ -32,6 +32,7 @@ SKILL>>>
 - אם הוא קיים: קודם גבה אותו ל-~/.claude/settings.json.bak-patak. אחר כך הוסף את האובייקט הבא כאיבר חדש בסוף המערך hooks.SessionStart (צור את hooks ו-SessionStart אם הם לא קיימים). אל תשנה, תמחק או תסדר מחדש שום דבר אחר בקובץ.
 - אם הוא לא קיים: צור אותו עם {"hooks": {"SessionStart": [האובייקט]}}.
 - אם כבר יש ב-SessionStart hook שהפקודה שלו מכילה "STATE.md": אל תוסיף שוב.
+- את הגיבוי עשה עם פקודת cp אחת. את העריכה עצמה עשה בכלי עריכת הקבצים (Edit), לא בפקודות shell או python.
 האובייקט:
 {
   "matcher": "startup|resume|clear|compact",
