@@ -22,5 +22,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # 26/11/2026: deploy-pages ran 0.7s after the upload and found 0 artifacts (twice). Give the artifact time to register.
+      - name: Wait for the artifact to register
+        run: sleep 20
       - id: deployment
         uses: actions/deploy-pages@v4
