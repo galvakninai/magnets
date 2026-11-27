@@ -1,0 +1,587 @@
+<!doctype html><html lang=he dir=rtl><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>5 העובדים | vaknin.ai</title>
+<meta name="description" content="3 עובדים מוכנים ל-Claude Code, ו-2 פרומפטים שבונים לכם קופירייטר ויועץ משלכם. כל אחד הורץ לפני שנכנס לדף.">
+<meta property="og:title" content="5 עובדים. אף אחד לא מקבל משכורת.">
+<meta property="og:description" content="3 עובדים מוכנים ל-Claude Code, ו-2 פרומפטים שבונים לכם קופירייטר ויועץ משלכם. כל אחד הורץ לפני שנכנס לדף.">
+<meta property="og:url" content="https://galvakninai.github.io/magnets/ovdim/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://galvakninai.github.io/magnets/ovdim/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="claude-tile.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0806">
+<style>
+@font-face{font-family:A;src:url(Assistant.ttf);font-weight:200 800}
+:root{--bg:#F5F5F7;--card:#fff;--ink:#1d1d1f;--mut:#6e6e73;--hair:rgba(0,0,0,.08);--fill:#f2f2f4;--blue:#0071e3;--ok:#34c759;--err:#ff3b30;
+ --cl:#D97757;--cx:#2a4dff;--sh:0 1px 2px rgba(0,0,0,.05),0 14px 36px rgba(0,0,0,.09);--shl:0 2px 4px rgba(0,0,0,.04),0 30px 70px -10px rgba(0,0,0,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{color:var(--ink);font:500 17px/1.55 A,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+a{color:inherit}
+code{font-family:ui-monospace,Menlo,monospace;direction:ltr;unicode-bidi:isolate}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid rgba(0,113,227,.45);outline-offset:3px;border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 30px;border:0;border-radius:16px;cursor:pointer;text-decoration:none;
+ background:var(--blue);color:#fff;font:800 19px/1 A;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 10px 24px -8px rgba(0,113,227,.55);transition:transform .12s,box-shadow .2s,background .2s}
+.btn:hover{background:#0077ed;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 14px 30px -8px rgba(0,113,227,.65)}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.btn:active,.nbtn:active,.cp:active,.chk:active,.tile:active{transform:scale(.97)}
+.gnav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 max(16px,calc((100% - 1080px)/2));
+ background:rgba(245,245,247,.72);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.gnav b{font-size:19px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.gnav b img{width:22px;height:22px;border-radius:6px}
+.nbtn{height:34px;padding:0 16px;border-radius:10px;display:inline-flex;align-items:center;background:var(--blue);color:#fff;font-weight:800;font-size:15px;text-decoration:none;transition:transform .12s}
+.card{background:var(--card);border-radius:24px;box-shadow:var(--sh)}
+.sec{padding:96px 0}
+.h2{font-weight:800;font-size:clamp(36px,5vw,60px);letter-spacing:-.03em;line-height:1.04;text-align:center;text-wrap:balance}
+.sub{color:var(--mut);text-align:center;font-size:19px;margin:12px auto 0;max-width:560px;text-wrap:balance}
+.grad{background:linear-gradient(90deg,var(--cl),#8a5ad0 50%,var(--cx));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cur{position:absolute;display:flex;align-items:flex-start;gap:1px;direction:ltr;pointer-events:none;z-index:5;will-change:transform}
+.cur svg{width:26px;height:26px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.28))}
+.cur svg path{stroke:#fff;stroke-width:1.5;stroke-linejoin:round}
+.cur .lb{display:flex;align-items:center;gap:6px;margin-top:16px;padding:4px 12px 4px 6px;border-radius:999px;font-size:15px;font-weight:700;color:#fff;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.cur .lb img{width:18px;height:18px;border-radius:5px}
+.cur.c svg path{fill:var(--cl)}.cur.c .lb{background:var(--cl)}
+.cur.x svg path{fill:var(--cx)}.cur.x .lb{background:var(--cx)}
+.hero{padding:64px 0 40px;text-align:center}
+.hero h1{font-weight:800;font-size:clamp(46px,9.4vw,108px);line-height:.98;letter-spacing:-.045em;text-wrap:balance}
+.lede{color:var(--mut);font-size:clamp(19px,2.2vw,24px);line-height:1.4;font-weight:600;margin:20px auto 0;max-width:600px;text-wrap:balance}
+.lede b{color:var(--ink)}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.tested{color:var(--mut);font-size:15.5px;margin-top:14px}
+.stagecard{position:relative;max-width:560px;margin:44px auto 0;padding:34px 24px 30px;border-radius:30px;background:#fff;box-shadow:var(--shl)}
+.stagecard .t{font-size:clamp(26px,4vw,34px);font-weight:800;letter-spacing:-.02em}
+.icons{display:flex;justify-content:center;gap:22px;margin-top:22px}
+.icons img{width:84px;height:84px;border-radius:24%;box-shadow:0 12px 26px rgba(0,0,0,.16)}
+.pillq{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:12px 18px;border-radius:16px;background:var(--fill);font-size:18px;font-weight:700}
+.stagecard .cur.c{right:6%;top:52%;animation:hc 7s cubic-bezier(.6,0,.3,1) infinite}
+.stagecard .cur.x{left:8%;top:30%;animation:hx 7s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes hc{0%,100%{transform:translate(0,0)}30%{transform:translate(-140px,-60px)}55%{transform:translate(-60px,40px)}80%{transform:translate(10px,-10px)}}
+@keyframes hx{0%,100%{transform:translate(0,0)}30%{transform:translate(150px,50px)}55%{transform:translate(70px,-30px)}80%{transform:translate(-10px,20px)}}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:900px;margin:0 auto;text-align:center}
+.nums .n{display:block;font-size:clamp(76px,15vw,160px);font-weight:800;line-height:.9;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.nums div:nth-child(1) .n{color:var(--cl)}.nums div:nth-child(2) .n{color:var(--cx)}.nums div:nth-child(3) .n{color:var(--ink)}
+.nums span{color:var(--mut);font-size:clamp(15px,1.8vw,19px);font-weight:700;line-height:1.3}
+.bento{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(200px,auto);gap:14px;margin-top:40px}
+@media(min-width:860px){.bento{grid-template-columns:repeat(6,1fr)}.tile{grid-column:span 2}.tile.big{grid-column:span 3;grid-row:span 2}.tile.wide{grid-column:span 3}}
+@media(max-width:859px){.tile.big,.tile.wide{grid-column:span 2}}
+.tile{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;text-decoration:none;color:var(--ink);background:#fff;border-radius:24px;box-shadow:var(--sh);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+.tile h3{font-size:22px;font-weight:800;letter-spacing:-.015em;line-height:1.15}
+.tile p{color:var(--mut);font-size:15.5px;margin-top:4px}
+.tile .mini{margin-bottom:auto;padding-bottom:16px}
+.vcard{border-radius:18px;background:var(--bg);padding:14px 16px}
+.vcard .hd{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;padding-bottom:8px}
+.vcard .hd img{width:30px;height:30px;border-radius:8px}
+.vl{display:flex;align-items:center;gap:12px;border-top:1px solid var(--hair);padding:10px 0;font-size:16px;font-weight:600}
+.vl svg{width:26px;height:26px;flex:none}
+.m-check{display:grid;gap:8px}
+.m-check span{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700}
+.m-check i{width:22px;height:22px;border-radius:50%;background:var(--ok);display:grid;place-items:center}
+.m-check i.o{background:transparent;box-shadow:inset 0 0 0 1.6px #c7c7cc}
+.m-check svg{width:13px;height:13px}
+.m-term{border-radius:14px;background:#1d1d1f;padding:12px 14px;font:600 13px/1.65 ui-monospace,Menlo,monospace;direction:ltr;text-align:left;color:#a1a1a6}
+.m-term b{color:#FFD27A}.m-term .c{color:#F0A98C}.m-term .x{color:#8FB0FF}
+.m-field{border-radius:14px;background:var(--fill);padding:12px 14px;font-size:15.5px;font-weight:600;box-shadow:inset 0 0 0 2px rgba(0,113,227,.5)}
+.m-field:after{content:"";display:inline-block;width:2px;height:1em;background:var(--blue);vertical-align:-2px;margin-inline-start:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.m-acc{display:grid;gap:8px}
+.m-acc span{display:flex;justify-content:space-between;border-radius:12px;background:var(--fill);padding:10px 12px;font-size:14.5px;font-weight:700}
+.m-acc span:after{content:"+";color:var(--blue);font-weight:800}
+.how{height:440vh;position:relative}
+.stage{position:sticky;top:52px;height:calc(100svh - 52px);display:grid;align-content:center;gap:18px;padding:20px 22px}
+.stage .h2{font-size:clamp(32px,4.4vw,52px)}
+.mc{position:relative;width:min(520px,100%);height:330px;margin:0 auto}
+.ly{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.98);transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.stage[data-s="1"] .l1,.stage[data-s="2"] .l2,.stage[data-s="3"] .l3,.stage[data-s="4"] .l4{opacity:1;transform:none}
+.qcard{position:absolute;inset:40px 0;display:grid;place-items:center;text-align:center;padding:24px}
+.qcard .k{color:var(--mut);font-weight:700;font-size:16px}
+.qcard .q{font-size:clamp(22px,3.4vw,28px);font-weight:800;letter-spacing:-.015em;line-height:1.25;margin-top:6px}
+.pair{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ans{padding:18px;display:flex;flex-direction:column;gap:10px;position:relative}
+.ans .h{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800;transition:filter .5s}
+.ans .h img{width:34px;height:34px;border-radius:9px}
+.ans p{font-size:15.5px;font-weight:600;line-height:1.45;color:#3a3a3c}
+.ans.c{box-shadow:var(--sh),inset 0 3px 0 var(--cl)}.ans.x{box-shadow:var(--sh),inset 0 3px 0 var(--cx)}
+.l3 .tag{position:absolute;top:-14px;inset-inline:0;margin:auto;width:max-content;padding:6px 14px;border-radius:12px;background:var(--ink);color:#fff;font-size:14px;font-weight:700;z-index:2}
+.l4 .vcard{position:absolute;inset:10px 0;background:#fff;box-shadow:var(--shl);padding:20px 22px;border-radius:24px}
+.l4 .vcard .hd{font-size:26px}
+.steps{position:relative;min-height:112px;max-width:520px;margin:0 auto;width:100%;text-align:center}
+.steps div{position:absolute;inset:0;opacity:0;transition:opacity .45s}
+.steps div.on{opacity:1}
+.steps h3{font-size:24px;font-weight:800;letter-spacing:-.015em}
+.steps p{color:var(--mut);font-size:17.5px;line-height:1.45;margin-top:4px}
+.dots{display:flex;gap:8px;justify-content:center}
+.dots i{width:30px;height:4px;border-radius:3px;background:#d2d2d7;transition:background .4s}
+.dots i.on{background:var(--ink)}
+@media(max-width:600px){.mc{height:360px}.pair{grid-template-columns:1fr;gap:12px}.ans{padding:14px 16px;gap:6px}.ans p{font-size:14.5px}.l3 .tag{top:-12px}}
+.mac{max-width:820px;margin:40px auto 0;border-radius:18px;background:#1d1d1f;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 50px 100px -30px rgba(0,0,0,.45),0 18px 36px -18px rgba(0,0,0,.3)}
+.tb{height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;direction:ltr;position:relative;background:#2a2a2d}
+.tb i{width:12px;height:12px;border-radius:50%}.tb i:nth-child(1){background:#FF5F57}.tb i:nth-child(2){background:#FEBC2E}.tb i:nth-child(3){background:#28C840}
+.tb span{position:absolute;inset:0;display:grid;place-items:center;color:#a1a1a6;font-size:14px;font-weight:700}
+.term{padding:20px;display:flex;flex-direction:column;gap:12px;min-height:520px;font-size:16px;color:#e5e5ea}
+.term .ln{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.term .ln.on{opacity:1;transform:none}
+.ask{font-weight:700}.ask .p{color:#FFD27A;margin-inline-end:8px}
+.caret{display:inline-block;width:9px;height:1.1em;background:#FFD27A;vertical-align:-3px;animation:blink 1s steps(1) infinite}
+.seat{border-radius:14px;padding:13px 16px;background:#2a2a2d;line-height:1.5;color:#d1d1d6}
+.seat b{display:flex;align-items:center;gap:8px;color:#fff;font-size:15.5px;margin-bottom:3px}
+.seat img{width:22px;height:22px;border-radius:6px}
+.seat.c{box-shadow:inset -3px 0 0 var(--cl)}.seat.x{box-shadow:inset -3px 0 0 #6a8aff}
+.seat.v{background:#fff;color:var(--ink)}
+.seat.v b{color:var(--ink);font-size:18px}
+.note{color:var(--mut);font-size:15.5px;text-align:center;margin-top:16px}
+.read{display:grid;grid-template-columns:1fr;gap:14px;max-width:860px;margin:36px auto 0}
+@media(min-width:760px){.read{grid-template-columns:1fr 1fr}}
+.rc{padding:22px}
+.rc b{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin-bottom:6px}
+.rc b svg{width:26px;height:26px;flex:none}
+.rc p{color:#3a3a3c;font-size:16.5px}
+.rc.hot{box-shadow:var(--sh),inset 0 0 0 2px var(--ok)}
+.caveat{max-width:820px;margin:16px auto 0;color:var(--mut);font-size:16px;text-align:center}
+.grid3{display:grid;grid-template-columns:1fr;gap:14px;margin-top:40px}
+@media(min-width:760px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.q3{padding:22px}
+.q3 h3{font-size:21px;font-weight:800;line-height:1.3;letter-spacing:-.01em}
+.q3 p{color:var(--mut);font-size:16px;margin-top:8px}
+.q3.no h3{color:var(--err)}
+.try{max-width:860px;margin:30px auto 0;display:grid;gap:12px}
+.tq{display:flex;flex-direction:column;gap:12px;padding:20px}
+.tq p{font-size:17px;font-weight:700;line-height:1.45}
+.cp{align-self:flex-start;border:0;cursor:pointer;height:40px;padding:0 16px;border-radius:12px;background:var(--fill);color:var(--blue);font:800 15px A;transition:transform .12s}
+.cp.ok{background:#e8f8ec;color:#1f8f3a}
+@media(max-width:759px){.try{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-22px;padding:6px 22px 16px;scrollbar-width:none}
+ .try::-webkit-scrollbar{display:none}.tq{flex:0 0 84%;scroll-snap-align:center}}
+.build{max-width:780px;margin:34px auto 0;padding:24px}
+.build label{display:block;font-weight:800;font-size:17px;margin:16px 0 6px}
+.build label:first-child{margin-top:0}
+.build label small{color:var(--mut);font-weight:600;font-size:15px;margin-inline-start:6px}
+.build textarea,.build input{width:100%;background:var(--fill);color:var(--ink);border:0;border-radius:14px;padding:13px 15px;font:600 16.5px/1.5 A;direction:rtl;resize:vertical;transition:box-shadow .2s,background .2s}
+.build textarea:focus,.build input:focus{outline:0;background:#fff;box-shadow:inset 0 0 0 2px var(--blue)}
+.build .tip{color:#a3401c;font-size:15.5px;margin-top:8px;min-height:1.4em}
+.build pre{margin-top:16px;white-space:pre-wrap;font:700 16px/1.6 A;direction:rtl;text-align:right;background:#1d1d1f;color:#f5f5f7;border-radius:16px;padding:16px;min-height:64px}
+.build .row{display:flex;gap:10px;margin-top:12px}
+.build .btn{height:50px;font-size:17px}
+.req{text-align:center;padding:30px 22px}
+.req img,.req svg{width:56px;height:56px;border-radius:24%;display:block;margin:0 auto 14px}
+.req .big{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.req p{color:var(--mut);font-size:16px;margin-top:8px}
+.inst{max-width:780px;margin:40px auto 0}
+.prog{height:8px;border-radius:5px;background:#e3e3e8;overflow:hidden;display:flex}
+.prog i{display:block;height:100%;width:0;background:var(--ok);border-radius:5px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.progt{color:var(--mut);font-size:15.5px;font-weight:700;margin:8px 0 6px}
+.st{padding:24px;margin-top:14px;transition:box-shadow .3s}
+.st.done{box-shadow:var(--sh),inset 0 0 0 2px var(--ok)}
+.st header{display:flex;gap:14px;align-items:flex-start}
+.chk{flex:none;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;background:#fff;box-shadow:inset 0 0 0 1.8px #c7c7cc;display:grid;place-items:center;margin-top:1px;transition:background .2s,box-shadow .2s,transform .12s}
+.chk svg{width:18px;height:18px;opacity:0;transition:opacity .2s}
+.st.done .chk{background:var(--ok);box-shadow:0 6px 14px -4px rgba(52,199,89,.6)}.st.done .chk svg{opacity:1}
+.st h3{font-size:22px;font-weight:800;line-height:1.25}
+.st .why{color:var(--mut);font-size:16px;margin-top:2px}
+.st ol{margin:16px 0 0;padding-inline-start:22px;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;font-size:16.5px}
+.cmd{display:flex;align-items:stretch;margin-top:8px;border-radius:14px;background:#1d1d1f;overflow:hidden}
+.cmd code{flex:1;min-width:0;padding:13px 14px;font-size:14px;line-height:1.5;color:#f5f5f7;text-align:left;white-space:pre-wrap;word-break:break-all}
+.cmd .cp{align-self:stretch;height:auto;border-radius:0;background:#2a2a2d;color:#6ab0ff}
+.cmd .cp.ok{background:#1f3a26;color:#7ee29a}
+.st li>code,.faq code,.ins code{background:var(--fill);padding:2px 7px;border-radius:7px;font-size:14px}
+.exp{color:#1f8f3a;font-size:15.5px;font-weight:700;margin-top:6px}
+.inside{max-width:860px;margin:36px auto 0;display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.inside{grid-template-columns:1fr 1fr}}
+.ins{padding:22px}
+.ins h3{font-size:20px;font-weight:800;line-height:1.25}
+.ins p{color:#3a3a3c;font-size:16px;margin-top:6px}
+.ins .src{margin-top:10px;font:600 13.5px/1.55 ui-monospace,Menlo,monospace;direction:ltr;text-align:left;color:#f5f5f7;background:#1d1d1f;border-radius:12px;padding:10px 12px;white-space:pre-wrap;word-break:break-word}
+.more{text-align:center;margin-top:20px}
+.faq{max-width:780px;margin:36px auto 0;display:grid;gap:10px}
+.faq details{background:#fff;border-radius:18px;box-shadow:var(--sh)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:800;font-size:18px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--blue);font-size:26px;line-height:1;transition:transform .25s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details>div{padding:0 20px 18px;color:#3a3a3c;font-size:16.5px}
+.end{text-align:center;padding:110px 0 90px}
+.end .h2{font-size:clamp(44px,7vw,84px)}
+.sign{color:var(--mut);margin-top:56px;font-size:16px}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.term .ln{opacity:1!important;transform:none!important}}
+.lvls{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-width:400px;margin:24px auto 0}
+.lvls i{aspect-ratio:1;border-radius:24%;display:grid;place-items:center;font:800 22px/1 A;font-style:normal;background:var(--fill);color:var(--mut)}
+.lvls i.on{background:linear-gradient(135deg,var(--cl),var(--cx));color:#fff;box-shadow:0 12px 26px rgba(0,0,0,.16)}
+.lvls i.was{background:#e8f8ec;color:#1f8f3a}
+.pcard{position:absolute;inset:24px 0;padding:20px 22px;border-radius:24px;background:#1d1d1f;color:#f5f5f7;font:600 16px/1.65 A;white-space:pre-wrap;text-align:right;box-shadow:var(--shl)}
+.pcard .k{display:block;color:#FFD27A;font-weight:800;margin-bottom:6px}
+.pr{margin-top:10px;border-radius:14px;background:#1d1d1f;overflow:hidden;display:flex;flex-direction:column}
+.pr pre{padding:14px 16px;font:600 16px/1.65 A;color:#f5f5f7;white-space:pre-wrap;direction:rtl;text-align:right;word-break:break-word}
+.pr .cp{align-self:stretch;height:42px;border-radius:0;background:#2a2a2d;color:#6ab0ff}
+.pr .cp.ok{background:#1f3a26;color:#7ee29a}
+.st .nx{margin-top:14px;font-size:17px;font-weight:700;line-height:1.5}
+.st .nx span{color:var(--mut);font-weight:600}
+.st p code,.rc code,.seat code,.q3 code{background:var(--fill);padding:2px 7px;border-radius:7px;font-size:14px}
+.seat code{background:#3a3a3d;color:#f5f5f7}
+.seat.v code{background:var(--fill);color:var(--ink)}
+.res{margin-top:14px;display:grid;gap:8px;font-size:16px;line-height:1.5;color:#3a3a3c}
+.res .warn{color:#a3401c;font-weight:700}
+.res .ok{color:#1f8f3a;font-weight:700}
+a.q3{display:block;text-decoration:none;color:inherit;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+a.q3:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+.q3 .lv{display:block;color:var(--mut);font-size:15px;font-weight:700;margin-bottom:4px}
+.lvls{position:relative;margin-bottom:46px}
+.stagecard .cur.lvc{top:68%;right:auto;left:calc(58.3% - 4px);animation:lv 4.5s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes lv{0%,25%{left:calc(58.3% - 4px)}50%,85%{left:calc(41.7% - 4px)}100%{left:calc(58.3% - 4px)}}
+.seat code{white-space:nowrap}
+
+.quiz{max-width:640px;margin:34px auto 0;padding:26px 24px;text-align:center}
+.qhead{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:15px;font-weight:700}
+.qbar{flex:1;height:6px;border-radius:4px;background:var(--fill);overflow:hidden}.qbar i{display:block;height:100%;width:20%;background:var(--gold,#0071e3);transition:width .4s}
+.qq{font-size:clamp(22px,3.2vw,28px);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin:22px 0 24px;min-height:2.6em;text-wrap:balance}
+.qbtns{display:flex;gap:12px;justify-content:center}.qbtns .btn{min-width:130px}
+.qres .qlv{display:block;font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;color:var(--gold,#0071e3)}
+.qres p{color:var(--mut);font-size:17.5px;margin-top:8px;text-wrap:balance}
+.alt{text-align:center;font-size:21px;font-weight:800;margin-top:56px;color:var(--mut)}
+.study{max-width:820px;margin:34px auto 0;padding:28px 24px;text-align:center}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.srow div{display:flex;flex-direction:column;gap:8px}
+.sn{white-space:nowrap;font-size:clamp(40px,8vw,92px);font-weight:800;line-height:.95;letter-spacing:-.04em;color:var(--mut);direction:ltr;unicode-bidi:isolate}
+.sn.hi{color:var(--gold,#0071e3)}
+.srow span{font-size:16px;color:var(--mut);line-height:1.4}
+.snote{margin:18px auto 0;max-width:600px;font-size:16.5px;line-height:1.55;color:#D9CDBB}
+.study .btn{margin-top:22px}
+.quiz [hidden]{display:none!important}
+/* coffee theme - from the six-levels carousel (bg #0A0806, gold #F2B84B). A = carousel exact, B = espresso brown */
+:root{--bg:#0A0806;--card:#16110C;--card2:#1F1811;--ink:#F3EDE4;--mut:#B3A998;--hair:rgba(242,184,75,.14);--fill:#251C14;
+ --gold:#F2B84B;--gold2:#F7D9A0;--blue:#F2B84B;--ok:#F2B84B;--okt:#F5CD7E;--warn:#F0A98C;--cl:#F7D9A0;--cx:#C98A3E;--dk:#050403;--dk2:#120D09;
+ --sh:0 1px 0 rgba(242,184,75,.08) inset,0 14px 36px rgba(0,0,0,.5);--shl:0 1px 0 rgba(242,184,75,.12) inset,0 30px 70px -10px rgba(0,0,0,.7)}
+body.b{--bg:#1B130C;--card:#271C13;--card2:#30231A;--fill:#3A2A1E;--ink:#F6EBDD;--mut:#C7B49D;--hair:rgba(242,184,75,.16);--dk:#120C07;--dk2:#1E150E}
+html,body{background:var(--bg)}
+body{color:var(--ink)}
+.gnav{background:color-mix(in srgb,var(--bg) 78%,transparent);box-shadow:0 1px 0 var(--hair)}
+.nbtn,.btn{background:var(--gold);color:#1A120A;box-shadow:0 10px 24px -10px rgba(242,184,75,.55)}
+.btn:hover{background:var(--gold2);box-shadow:0 14px 30px -10px rgba(242,184,75,.65)}
+.btn.ghost{background:var(--card2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair)}
+.grad{background:linear-gradient(90deg,var(--gold2),var(--gold) 55%,#C98A3E);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card,.tile,.stagecard,.faq details,.l4 .vcard{background:var(--card);box-shadow:var(--sh)}
+.tile:hover,a.q3:hover{box-shadow:var(--shl)}
+.tile{color:var(--ink)}
+.vcard{background:var(--card2)}
+.vl{border-top-color:var(--hair)}
+.vl circle,.rc circle{fill:var(--gold)}
+.vl path,.rc b path{stroke:#1A120A}
+.pillq,.m-acc span,.m-field{background:var(--fill);color:var(--ink)}
+.m-field{box-shadow:inset 0 0 0 2px rgba(242,184,75,.55)}.m-field:after{background:var(--gold)}
+.m-acc span:after,.faq summary:after{color:var(--gold)}
+.m-check i{background:var(--gold)}.m-check i svg{stroke:#1A120A}.m-check i.o{box-shadow:inset 0 0 0 1.6px var(--mut)}
+.m-term,.mac,.pcard,.pr,.build pre,.ins .src{background:var(--dk);box-shadow:inset 0 0 0 1px var(--hair)}
+.tb{background:var(--dk2)}
+.seat{background:var(--dk2);color:#D9CDBB}
+.seat.c{box-shadow:inset -3px 0 0 #8a7a66}.seat.x{box-shadow:inset -3px 0 0 var(--gold)}
+.seat.v{background:var(--card2);color:var(--ink)}.seat.v b{color:var(--ink)}
+.seat code{background:#2A2017;color:var(--gold2)}.seat.v code{background:var(--fill);color:var(--gold2)}
+.pr .cp,.cmd .cp{background:var(--dk2);color:var(--gold)}
+.pr .cp.ok{background:#2a2414;color:var(--gold2)}
+.cp{background:var(--fill);color:var(--gold)}.cp.ok{background:#2a2414;color:var(--gold2)}
+.ans p,.rc p,.ins p,.faq details>div{color:#D9CDBB}
+.ans.c{box-shadow:var(--sh),inset 0 3px 0 #8a7a66}.ans.x{box-shadow:var(--sh),inset 0 3px 0 var(--gold)}
+.rc.hot{box-shadow:var(--sh),inset 0 0 0 2px var(--gold)}
+.q3 .lv{color:var(--gold)}
+.nums div:nth-child(1) .n,.nums div:nth-child(2) .n,.nums div:nth-child(3) .n{color:transparent;-webkit-text-stroke:2px var(--gold)}
+.nums div:nth-child(2) .n{-webkit-text-stroke:0;color:var(--gold)}
+.lvls i{background:var(--fill);color:var(--mut)}
+.lvls i.was{background:rgba(242,184,75,.28);color:var(--gold2)}
+.lvls i.on{background:var(--gold);color:#1A120A;box-shadow:0 12px 26px rgba(242,184,75,.25)}
+.stagecard .cur.c svg path{fill:var(--gold);stroke:#1A120A}.stagecard .cur.c .lb{background:var(--gold);color:#1A120A}
+.dots i{background:#3A2E22}.dots i.on{background:var(--gold)}
+.build textarea,.build input{background:var(--fill);color:var(--ink)}
+.build textarea::placeholder,.build input::placeholder{color:#8a7d6c}
+.build textarea:focus,.build input:focus{background:var(--card2);box-shadow:inset 0 0 0 2px var(--gold)}
+.build .tip{color:var(--warn)}
+.req svg{stroke:var(--gold)}
+.prog{background:var(--fill)}.prog i{background:var(--gold)}
+.chk{background:var(--card2);box-shadow:inset 0 0 0 1.8px var(--mut)}
+.st.done{box-shadow:var(--sh),inset 0 0 0 2px var(--gold)}
+.st.done .chk{background:var(--gold);box-shadow:0 6px 14px -4px rgba(242,184,75,.5)}.st.done .chk svg{stroke:#1A120A}
+.st .nx b,.st .nx{color:var(--ink)}
+.res{color:#D9CDBB}.res .ok{color:var(--okt)}.res .warn{color:var(--warn)}
+.st li>code,.faq code,.ins code,.st p code,.rc code,.q3 code{background:var(--fill);color:var(--gold2)}
+.lede b{color:var(--ink)}
+:focus-visible{outline-color:rgba(242,184,75,.6)}
+/* shared signup strip, page-local recolor only (shared file untouched) */
+.vk-su .vk-in{background:linear-gradient(100deg,#1F160E,#3A2817 60%,#5A3D1E)!important;box-shadow:inset 0 0 0 1px var(--hair)}
+.vk-su .vk-bg::after{background:radial-gradient(closest-side,rgba(242,184,75,.25),transparent)!important}
+
+.crew{display:grid;gap:8px;max-width:420px;margin:22px auto 0;text-align:right}
+.crew div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:var(--fill);font-size:18px;font-weight:800}
+.crew span{font-size:15px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crew .r{background:var(--gold);color:#1A120A}
+.crew .b{box-shadow:inset 0 0 0 1.6px var(--gold);color:var(--gold2)}
+.grp{max-width:780px;margin:56px auto 0;font-size:clamp(26px,4vw,34px);font-weight:800;letter-spacing:-.02em}
+.grp small{display:block;color:var(--mut);font-size:17px;font-weight:600;letter-spacing:0;margin-top:6px}
+.st .store{margin-top:10px;height:46px;font-size:17px}
+.pr pre.ltr{direction:ltr;text-align:left;white-space:pre;overflow-x:auto}
+.st h3 bdi{white-space:nowrap}
+bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
+.faq pre{margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--dk);color:var(--gold2);font:600 14px/1.5 ui-monospace,Menlo,monospace;direction:ltr;text-align:left;white-space:pre;overflow-x:auto}
+.req a{color:var(--gold2)}
+.faq,.faq details,.faq details>div{min-width:0}
+.faq pre{max-width:100%}
+.phone{display:none;max-width:560px;margin:26px auto 0;padding:20px 22px;text-align:center}
+.phone b{display:block;font-size:19px;font-weight:800}
+.phone p{color:var(--mut);font-size:16px;margin-top:4px}
+.phone .btn{margin-top:14px;height:50px;font-size:18px}
+@media (max-width:760px){.phone{display:block}}
+.gloss{max-width:780px;margin:18px auto 0;padding:22px;display:grid;gap:10px;font-size:16.5px;color:#D9CDBB}
+.gloss b{color:var(--ink)}
+.gloss code{background:var(--fill);color:var(--gold2);padding:2px 7px;border-radius:7px;font-size:14px}
+</style>
+
+<nav class=gnav><b><img src="claude-tile.svg" alt="">5 העובדים</b><a class=nbtn href="#ready">לגייס</a></nav>
+
+<header class=hero><div class=wrap>
+ <h1>5 עובדים. <span class=grad>אף אחד</span> לא מקבל משכורת.</h1>
+ <p class=lede>3 מהם מוכנים לשימוש, בלי לבנות כלום. את 2 האחרים בונים סביבכם: מדביקים פרומפט, ו-<bdi dir=ltr>Claude</bdi> מראיין אתכם ובונה אותם. <b>הרצתי כל אחד מהם</b> לפני שהכנסתי אותו לדף.</p>
+ <div class=cta><a class=btn href="#ready">לגייס את הצוות</a></div>
+ <div class="card phone"><b>קוראים בטלפון?</b><p>ההתקנה קורית במחשב. שלחו לעצמכם את הדף, ותפתחו אותו שם</p><button class=btn id=share>שלחו לעצמכם</button></div>
+ <p class=tested>הפרומפטים נבדקו ב-27/11 בסשן נקי, בלי ההגדרות שלי</p>
+ <div class=stagecard>
+  <div class=t>הצוות שלכם</div>
+  <div class=crew>
+   <div>המאבטח<span class=r>מוכן</span></div>
+   <div>המעצב<span class=r>מוכן</span></div>
+   <div>העוזר האישי<span class=r>מוכן</span></div>
+   <div>הקופירייטר<span class=b>בונים סביבכם</span></div>
+   <div>היועץ<span class=b>בונים סביבכם</span></div>
+  </div>
+  <div class=pillq>3 מוכנים · 2 בפרומפט אחד</div>
+ </div>
+</div></header>
+
+<section class=sec id=need style="padding-top:20px"><div class=wrap>
+ <h2 class="h2 rv">מה צריך</h2>
+ <div class=grid3>
+  <div class="card req rv"><svg viewBox="0 0 24 24" fill=none stroke="#1d1d1f" stroke-width=1.8 stroke-linecap=round stroke-linejoin=round style="border-radius:0"><rect x=2.5 y=4 width=19 height=16 rx=3 /><path d="M7 9.5l3 2.5-3 2.5M12.5 15h4.5"/></svg>
+   <div class=big>Claude&nbsp;Code</div><p>מותקן במחשב. עוד לא? <a href="#inst-cc" class=opn>שורת ההתקנה כאן</a></p></div>
+  <div class="card req rv"><img src="claude-tile.svg" alt=""><div class=big>מנוי Pro ומעלה</div><p>החשבון החינמי של <bdi dir=ltr>Claude</bdi> לא כולל את <bdi dir=ltr>Claude&nbsp;Code</bdi></p></div>
+  <div class="card req rv"><svg viewBox="0 0 24 24" fill=none stroke="#1d1d1f" stroke-width=1.8 stroke-linecap=round stroke-linejoin=round style="border-radius:0"><circle cx=12 cy=12 r=9.5 /><circle cx=12 cy=12 r=3.5 /><path d="M12 8.5h8.6M8.97 13.75l-4.3-7.45M15.03 13.75l-4.3 7.45"/></svg>
+   <div class=big>רק לשניים</div><p>המאבטח צריך פרויקט ב-<bdi dir=ltr>GitHub</bdi>, והעוזר האישי צריך את הדפדפן <bdi dir=ltr>Chrome</bdi></p></div>
+ </div>
+ <div class="card gloss rv">
+  <span><b>טרמינל:</b> החלון שבו מקלידים פקודות. ב-<bdi dir=ltr>Mac</bdi>: לוחצים <bdi dir=ltr>Cmd</bdi>+רווח, מקלידים <bdi dir=ltr>Terminal</bdi> ולוחצים אנטר. ב-<bdi dir=ltr>Windows</bdi>: לוחצים על מקש <bdi dir=ltr>Start</bdi>, מקלידים <bdi dir=ltr>PowerShell</bdi> ולוחצים אנטר</span>
+  <span><b><bdi dir=ltr>Claude&nbsp;Code</bdi>:</b> נפתח מתוך הטרמינל כשמקלידים <code>claude</code>. פקודות שמתחילות ב-<code>/</code> מקלידים בתוכו</span>
+  <span><b>סקיל:</b> קובץ הוראות קבוע ש-<bdi dir=ltr>Claude</bdi> קורא כשהוא צריך אותו</span>
+  <span><b>שיחה חדשה:</b> מקלידים <code>/clear</code> בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>, או סוגרים ופותחים אותו מחדש</span>
+ </div>
+</div></section>
+
+<section class=sec id=ready style="padding-top:20px"><div class=wrap>
+ <h2 class="h2 rv">3 מוכנים לשימוש</h2>
+ <p class="sub rv">סמנו כל עובד שגייסתם. הסימון נשמר רק בדפדפן שלכם</p>
+ <div class=inst>
+  <div class=prog><i id=bar></i></div><div class=progt id=progt>0 מתוך 5</div>
+
+  <div class="card st" data-step=1 id=w1><header><button class=chk aria-label="סימון המאבטח"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+   <div><h3>המאבטח<br><bdi dir=ltr>security-review</bdi></h3><p class=why>מזהה פרצות אבטחה לפני שהקוד עולה לאוויר</p></div></header>
+   <p class=nx>התקנה: אין. הוא חלק מ-<bdi dir=ltr>Claude&nbsp;Code</bdi> עצמו. <span>הוא רלוונטי רק אם אתם בונים אתר או אפליקציה בקוד. לא? דלגו לעובד הבא</span></p>
+   <ol><li>הפרויקט צריך להיות שמור ב-<bdi dir=ltr>GitHub</bdi>, השירות שמחזיק עותק של הקוד שלכם בענן</li>
+   <li>כשסיימתם שינוי, ולפני שאתם מעלים אותו, הקלידו בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>:<div class=pr><button class=cp aria-label="העתקת הפקודה של המאבטח">העתקה</button><pre class=ltr>/security-review</pre></div></li>
+   <li>קיבלתם שגיאה עם <bdi dir=ltr>origin/HEAD</bdi>? בקשו מ-<bdi dir=ltr>Claude</bdi>, ואז הריצו שוב:<div class=pr><button class=cp aria-label="העתקת בקשת התיקון">העתקה</button><pre>תריץ את הפקודה <bdi dir=ltr>git remote set-head origin -a</bdi></pre></div></li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי קיבלתי בדיוק את השגיאה הזאת. אחרי הבקשה משלב 3 הוא רץ והחזיר דוח מסודר באנגלית: מה נבדק, מה נמצא, ומה הוא השאיר מחוץ לדוח ולמה&nbsp;✅</span><span class=warn>הוא משווה את הקוד שלכם לגרסה שב-<bdi dir=ltr>GitHub</bdi>, כולל שינויים שעוד לא שמרתם. קוד ישן שכבר היה שם לא נבדק&nbsp;⚠️</span><span>רוצים את הדוח בעברית? כתבו אחריו "תסביר לי את זה בעברית"</span></div></div>
+
+  <div class="card st" data-step=2 id=w2><header><button class=chk aria-label="סימון המעצב"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+   <div><h3>המעצב<br><bdi dir=ltr>frontend-design</bdi></h3><p class=why>בונה אתרים שלא נראים כמו עוד תוצר של <bdi dir=ltr>AI</bdi></p></div></header>
+   <p class=nx>פלאגין רשמי של <bdi dir=ltr>Anthropic</bdi>, <span>ומתקינים אותו פעם אחת</span></p>
+   <ol><li>בטרמינל, לא בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>, הדביקו:<div class=pr><button class=cp aria-label="העתקת פקודת ההתקנה של המעצב">העתקה</button><pre class=ltr>claude plugin install frontend-design</pre></div></li>
+   <li>פתחו ב-<bdi dir=ltr>Claude&nbsp;Code</bdi> שיחה חדשה. מעכשיו הוא נכנס לבד כשאתם מבקשים דף, אתר או עיצוב</li>
+   <li>ספרו לו על המותג שלכם כבר בבקשה הראשונה: צבעים, פונט ואווירה. ככה העיצוב יתאים לכם</li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי, מיד אחרי ההתקנה, ביקשתי דף נחיתה פשוט למאפייה שכונתית, בלי להזכיר את המעצב. <bdi dir=ltr>Claude</bdi> הפעיל אותו לבד&nbsp;✅</span></div></div>
+
+  <div class="card st" data-step=3 id=w3><header><button class=chk aria-label="סימון העוזר האישי"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+   <div><h3>העוזר האישי<br><bdi dir=ltr>Claude in Chrome</bdi></h3><p class=why>עובד בדפדפן שלכם, עם החשבונות שלכם</p></div></header>
+   <p class=nx>תוסף רשמי של <bdi dir=ltr>Anthropic</bdi> לדפדפן <bdi dir=ltr>Chrome</bdi></p>
+   <ol><li>התקינו את התוסף, והתחברו בו לאותו חשבון <bdi dir=ltr>Claude</bdi> שלכם<br><a class="btn ghost store" href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target=_blank rel=noopener>לתוסף ב-Chrome Web Store</a></li>
+   <li>בטרמינל, פתחו את <bdi dir=ltr>Claude&nbsp;Code</bdi> עם החיבור לדפדפן:<div class=pr><button class=cp aria-label="העתקת הפקודה של העוזר האישי">העתקה</button><pre class=ltr>claude --chrome</pre></div>כבר בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>? הקלידו בו <code>/chrome</code></li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: ביקשתי מ-<bdi dir=ltr>Claude&nbsp;Code</bdi> לפתוח אתר ולספר מה כתוב בו. הוא פתח לשונית ב-<bdi dir=ltr>Chrome</bdi> שלי, קרא את הדף ולא לחץ על כלום&nbsp;✅</span><span>את זה בדקתי במחשב שלי ולא בסשן נקי, כי בסשן נקי אין את התוסף</span><span>אפשר גם בלי <bdi dir=ltr>Claude&nbsp;Code</bdi>: פותחים את החלונית של התוסף, ליד האתר שאתם נמצאים בו</span><span class=warn>הוא לוחץ וממלא טפסים בחשבונות האמיתיים שלכם, אז התחילו ממשימה שקל לבדוק&nbsp;⚠️</span></div></div>
+
+  <h3 class="grp rv" id=build>2 בונים סביבכם<small>מדביקים פרומפט ב-<bdi dir=ltr>Claude&nbsp;Code</bdi>, עונים על כמה שאלות, ובסוף יש לכם עובד שמכיר את העסק שלכם</small></h3>
+
+  <div class="card st" data-step=4 id=w4><header><button class=chk aria-label="סימון הקופירייטר"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+   <div><h3>הקופירייטר</h3><p class=why>כותב בקול שלכם, ולומד מכל תיקון שלכם</p></div></header>
+   <p class=nx>מה הוא עושה: <span>מראיין אתכם ב-7 שאלות, מנתח טקסטים שכתבתם, ובונה סקיל עם יומן תיקונים</span></p>
+   <ol><li>הכינו 3 עד 5 טקסטים שכתבתם ואתם אוהבים: פוסטים, מיילים או הודעות. אין לכם? הוא יבקש מכם לכתוב 3 פסקאות קצרות</li>
+   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class=pr><button class=cp aria-label="העתקת הפרומפט של הקופירייטר">העתקה</button><pre>אתה עוזר לי לבנות קופירייטר אישי בתוך Claude Code: סקיל שכותב בקול שלי, מכיר את הקהל שלי, ולומד מכל תיקון שלי. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
+
+איך אתה עובד:
+- בהודעה הראשונה אומר לי במשפט אחד מה עומד לקרות: ראיון קצר, בנייה, ובדיקה יחד. ואז שואל את השאלה הראשונה.
+- שואל אותי שאלה אחת בכל פעם, על נושא אחד, ומחכה לתשובה לפני הצעד הבא.
+- מדבר איתי בעברית פשוטה, ופונה אליי ברבים ("אתם") לאורך כל השיחה. שמות של כלים, קבצים ופקודות נשארים באנגלית.
+- לא ממציא עליי ועל העסק שלי כלום: לא מחירים, לא מספרים, לא לקוחות, לא שמות ולא הבטחות. אם חסר לך פרט, תשאל.
+- בשיחה הזאת, לפני שאתה שומר קובץ, אתה מראה לי מה ייכתב בו, מסביר במשפט אחד מה כל קובץ עושה, ומחכה שאכתוב "שמור".
+- כשתשמור קבצים בתיקייה <bdi dir=ltr>~/.claude</bdi>, ‏Claude Code יבקש ממני אישור. תגיד לי מראש שזה תקין ושאני צריך לאשר. אם השמירה בכל זאת נחסמת, תעצור ותסביר לי מה לאשר. אל תעקוף את זה בדרך אחרת.
+
+שלב 1: תראיין אותי. שבע שאלות, אחת בכל פעם:
+1. מה העסק שלי, ומה אני מוכר?
+2. מי הקהל שלי? תבקש ממני לתאר לקוח אחד אמיתי.
+3. איפה הטקסטים יופיעו? למשל פוסטים, דף מכירה, מיילים, הודעות וואטסאפ.
+4. תבקש ממני להדביק 3 עד 5 טקסטים שאני כתבתי ואוהב. אם אין לי, תבקש ממני לכתוב 3 פסקאות קצרות, כמו שאני מסביר את העסק לחבר.
+5. אילו מילים וביטויים אני תמיד משתמש בהם, ואילו אני לא סובל?
+6. איך אני כותב? למשל רשמי או קליל, עם אימוג'ים או בלי, משפטים קצרים או ארוכים, ואיך אני פונה לקהל שלי.
+7. איך לקרוא לקופירייטר? שם קצר באנגלית, באותיות קטנות, בלי רווחים (למשל <bdi dir=ltr style=white-space:nowrap>my-copywriter</bdi>).
+
+שלב 2: תנתח את הקול שלי.
+- מתוך הטקסטים ששלחתי, תכתוב 5 עד 8 כללים שמתארים איך אני כותב. כל כלל אומר מה בדיוק עושים, במשפט פשוט, עם ציטוט קצר מהטקסטים שלי שמוכיח אותו. בלי כללים כלליים כמו "כותב בחום".
+- ביטוי שמופיע רק בטקסט אחד הוא לא כלל.
+- תוסיף רשימה של מה אני לא עושה אף פעם, לפי מה שסיפרתי.
+- תראה לי ותחכה. אני אתקן, ואתה תעדכן עד שאגיד "מאשר".
+
+שלב 3: תבנה את הסקיל.
+- תיקייה: <bdi dir=ltr>~/.claude/skills/&lt;השם שבחרתי&gt;/</bdi>
+- SKILL.md: בראש הקובץ name ו-description. ב-description תכתוב מתי להפעיל אותו, בעברית ובאנגלית, עד 250 תווים: כתיבת פוסט, כיתוב, מייל, דף מכירה או כל טקסט שיווקי לעסק שלי.
+- references/voice.md: הכללים מהשלב הקודם, הקהל, והמילים האסורות.
+- references/examples.md: הטקסטים שלי, כמו שהם.
+- references/corrections.md: יומן תיקונים ריק עם כותרת.
+- ההוראות ב-SKILL.md יגידו לקופירייטר:
+  - לפנות אליי ברבים.
+  - לקרוא את voice.md, examples.md ו-corrections.md לפני כל כתיבה.
+  - הדוגמאות מראות איך אני נשמע. לא מעתיקים מהן משפטים לטקסט חדש.
+  - לא להמציא עובדות, מחירים, תאריכים או שמות. אם חסר משהו, לשאול.
+  - לפני שהוא מגיש, לעבור על הטקסט פעם אחת: האם זה נשמע כמוני? יש מילה מיותרת? יש משפט שנשמע מתורגם?
+  - כשאני מתקן אותו: לכתוב מיד שורה ב-corrections.md (תאריך, מה היה, מה נכון), לעדכן את voice.md אם זה כלל ולא פרט של טקסט אחד, ולהגיד לי במשפט אחד מה נשמר.
+- תראה לי את הקבצים ותחכה ל"שמור".
+
+שלב 4: נבדוק אותו יחד.
+- תבקש ממני משימה אמיתית: פוסט, מייל או כיתוב שאני צריך השבוע.
+- תכתוב אותה לפי הסקיל, ותשאל מה הייתי משנה.
+- את התיקון שלי תכניס ל-corrections.md, כמו שהסקיל יעשה מעכשיו. תגיד לי ש-Claude Code עשוי לבקש אישור גם כאן, וזה תקין.
+- בסוף תסביר לי איך מפעילים אותו בפעם הבאה: פותחים שיחה חדשה ב-Claude Code ומבקשים טקסט. הדרך הבטוחה היא לכתוב / ואת השם שלו, ואחריו את הבקשה. למשל: <bdi dir=ltr style=white-space:nowrap>/my-copywriter</bdi> תכתוב פוסט על המבצע של השבוע.
+
+תתחיל עכשיו.</pre></div></li>
+   <li>בפעם הבאה: <code>/</code> והשם שבחרתם, ואחריו הבקשה. למשל <bdi dir=ltr>/my-copywriter</bdi> תכתוב פוסט על המבצע של השבוע</li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי קופירייטר לבעל מוסך אופניים קטן, שאין לו אף טקסט כתוב. <bdi dir=ltr>Claude</bdi> ביקש ממנו 3 פסקאות קצרות, ומתוכן כתב 7 כללי קול, כל אחד עם ציטוט&nbsp;✅</span><span class=ok>ביקשתי פוסט על כוונון חורף בלי לתת מחיר. הוא עצר ושאל: "חסר לי פרט אחד, ואני לא רוצה להמציא אותו"&nbsp;✅</span><span class=warn>פעם אחת הוא כן הוסיף פרט שלא נתתי, אבל סימן אותו בעצמו וביקש שאתקן. קראו כל טקסט לפני שמפרסמים&nbsp;⚠️</span></div></div>
+
+  <div class="card st" data-step=5 id=w5><header><button class=chk aria-label="סימון היועץ"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
+   <div><h3>היועץ</h3><p class=why>תוקף את התוכנית שלכם לפני שמתחילים לבנות</p></div></header>
+   <p class=nx>מה הוא עושה: <span>שואל על פרויקטים שהשתבשו לכם, ובונה יועץ שזוכר אותם ולא נותן לחזור עליהם</span></p>
+   <ol><li>חשבו על 2 או 3 פרויקטים שלא הלכו כמו שתכננתם. אין? גם החלטה בעסק שהתחרטתם עליה עובדת</li>
+   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class=pr><button class=cp aria-label="העתקת הפרומפט של היועץ">העתקה</button><pre>אתה עוזר לי לבנות יועץ אישי בתוך Claude Code: סקיל שתוקף כל תוכנית שלי לפני שמתחילים לבנות. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. היועץ מוצא איפה התוכנית עלולה להיכשל, שואל את השאלות שלא שאלתי, ולא נותן להתחיל בלי אישור שלי. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
+
+איך אתה עובד:
+- בהודעה הראשונה אומר לי במשפט אחד מה עומד לקרות: ראיון קצר, בנייה, ובדיקה יחד. ואז שואל את השאלה הראשונה.
+- שואל אותי שאלה אחת בכל פעם, על נושא אחד, ומחכה לתשובה לפני הצעד הבא.
+- מדבר איתי בעברית פשוטה, ופונה אליי ברבים ("אתם") לאורך כל השיחה. שמות של כלים, קבצים ופקודות נשארים באנגלית.
+- לא ממציא עליי כלום. את הכישלונות מהעבר אתה לוקח רק ממה שאני מספר.
+- בשיחה הזאת, לפני שאתה שומר קובץ, אתה מראה לי מה ייכתב בו, מסביר במשפט אחד מה כל קובץ עושה, ומחכה שאכתוב "שמור".
+- כשתשמור קבצים בתיקייה <bdi dir=ltr>~/.claude</bdi>, ‏Claude Code יבקש ממני אישור. תגיד לי מראש שזה תקין ושאני צריך לאשר. אם השמירה בכל זאת נחסמת, תעצור ותסביר לי מה לאשר. אל תעקוף את זה בדרך אחרת.
+
+שלב 1: תראיין אותי. שש שאלות, אחת בכל פעם:
+1. מה אני בונה בדרך כלל עם Claude? למשל אתרים, אוטומציות, תוכן או החלטות בעסק.
+2. ספר לי על 2 או 3 פרויקטים שהשתבשו. מה קרה, ומתי הבנתי שזה הולך לכיוון לא טוב? אם אין לי כאלה, תשאל על החלטה בעסק שהתחרטתי עליה.
+3. איפה אני נוטה לטעות? למשל לקפוץ ישר לבנייה, לבנות יותר מדי, לשכוח מה הלקוח צריך, או להעריך פחות זמן ממה שצריך.
+4. כמה קשוח היועץ צריך להיות? עדין, ישיר, או בלי הנחות בכלל.
+5. כמה שאלות מקסימום לפני שהוא נותן תשובה? (ברירת מחדל: 5)
+6. איך לקרוא ליועץ? שם קצר באנגלית, באותיות קטנות, בלי רווחים (למשל <bdi dir=ltr style=white-space:nowrap>plan-attack</bdi>).
+
+שלב 2: תבנה את הסקיל.
+- תיקייה: <bdi dir=ltr>~/.claude/skills/&lt;השם שבחרתי&gt;/</bdi>
+- SKILL.md: בראש הקובץ name ו-description. ב-description תכתוב שהוא מופעל כשאני מציג תוכנית לפני שמתחילים לבנות ומבקש לבדוק אותה, בעברית ובאנגלית, עד 250 תווים.
+- references/lessons.md: הכישלונות מהעבר שסיפרתי, כל אחד בשורה: מה קרה, ומה הלקח.
+- ההוראות ב-SKILL.md יגידו ליועץ לעבוד ככה, בכל פעם:
+  1. לסכם את התוכנית שלי במשפט אחד, ולשאול אם הבין נכון.
+  2. לשאול שאלה אחת בכל הודעה, על נושא אחד בלבד, עד המקסימום שקבעתי. לא "כמה ומתי" באותה שאלה, אלא קודם "כמה". רק שאלות שהתשובה עליהן משנה את התוכנית.
+  3. לזהות את ההחלטה הכי גדולה בתוכנית: הנקודה שאם נטעה בה, נצטרך להתחיל מחדש. להציג 2 או 3 דרכים, ולהמליץ על אחת עם הסבר קצר.
+  4. לכתוב 2 עד 3 דרכים שבהן התוכנית תיכשל. כל אחת נשענת על לקח מ-lessons.md או על סיבה קונקרטית מהתוכנית עצמה. בלי סיכונים כלליים שמתאימים לכל פרויקט.
+  5. לכתוב מה הייתי צריך לראות כדי לדעת שהצלחתי: משהו שאפשר לבדוק, לא "שיהיה טוב".
+  6. לעצור ולחכות לאישור שלי. לא מתחילים לבנות לפני שאני כותב "מאשר".
+- כשפרויקט נגמר או משתבש, היועץ מציע להוסיף שורה ל-lessons.md, כדי שבפעם הבאה הוא יזכור.
+- תראה לי את הקבצים ותחכה ל"שמור".
+
+שלב 3: נבדוק אותו יחד.
+- תבקש ממני תוכנית אמיתית שאני רוצה לבנות בקרוב.
+- תריץ עליה את היועץ, צעד אחרי צעד, לפי הסקיל. זו בדיקה של היועץ: גם אם אכתוב "מאשר", לא מתחילים לבנות את התוכנית בשיחה הזאת.
+- בסוף תשאל אם הוא היה קשוח מדי או רך מדי, ותעדכן את SKILL.md לפי מה שאגיד.
+- תסביר לי איך מפעילים אותו בפעם הבאה: פותחים שיחה חדשה ב-Claude Code, כותבים / ואת השם שלו, ואחריו את התוכנית. למשל: <bdi dir=ltr style=white-space:nowrap>/plan-attack</bdi> אני רוצה לפתוח חנות אונליין.
+
+תתחיל עכשיו.</pre></div></li>
+   <li>בפעם הבאה: <code>/</code> והשם שבחרתם, ואחריו התוכנית. למשל <bdi dir=ltr>/plan-attack</bdi> אני רוצה לפתוח חנות אונליין</li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי יועץ לבעל עגלת קפה, ונתתי לו תוכנית: אפליקציה להזמנות מראש. היועץ סיכם במשפט, שאל 3 שאלות קצרות, כמו "כמה לקוחות ביקשו מכם עד היום להזמין קפה מראש?", והמליץ להתחיל בניסוי של שבועיים בוואטסאפ&nbsp;✅</span><span class=ok>אחת הסיבות לכישלון שהוא נתן באה מהעבר של בעל העגלה: "אמרתם שזה רעיון שלכם ואף לקוח לא ביקש. זה חוזר על הלקח ממכונת האספרסו"&nbsp;✅</span><span class=ok>כתבתי "מאשר", והוא לא התחיל לבנות, כי זו הייתה רק בדיקה&nbsp;✅</span><span class=warn>בשיחה חדשה הוא הוסיף לסיכום פרט שלא אמרתי. בשביל זה הוא שואל "הבנתי נכון?", אז תקנו אותו&nbsp;⚠️</span></div></div>
+ </div>
+</div></section>
+
+<div class=wrap><div data-signup-here></div></div>
+
+<section class=sec id=read style="padding-top:20px"><div class=wrap>
+ <h2 class="h2 rv">מה למדתי מהניסויים</h2>
+ <p class="sub rv">דברים שלא כתובים בפרומפטים, וכדאי לדעת לפני שמתחילים</p>
+ <div class=read>
+<div class="card rc hot rv"><b><svg viewBox="0 0 28 28"><circle cx=14 cy=14 r=12.5 fill="#34c759"/><path d="M8 14.5l4 4 8-9" fill=none stroke="#fff" stroke-width=2.6 stroke-linecap=round stroke-linejoin=round /></svg>הקופירייטר באמת לומד</b><p>באחד הסבבים תיקנתי אותו פעם אחת: "בלי אימוג'ים בכלל". בשיחה חדשה לגמרי הוא קרא את יומן התיקונים לפני שכתב, והפוסט יצא בלי אימוג'י אחד.</p></div>
+  <div class="card rc rv"><b><bdi dir=ltr>Claude</bdi> שואל לפני שהוא שומר סקיל</b><p>התיקייה <code>.claude</code> מוגנת, ובלי אישור שלכם הסקיל לא נשמר. זה מכוון, ואפשר לאשר.</p></div>
+  <div class="card rc rv"><b><code>/</code> והשם, זו הדרך הבטוחה</b><p><bdi dir=ltr>Claude</bdi> יכול להפעיל סקיל לבד כשהבקשה מתאימה לו, אבל לא תמיד. אצלי, מילת הפעלה שבחרתי נתפסה על ידי הוראה אחרת שהייתה לי. כשמקלידים <code>/</code> ואת השם, זה לא קורה.</p></div>
+  <div class="card rc rv"><b>המאבטח לא מדווח על הכל</b><p>השארתי בכוונה פרצה אמיתית בקוד, כזאת שמאפשרת לשלוף את כל רשימת המשתמשים. הוא מצא אותה, אבל דירג אותה 6 מתוך 10 והשאיר אותה מתחת לסף הדיווח. קראו גם את מה שהוא השאיר בצד.</p></div>
+ </div>
+ <p class="caveat rv">את הסקילים שלי בניתי על העסקים שלי, אז הם נשארים אצלי. הפרומפטים כאן בונים לכם סקילים משלכם.</p>
+</div></section>
+
+<section class=sec style="padding-top:20px"><div class=wrap>
+ <h2 class="h2 rv">איך בדקתי</h2>
+ <p class="sub rv">כדי שתדעו בדיוק מה נבדק, ואיך</p>
+ <div class=inside>
+  <div class="card ins rv"><h3>סשן נקי, משתמש מדומה</h3><p>בלי ההוראות, הסקילים וההגדרות שלי. בכל ריצה בעל עסק אחר בלי רקע טכני, שעונה רק על מה שנשאל.</p></div>
+  <div class="card ins rv"><h3>בדיקה בשיחה חדשה</h3><p>אחרי הבנייה פתחתי שיחה חדשה לגמרי, ובדקתי שהעובד נכנס לעבודה ומכבד את מה שלמד.</p></div>
+  <div class="card ins rv"><h3>שיניתי? בודקים שוב</h3><p>אחרי כל סבב תיקנתי את הפרומפטים, והרצתי את שניהם שוב מאפס. בסך הכל 4 סבבים.</p></div>
+  <div class="card ins rv"><h3>מול התיעוד הרשמי</h3><div class=src>code.claude.com/docs</div><p>דרישות המנוי והמערכת נבדקו שם ב-27/11. את שורות ההתקנה הרצתי בפועל.</p></div>
+ </div>
+</div></section>
+
+<section class=sec id=faq style="padding-top:20px"><div class=wrap>
+ <h2 class="h2 rv">אם משהו נתקע</h2>
+ <div class=faq>
+  <details id=inst-cc><summary><span>עוד לא התקנתי את <bdi dir=ltr>Claude&nbsp;Code</bdi></span></summary><div>פותחים טרמינל ומדביקים שורה אחת. ב-<bdi dir=ltr>Mac</bdi>:<pre>curl -fsSL https://claude.ai/install.sh | bash</pre>ב-<bdi dir=ltr>Windows</bdi>, ב-<bdi dir=ltr>PowerShell</bdi>:<pre>irm https://claude.ai/install.ps1 | iex</pre>אחר כך פותחים טרמינל חדש, מקלידים <code>claude</code>, ומתחברים עם החשבון שלכם. צריך <bdi dir=ltr>macOS</bdi> 13 ומעלה או <bdi dir=ltr>Windows</bdi> 10 ומעלה.</div></details>
+  <details><summary><span>המאבטח מחזיר שגיאה עם <bdi dir=ltr>origin/HEAD</bdi></span></summary><div>זה קורה כשהפרויקט עלה ל-<bdi dir=ltr>GitHub</bdi> בלי שהוגדר הענף הראשי. בקשו מ-<bdi dir=ltr>Claude</bdi>: "תריץ את הפקודה <code>git remote set-head origin -a</code>", ונסו שוב. אצלי זה פתר את זה. אין לכם בכלל פרויקט ב-<bdi dir=ltr>GitHub</bdi>? המאבטח לא יעבוד, ואפשר לדלג עליו.</div></details>
+  <details><summary><span>התקנתי את המעצב ולא קרה כלום</span></summary><div>פתחו שיחה חדשה ב-<bdi dir=ltr>Claude&nbsp;Code</bdi>, ובקשו דף או אתר. הבדיקה שלי רצה בשיחה שנפתחה אחרי ההתקנה.</div></details>
+  <details><summary><span><bdi dir=ltr>Claude</bdi> מבקש אישור לשמור בתיקייה <bdi dir=ltr>.claude</bdi></span></summary><div>זה מכוון. התיקייה <code>.claude</code> מוגנת, ו-<bdi dir=ltr>Claude</bdi> שואל לפני שהוא כותב בה. אם זה הקופירייטר או היועץ שביקשתם לבנות, אשרו. גם כשהקופירייטר רושם תיקון שלכם, ייתכן שתתבקשו לאשר שוב.</div></details>
+  <details><summary><span>הקופירייטר או היועץ לא נכנסים לעבודה</span></summary><div>פתחו שיחה חדשה ב-<bdi dir=ltr>Claude&nbsp;Code</bdi>, הקלידו <code>/</code> ואת השם שבחרתם, ואחריו את הבקשה. למשל <code>/my-copywriter</code> ואחריו "תכתוב פוסט על המבצע". <bdi dir=ltr>Claude</bdi> יכול להפעיל אותם גם לבד, כשהבקשה מתאימה לתיאור שלהם, אבל לא תמיד.</div></details>
+  <details><summary><span>העוזר האישי לא מתחבר ל-<bdi dir=ltr>Claude&nbsp;Code</bdi></span></summary><div>בדקו שהתוסף מותקן ב-<bdi dir=ltr>Chrome</bdi>, ושהתחברתם בו ובטרמינל לאותו חשבון <bdi dir=ltr>Claude</bdi> שלכם. פתחו את <bdi dir=ltr>Claude&nbsp;Code</bdi> עם <code>claude --chrome</code>, או הקלידו בתוכו <code>/chrome</code>. החיבור לא עובד עם מפתח <bdi dir=ltr>API</bdi>, רק עם החשבון הרגיל שלכם.</div></details>
+ </div>
+</div></section>
+
+<section class=end><div class=wrap>
+ <h2 class="h2 rv">גייסתם?<br>ספרו לי <span class=grad>מי ראשון</span></h2>
+ <p class="sub rv">כתבו בתגובות לפוסט עם איזה עובד התחלתם, או שלחו לי הודעה פרטית</p>
+ <div class="cta rv"><a class=btn href="#ready">לגייס את הצוות</a><a class="btn ghost" href="prompts.md" download>הכל בקובץ אחד</a></div>
+ <p class=sign>גל · vaknin.ai</p>
+</div></section>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const KEY='ovdim-steps';let done={};try{done=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sts=document.querySelectorAll('.st');
+function paint(){let n=0;sts.forEach(s=>{const d=!!done[s.dataset.step];s.classList.toggle('done',d);n+=d});
+ document.getElementById('bar').style.width=(n/5*100)+'%';document.getElementById('progt').textContent=n===5?'כל 5 העובדים בצוות. ספרו לי בתגובות מי היה הראשון 🎉':n+' מתוך 5'}
+sts.forEach(s=>s.querySelector('.chk').onclick=()=>{done[s.dataset.step]=!done[s.dataset.step];try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}paint()});paint();
+document.querySelectorAll('.cp').forEach(b=>b.onclick=async()=>{const el=b.parentNode.querySelector('code,pre,p');const c=el.textContent;let ok=true;
+ try{await navigator.clipboard.writeText(c)}catch(e){ok=false;const r=document.createRange();r.selectNodeContents(el);getSelection().removeAllRanges();getSelection().addRange(r)}
+ b.textContent=ok?'הועתק':'סומן, העתיקו ידנית';b.classList.toggle('ok',ok);setTimeout(()=>{b.textContent='העתקה';b.classList.remove('ok')},1600)});
+document.querySelectorAll('a.opn').forEach(a=>a.addEventListener('click',()=>{const d=document.getElementById('inst-cc');if(d)d.open=true}));
+(()=>{const b=document.getElementById('share');if(!b)return;const url=location.href.split('#')[0];
+ b.onclick=async()=>{if(navigator.share){try{await navigator.share({title:'5 העובדים | vaknin.ai',text:'לפתוח במחשב',url});return}catch(e){if(e&&e.name==='AbortError')return}}
+  let ok=true;try{await navigator.clipboard.writeText(url)}catch(e){ok=false}
+  b.textContent=ok?'הקישור הועתק, שלחו אותו לעצמכם':url;setTimeout(()=>b.textContent='שלחו לעצמכם',2600)}})();
+</script>
+
+<script>
+/* counts: view, file download, copy per worker, share. Live site only, never from local preview */
+(()=>{const live=/github\.io$/.test(location.hostname)&&!/[?&]preview/.test(location.search);if(!live)return;
+ const K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhocmh5cW11dWdwa3huZnJ3bm9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NjI2NTcsImV4cCI6MjA5ODIzODY1N30.581pFOEK3-buFUwMk2c66cWjXThTtoJrmNLsYEnq_5w";
+ function ev(key,e){try{fetch("https://xhrhyqmuugpkxnfrwnoa.supabase.co/rest/v1/magnet_events",{method:"POST",keepalive:true,
+  headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},
+  body:JSON.stringify({magnet_key:key,event:e,ref:(document.referrer||"").slice(0,200),ua:navigator.userAgent.slice(0,200)})}).catch(()=>{})}catch(_){}}
+ ev("ovdim","view");
+ document.querySelectorAll('a[href="prompts.md"]').forEach(a=>a.addEventListener('click',()=>ev("ovdim","download")));
+ document.querySelectorAll('.st').forEach(s=>s.querySelectorAll('.pr .cp').forEach(b=>b.addEventListener('click',()=>ev("ovdim-w"+s.dataset.step,"download"))));
+ const st=document.querySelector('a.store');if(st)st.addEventListener('click',()=>ev("ovdim-chrome","download"));
+ const sh=document.getElementById('share');if(sh)sh.addEventListener('click',()=>ev("ovdim-share","download"));})();
+</script>
+
+<script src="../_shared/signup.js" defer></script>
+<script>/* ovdim only: own photo in the shared signup strip (the shared gal-cut.png stays for all other magnets) */
+document.addEventListener('DOMContentLoaded',()=>{const i=document.querySelector('.vk-cut');if(i)i.src='gal-cut-ovdim.png'});</script>
