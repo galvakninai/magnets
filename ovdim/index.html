@@ -333,6 +333,38 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
 .gloss{max-width:780px;margin:18px auto 0;padding:22px;display:grid;gap:10px;font-size:16.5px;color:#D9CDBB}
 .gloss b{color:var(--ink)}
 .gloss code{background:var(--fill);color:var(--gold2);padding:2px 7px;border-radius:7px;font-size:14px}
+
+.cov{max-width:420px;margin:40px auto 0;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(242,184,75,.28),0 0 0 1px var(--hair)}
+.cov img{display:block;width:100%;height:auto}
+.acc{padding:0;margin-top:12px;overflow:hidden}
+.acc .ah{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.acc .at{flex:1;min-width:0}
+.acc .at h3{font-size:20px;line-height:1.2}
+.acc .at .why{font-size:15px;margin-top:3px}
+.acc .sk{display:block;font-size:14px;font-weight:700;color:var(--gold2);margin-top:2px}
+.acc .chk{flex:none}
+.chev{flex:none;width:12px;height:12px;border-left:2.5px solid var(--mut);border-bottom:2.5px solid var(--mut);transform:rotate(-45deg);margin:-6px 4px 0;transition:transform .25s}
+.acc.open .chev{transform:rotate(135deg);margin-top:6px}
+.acc .ab{display:none;padding:0 22px 22px}
+.acc.open .ab{display:block}
+.acc.open{box-shadow:var(--sh),inset 0 0 0 1.5px var(--hair)}
+.bdg{position:relative;flex:none;width:48px;height:58px;border-radius:12px;background:#0f0b08;box-shadow:inset 0 0 0 1.5px var(--hair);display:grid;place-items:center;color:var(--gold);overflow:hidden}
+.bdg:before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--gold)}
+.bdg svg{width:26px;height:26px;margin-top:8px}
+.res .more{margin-top:2px}
+.res .more summary{list-style:none;cursor:pointer;color:var(--gold);font-weight:700;font-size:15px}
+.res .more summary::-webkit-details-marker{display:none}
+.res .more summary:after{content:" +"}
+.res .more[open] summary:after{content:" -"}
+.res .more>span{display:block;margin-top:8px}
+.pr.fold pre{max-height:9.2em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.pr.fold.open pre{max-height:none;-webkit-mask-image:none;mask-image:none}
+.pr.fold .cp{height:50px;font-size:17px;font-weight:800;background:var(--gold);color:#1A120A}
+.pr .unf{background:var(--dk2);color:var(--gold2);border:0;height:42px;font:700 15px A,sans-serif;cursor:pointer}
+.gt{font:inherit;color:inherit;background:none;border:0;padding:0;border-bottom:1.5px dotted var(--gold);cursor:help}
+.tipb{position:fixed;left:16px;right:16px;bottom:18px;z-index:60;max-width:520px;margin:0 auto;padding:16px 18px;border-radius:18px;background:var(--card2);color:var(--ink);font-size:16px;line-height:1.5;box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 0 0 1px var(--hair);display:none}
+.tipb.on{display:block}
+.tipb b{color:var(--gold2)}
 </style>
 
 <nav class=gnav><b><img src="claude-tile.svg" alt="">5 העובדים</b><a class=nbtn href="#ready">לגייס</a></nav>
@@ -343,17 +375,7 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
  <div class=cta><a class=btn href="#ready">לגייס את הצוות</a></div>
  <div class="card phone"><b>קוראים בטלפון?</b><p>ההתקנה קורית במחשב. שלחו לעצמכם את הדף, ותפתחו אותו שם</p><button class=btn id=share>שלחו לעצמכם</button></div>
  <p class=tested>הפרומפטים נבדקו ב-27/11 בסשן נקי, בלי ההגדרות שלי</p>
- <div class=stagecard>
-  <div class=t>הצוות שלכם</div>
-  <div class=crew>
-   <div>המאבטח<span class=r>מוכן</span></div>
-   <div>המעצב<span class=r>מוכן</span></div>
-   <div>העוזר האישי<span class=r>מוכן</span></div>
-   <div>הקופירייטר<span class=b>בונים סביבכם</span></div>
-   <div>היועץ<span class=b>בונים סביבכם</span></div>
-  </div>
-  <div class=pillq>3 מוכנים · 2 בפרומפט אחד</div>
- </div>
+ <figure class=cov><img src="cover.jpg" alt="גל מחזיק 5 תגי עובדים" width=900 height=1203></figure>
 </div></header>
 
 <section class=sec id=need style="padding-top:20px"><div class=wrap>
@@ -365,12 +387,6 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
   <div class="card req rv"><svg viewBox="0 0 24 24" fill=none stroke="#1d1d1f" stroke-width=1.8 stroke-linecap=round stroke-linejoin=round style="border-radius:0"><circle cx=12 cy=12 r=9.5 /><circle cx=12 cy=12 r=3.5 /><path d="M12 8.5h8.6M8.97 13.75l-4.3-7.45M15.03 13.75l-4.3 7.45"/></svg>
    <div class=big>רק לשניים</div><p>המאבטח צריך פרויקט ב-<bdi dir=ltr>GitHub</bdi>, והעוזר האישי צריך את הדפדפן <bdi dir=ltr>Chrome</bdi></p></div>
  </div>
- <div class="card gloss rv">
-  <span><b>טרמינל:</b> החלון שבו מקלידים פקודות. ב-<bdi dir=ltr>Mac</bdi>: לוחצים <bdi dir=ltr>Cmd</bdi>+רווח, מקלידים <bdi dir=ltr>Terminal</bdi> ולוחצים אנטר. ב-<bdi dir=ltr>Windows</bdi>: לוחצים על מקש <bdi dir=ltr>Start</bdi>, מקלידים <bdi dir=ltr>PowerShell</bdi> ולוחצים אנטר</span>
-  <span><b><bdi dir=ltr>Claude&nbsp;Code</bdi>:</b> נפתח מתוך הטרמינל כשמקלידים <code>claude</code>. פקודות שמתחילות ב-<code>/</code> מקלידים בתוכו</span>
-  <span><b>סקיל:</b> קובץ הוראות קבוע ש-<bdi dir=ltr>Claude</bdi> קורא כשהוא צריך אותו</span>
-  <span><b>שיחה חדשה:</b> מקלידים <code>/clear</code> בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>, או סוגרים ופותחים אותו מחדש</span>
- </div>
 </div></section>
 
 <section class=sec id=ready style="padding-top:20px"><div class=wrap>
@@ -379,36 +395,32 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
  <div class=inst>
   <div class=prog><i id=bar></i></div><div class=progt id=progt>0 מתוך 5</div>
 
-  <div class="card st" data-step=1 id=w1><header><button class=chk aria-label="סימון המאבטח"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
-   <div><h3>המאבטח<br><bdi dir=ltr>security-review</bdi></h3><p class=why>מזהה פרצות אבטחה לפני שהקוד עולה לאוויר</p></div></header>
+  <div class="card st acc" data-step=1 id=w1><header class=ah role=button tabindex=0 aria-expanded=false><span class=bdg aria-hidden=true><svg viewBox="0 0 100 100" fill=none stroke=currentColor stroke-width=7 stroke-linecap=round stroke-linejoin=round><path d="M50 8 L86 22 V48 C86 70 70 86 50 94 C30 86 14 70 14 48 V22 Z"/><path d="M34 50 L46 62 L68 38"/></svg></span><div class=at><h3>המאבטח<span class=sk><bdi dir=ltr>security-review</bdi></span></h3><p class=why>מזהה פרצות אבטחה לפני שהקוד עולה לאוויר</p></div><button class=chk aria-label="סימון המאבטח"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button><span class=chev aria-hidden=true></span></header><div class=ab>
    <p class=nx>התקנה: אין. הוא חלק מ-<bdi dir=ltr>Claude&nbsp;Code</bdi> עצמו. <span>הוא רלוונטי רק אם אתם בונים אתר או אפליקציה בקוד. לא? דלגו לעובד הבא</span></p>
    <ol><li>הפרויקט צריך להיות שמור ב-<bdi dir=ltr>GitHub</bdi>, השירות שמחזיק עותק של הקוד שלכם בענן</li>
    <li>כשסיימתם שינוי, ולפני שאתם מעלים אותו, הקלידו בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>:<div class=pr><button class=cp aria-label="העתקת הפקודה של המאבטח">העתקה</button><pre class=ltr>/security-review</pre></div></li>
    <li>קיבלתם שגיאה עם <bdi dir=ltr>origin/HEAD</bdi>? בקשו מ-<bdi dir=ltr>Claude</bdi>, ואז הריצו שוב:<div class=pr><button class=cp aria-label="העתקת בקשת התיקון">העתקה</button><pre>תריץ את הפקודה <bdi dir=ltr>git remote set-head origin -a</bdi></pre></div></li></ol>
-   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי קיבלתי בדיוק את השגיאה הזאת. אחרי הבקשה משלב 3 הוא רץ והחזיר דוח מסודר באנגלית: מה נבדק, מה נמצא, ומה הוא השאיר מחוץ לדוח ולמה&nbsp;✅</span><span class=warn>הוא משווה את הקוד שלכם לגרסה שב-<bdi dir=ltr>GitHub</bdi>, כולל שינויים שעוד לא שמרתם. קוד ישן שכבר היה שם לא נבדק&nbsp;⚠️</span><span>רוצים את הדוח בעברית? כתבו אחריו "תסביר לי את זה בעברית"</span></div></div>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי קיבלתי בדיוק את השגיאה הזאת. אחרי הבקשה משלב 3 הוא רץ והחזיר דוח מסודר באנגלית: מה נבדק, מה נמצא, ומה הוא השאיר מחוץ לדוח ולמה&nbsp;✅</span><details class=more><summary>מה עוד ראיתי</summary><span class=warn>הוא משווה את הקוד שלכם לגרסה שב-<bdi dir=ltr>GitHub</bdi>, כולל שינויים שעוד לא שמרתם. קוד ישן שכבר היה שם לא נבדק&nbsp;⚠️</span><span>רוצים את הדוח בעברית? כתבו אחריו "תסביר לי את זה בעברית"</span></details></div></div></div>
 
-  <div class="card st" data-step=2 id=w2><header><button class=chk aria-label="סימון המעצב"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
-   <div><h3>המעצב<br><bdi dir=ltr>frontend-design</bdi></h3><p class=why>בונה אתרים שלא נראים כמו עוד תוצר של <bdi dir=ltr>AI</bdi></p></div></header>
+  <div class="card st acc" data-step=2 id=w2><header class=ah role=button tabindex=0 aria-expanded=false><span class=bdg aria-hidden=true><svg viewBox="0 0 100 100" fill=none stroke=currentColor stroke-width=7 stroke-linecap=round stroke-linejoin=round><circle cx="50" cy="50" r="38"/><circle cx="36" cy="40" r="6"/><circle cx="58" cy="34" r="6"/><circle cx="66" cy="54" r="6"/><path d="M34 64 C42 72 56 72 62 66"/></svg></span><div class=at><h3>המעצב<span class=sk><bdi dir=ltr>frontend-design</bdi></span></h3><p class=why>בונה אתרים שלא נראים כמו עוד תוצר של <bdi dir=ltr>AI</bdi></p></div><button class=chk aria-label="סימון המעצב"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button><span class=chev aria-hidden=true></span></header><div class=ab>
    <p class=nx>פלאגין רשמי של <bdi dir=ltr>Anthropic</bdi>, <span>ומתקינים אותו פעם אחת</span></p>
-   <ol><li>בטרמינל, לא בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>, הדביקו:<div class=pr><button class=cp aria-label="העתקת פקודת ההתקנה של המעצב">העתקה</button><pre class=ltr>claude plugin install frontend-design</pre></div></li>
-   <li>פתחו ב-<bdi dir=ltr>Claude&nbsp;Code</bdi> שיחה חדשה. מעכשיו הוא נכנס לבד כשאתם מבקשים דף, אתר או עיצוב</li>
+   <ol><li><button class=gt type=button data-t="החלון שבו מקלידים פקודות. ב-⁠Mac: לוחצים Cmd+רווח, מקלידים Terminal ולוחצים אנטר. ב-⁠Windows: לוחצים על Start, מקלידים PowerShell ולוחצים אנטר">בטרמינל</button>, לא בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>, הדביקו:<div class=pr><button class=cp aria-label="העתקת פקודת ההתקנה של המעצב">העתקה</button><pre class=ltr>claude plugin install frontend-design</pre></div></li>
+   <li>פתחו ב-<bdi dir=ltr>Claude&nbsp;Code</bdi> <button class=gt type=button data-t="מקלידים /clear בתוך Claude Code, או סוגרים ופותחים אותו מחדש">שיחה חדשה</button>. מעכשיו הוא נכנס לבד כשאתם מבקשים דף, אתר או עיצוב</li>
    <li>ספרו לו על המותג שלכם כבר בבקשה הראשונה: צבעים, פונט ואווירה. ככה העיצוב יתאים לכם</li></ol>
-   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי, מיד אחרי ההתקנה, ביקשתי דף נחיתה פשוט למאפייה שכונתית, בלי להזכיר את המעצב. <bdi dir=ltr>Claude</bdi> הפעיל אותו לבד&nbsp;✅</span></div></div>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בסשן נקי, מיד אחרי ההתקנה, ביקשתי דף נחיתה פשוט למאפייה שכונתית, בלי להזכיר את המעצב. <bdi dir=ltr>Claude</bdi> הפעיל אותו לבד&nbsp;✅</span></div></div></div>
 
-  <div class="card st" data-step=3 id=w3><header><button class=chk aria-label="סימון העוזר האישי"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
-   <div><h3>העוזר האישי<br><bdi dir=ltr>Claude in Chrome</bdi></h3><p class=why>עובד בדפדפן שלכם, עם החשבונות שלכם</p></div></header>
+  <div class="card st acc" data-step=3 id=w3><header class=ah role=button tabindex=0 aria-expanded=false><span class=bdg aria-hidden=true><svg viewBox="0 0 100 100" fill=none stroke=currentColor stroke-width=7 stroke-linecap=round stroke-linejoin=round><path d="M28 18 L28 78 L44 62 L56 86 L66 81 L54 58 L76 58 Z"/></svg></span><div class=at><h3>העוזר האישי<span class=sk><bdi dir=ltr>Claude in Chrome</bdi></span></h3><p class=why>עובד בדפדפן שלכם, עם החשבונות שלכם</p></div><button class=chk aria-label="סימון העוזר האישי"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button><span class=chev aria-hidden=true></span></header><div class=ab>
    <p class=nx>תוסף רשמי של <bdi dir=ltr>Anthropic</bdi> לדפדפן <bdi dir=ltr>Chrome</bdi></p>
    <ol><li>התקינו את התוסף, והתחברו בו לאותו חשבון <bdi dir=ltr>Claude</bdi> שלכם<br><a class="btn ghost store" href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn" target=_blank rel=noopener>לתוסף ב-Chrome Web Store</a></li>
-   <li>בטרמינל, פתחו את <bdi dir=ltr>Claude&nbsp;Code</bdi> עם החיבור לדפדפן:<div class=pr><button class=cp aria-label="העתקת הפקודה של העוזר האישי">העתקה</button><pre class=ltr>claude --chrome</pre></div>כבר בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>? הקלידו בו <code>/chrome</code></li></ol>
-   <div class=res><span class=ok>מה קרה כשהרצתי: ביקשתי מ-<bdi dir=ltr>Claude&nbsp;Code</bdi> לפתוח אתר ולספר מה כתוב בו. הוא פתח לשונית ב-<bdi dir=ltr>Chrome</bdi> שלי, קרא את הדף ולא לחץ על כלום&nbsp;✅</span><span>את זה בדקתי במחשב שלי ולא בסשן נקי, כי בסשן נקי אין את התוסף</span><span>אפשר גם בלי <bdi dir=ltr>Claude&nbsp;Code</bdi>: פותחים את החלונית של התוסף, ליד האתר שאתם נמצאים בו</span><span class=warn>הוא לוחץ וממלא טפסים בחשבונות האמיתיים שלכם, אז התחילו ממשימה שקל לבדוק&nbsp;⚠️</span></div></div>
+   <li><button class=gt type=button data-t="החלון שבו מקלידים פקודות. ב-⁠Mac: לוחצים Cmd+רווח, מקלידים Terminal ולוחצים אנטר. ב-⁠Windows: לוחצים על Start, מקלידים PowerShell ולוחצים אנטר">בטרמינל</button>, פתחו את <bdi dir=ltr>Claude&nbsp;Code</bdi> עם החיבור לדפדפן:<div class=pr><button class=cp aria-label="העתקת הפקודה של העוזר האישי">העתקה</button><pre class=ltr>claude --chrome</pre></div>כבר בתוך <bdi dir=ltr>Claude&nbsp;Code</bdi>? הקלידו בו <code>/chrome</code></li></ol>
+   <div class=res><span class=ok>מה קרה כשהרצתי: ביקשתי מ-<bdi dir=ltr>Claude&nbsp;Code</bdi> לפתוח אתר ולספר מה כתוב בו. הוא פתח לשונית ב-<bdi dir=ltr>Chrome</bdi> שלי, קרא את הדף ולא לחץ על כלום&nbsp;✅</span><details class=more><summary>מה עוד ראיתי</summary><span>את זה בדקתי במחשב שלי ולא בסשן נקי, כי בסשן נקי אין את התוסף</span><span>אפשר גם בלי <bdi dir=ltr>Claude&nbsp;Code</bdi>: פותחים את החלונית של התוסף, ליד האתר שאתם נמצאים בו</span><span class=warn>הוא לוחץ וממלא טפסים בחשבונות האמיתיים שלכם, אז התחילו ממשימה שקל לבדוק&nbsp;⚠️</span></details></div></div></div>
 
   <h3 class="grp rv" id=build>2 בונים סביבכם<small>מדביקים פרומפט ב-<bdi dir=ltr>Claude&nbsp;Code</bdi>, עונים על כמה שאלות, ובסוף יש לכם עובד שמכיר את העסק שלכם</small></h3>
 
-  <div class="card st" data-step=4 id=w4><header><button class=chk aria-label="סימון הקופירייטר"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
-   <div><h3>הקופירייטר</h3><p class=why>כותב בקול שלכם, ולומד מכל תיקון שלכם</p></div></header>
-   <p class=nx>מה הוא עושה: <span>מראיין אתכם ב-7 שאלות, מנתח טקסטים שכתבתם, ובונה סקיל עם יומן תיקונים</span></p>
+  <div class="card st acc" data-step=4 id=w4><header class=ah role=button tabindex=0 aria-expanded=false><span class=bdg aria-hidden=true><svg viewBox="0 0 100 100" fill=none stroke=currentColor stroke-width=7 stroke-linecap=round stroke-linejoin=round><path d="M22 78 L30 56 L66 20 L80 34 L44 70 Z"/><path d="M58 28 L72 42"/><path d="M22 86 H78"/></svg></span><div class=at><h3>הקופירייטר</h3><p class=why>כותב בקול שלכם, ולומד מכל תיקון שלכם</p></div><button class=chk aria-label="סימון הקופירייטר"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button><span class=chev aria-hidden=true></span></header><div class=ab>
+   <p class=nx>מה הוא עושה: <span>מראיין אתכם ב-7 שאלות, מנתח טקסטים שכתבתם, ובונה <button class=gt type=button data-t="קובץ הוראות קבוע ש-⁠Claude קורא כשהוא צריך אותו">סקיל</button> עם יומן תיקונים</span></p>
    <ol><li>הכינו 3 עד 5 טקסטים שכתבתם ואתם אוהבים: פוסטים, מיילים או הודעות. אין לכם? הוא יבקש מכם לכתוב 3 פסקאות קצרות</li>
-   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class=pr><button class=cp aria-label="העתקת הפרומפט של הקופירייטר">העתקה</button><pre>אתה עוזר לי לבנות קופירייטר אישי בתוך Claude Code: סקיל שכותב בקול שלי, מכיר את הקהל שלי, ולומד מכל תיקון שלי. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
+   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class="pr fold"><button class=cp aria-label="העתקת הפרומפט של הקופירייטר">העתקת הפרומפט המלא</button><pre>אתה עוזר לי לבנות קופירייטר אישי בתוך Claude Code: סקיל שכותב בקול שלי, מכיר את הקהל שלי, ולומד מכל תיקון שלי. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
 
 איך אתה עובד:
 - בהודעה הראשונה אומר לי במשפט אחד מה עומד לקרות: ראיון קצר, בנייה, ובדיקה יחד. ואז שואל את השאלה הראשונה.
@@ -454,15 +466,14 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
 - את התיקון שלי תכניס ל-corrections.md, כמו שהסקיל יעשה מעכשיו. תגיד לי ש-Claude Code עשוי לבקש אישור גם כאן, וזה תקין.
 - בסוף תסביר לי איך מפעילים אותו בפעם הבאה: פותחים שיחה חדשה ב-Claude Code ומבקשים טקסט. הדרך הבטוחה היא לכתוב / ואת השם שלו, ואחריו את הבקשה. למשל: <bdi dir=ltr style=white-space:nowrap>/my-copywriter</bdi> תכתוב פוסט על המבצע של השבוע.
 
-תתחיל עכשיו.</pre></div></li>
+תתחיל עכשיו.</pre><button class=unf type=button>לקרוא את כל הפרומפט</button></div></li>
    <li>בפעם הבאה: <code>/</code> והשם שבחרתם, ואחריו הבקשה. למשל <bdi dir=ltr>/my-copywriter</bdi> תכתוב פוסט על המבצע של השבוע</li></ol>
-   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי קופירייטר לבעל מוסך אופניים קטן, שאין לו אף טקסט כתוב. <bdi dir=ltr>Claude</bdi> ביקש ממנו 3 פסקאות קצרות, ומתוכן כתב 7 כללי קול, כל אחד עם ציטוט&nbsp;✅</span><span class=ok>ביקשתי פוסט על כוונון חורף בלי לתת מחיר. הוא עצר ושאל: "חסר לי פרט אחד, ואני לא רוצה להמציא אותו"&nbsp;✅</span><span class=warn>פעם אחת הוא כן הוסיף פרט שלא נתתי, אבל סימן אותו בעצמו וביקש שאתקן. קראו כל טקסט לפני שמפרסמים&nbsp;⚠️</span></div></div>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי קופירייטר לבעל מוסך אופניים קטן, שאין לו אף טקסט כתוב. <bdi dir=ltr>Claude</bdi> ביקש ממנו 3 פסקאות קצרות, ומתוכן כתב 7 כללי קול, כל אחד עם ציטוט&nbsp;✅</span><details class=more><summary>מה עוד ראיתי</summary><span class=ok>ביקשתי פוסט על כוונון חורף בלי לתת מחיר. הוא עצר ושאל: "חסר לי פרט אחד, ואני לא רוצה להמציא אותו"&nbsp;✅</span><span class=warn>פעם אחת הוא כן הוסיף פרט שלא נתתי, אבל סימן אותו בעצמו וביקש שאתקן. קראו כל טקסט לפני שמפרסמים&nbsp;⚠️</span></details></div></div></div>
 
-  <div class="card st" data-step=5 id=w5><header><button class=chk aria-label="סימון היועץ"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button>
-   <div><h3>היועץ</h3><p class=why>תוקף את התוכנית שלכם לפני שמתחילים לבנות</p></div></header>
+  <div class="card st acc" data-step=5 id=w5><header class=ah role=button tabindex=0 aria-expanded=false><span class=bdg aria-hidden=true><svg viewBox="0 0 100 100" fill=none stroke=currentColor stroke-width=7 stroke-linecap=round stroke-linejoin=round><circle cx="50" cy="50" r="38"/><path d="M38 40 C38 28 62 28 62 40 C62 50 50 50 50 60"/><circle cx="50" cy="72" r="3"/></svg></span><div class=at><h3>היועץ</h3><p class=why>תוקף את התוכנית שלכם לפני שמתחילים לבנות</p></div><button class=chk aria-label="סימון היועץ"><svg viewBox="0 0 24 24" fill=none stroke="#fff" stroke-width=3.2><path d="M5 12.5l4.5 4.5L19 7"/></svg></button><span class=chev aria-hidden=true></span></header><div class=ab>
    <p class=nx>מה הוא עושה: <span>שואל על פרויקטים שהשתבשו לכם, ובונה יועץ שזוכר אותם ולא נותן לחזור עליהם</span></p>
    <ol><li>חשבו על 2 או 3 פרויקטים שלא הלכו כמו שתכננתם. אין? גם החלטה בעסק שהתחרטתם עליה עובדת</li>
-   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class=pr><button class=cp aria-label="העתקת הפרומפט של היועץ">העתקה</button><pre>אתה עוזר לי לבנות יועץ אישי בתוך Claude Code: סקיל שתוקף כל תוכנית שלי לפני שמתחילים לבנות. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. היועץ מוצא איפה התוכנית עלולה להיכשל, שואל את השאלות שלא שאלתי, ולא נותן להתחיל בלי אישור שלי. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
+   <li>פתחו <bdi dir=ltr>Claude&nbsp;Code</bdi> והדביקו:<div class="pr fold"><button class=cp aria-label="העתקת הפרומפט של היועץ">העתקת הפרומפט המלא</button><pre>אתה עוזר לי לבנות יועץ אישי בתוך Claude Code: סקיל שתוקף כל תוכנית שלי לפני שמתחילים לבנות. סקיל הוא קובץ הוראות קבוע ש-Claude קורא בכל פעם שהוא צריך אותו. היועץ מוצא איפה התוכנית עלולה להיכשל, שואל את השאלות שלא שאלתי, ולא נותן להתחיל בלי אישור שלי. אני רוצה לסיים את השיחה הזאת עם סקיל עובד, גם אם אין לי רקע טכני.
 
 איך אתה עובד:
 - בהודעה הראשונה אומר לי במשפט אחד מה עומד לקרות: ראיון קצר, בנייה, ובדיקה יחד. ואז שואל את השאלה הראשונה.
@@ -500,9 +511,9 @@ bdi[dir=ltr]{direction:ltr;unicode-bidi:isolate}
 - בסוף תשאל אם הוא היה קשוח מדי או רך מדי, ותעדכן את SKILL.md לפי מה שאגיד.
 - תסביר לי איך מפעילים אותו בפעם הבאה: פותחים שיחה חדשה ב-Claude Code, כותבים / ואת השם שלו, ואחריו את התוכנית. למשל: <bdi dir=ltr style=white-space:nowrap>/plan-attack</bdi> אני רוצה לפתוח חנות אונליין.
 
-תתחיל עכשיו.</pre></div></li>
+תתחיל עכשיו.</pre><button class=unf type=button>לקרוא את כל הפרומפט</button></div></li>
    <li>בפעם הבאה: <code>/</code> והשם שבחרתם, ואחריו התוכנית. למשל <bdi dir=ltr>/plan-attack</bdi> אני רוצה לפתוח חנות אונליין</li></ol>
-   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי יועץ לבעל עגלת קפה, ונתתי לו תוכנית: אפליקציה להזמנות מראש. היועץ סיכם במשפט, שאל 3 שאלות קצרות, כמו "כמה לקוחות ביקשו מכם עד היום להזמין קפה מראש?", והמליץ להתחיל בניסוי של שבועיים בוואטסאפ&nbsp;✅</span><span class=ok>אחת הסיבות לכישלון שהוא נתן באה מהעבר של בעל העגלה: "אמרתם שזה רעיון שלכם ואף לקוח לא ביקש. זה חוזר על הלקח ממכונת האספרסו"&nbsp;✅</span><span class=ok>כתבתי "מאשר", והוא לא התחיל לבנות, כי זו הייתה רק בדיקה&nbsp;✅</span><span class=warn>בשיחה חדשה הוא הוסיף לסיכום פרט שלא אמרתי. בשביל זה הוא שואל "הבנתי נכון?", אז תקנו אותו&nbsp;⚠️</span></div></div>
+   <div class=res><span class=ok>מה קרה כשהרצתי: בניתי יועץ לבעל עגלת קפה, ונתתי לו תוכנית: אפליקציה להזמנות מראש. היועץ סיכם במשפט, שאל 3 שאלות קצרות, כמו "כמה לקוחות ביקשו מכם עד היום להזמין קפה מראש?", והמליץ להתחיל בניסוי של שבועיים בוואטסאפ&nbsp;✅</span><details class=more><summary>מה עוד ראיתי</summary><span class=ok>אחת הסיבות לכישלון שהוא נתן באה מהעבר של בעל העגלה: "אמרתם שזה רעיון שלכם ואף לקוח לא ביקש. זה חוזר על הלקח ממכונת האספרסו"&nbsp;✅</span><span class=ok>כתבתי "מאשר", והוא לא התחיל לבנות, כי זו הייתה רק בדיקה&nbsp;✅</span><span class=warn>בשיחה חדשה הוא הוסיף לסיכום פרט שלא אמרתי. בשביל זה הוא שואל "הבנתי נכון?", אז תקנו אותו&nbsp;⚠️</span></details></div></div></div>
  </div>
 </div></section>
 
@@ -582,6 +593,18 @@ document.querySelectorAll('a.opn').forEach(a=>a.addEventListener('click',()=>{co
  const sh=document.getElementById('share');if(sh)sh.addEventListener('click',()=>ev("ovdim-share","download"));})();
 </script>
 
+<div class=tipb id=tipb role=status></div>
+<script>/* v2: accordion (one open), prompt unfold, tap-to-explain terms */
+(()=>{const cards=[...document.querySelectorAll('.acc')];
+ const set=(c,o)=>{c.classList.toggle('open',o);c.querySelector('.ah').setAttribute('aria-expanded',o)};
+ cards.forEach(c=>{const h=c.querySelector('.ah');const go=e=>{if(e.target.closest('.chk'))return;const o=!c.classList.contains('open');cards.forEach(x=>set(x,false));set(c,o);if(o)c.scrollIntoView({block:'nearest',behavior:'smooth'})};
+  h.addEventListener('click',go);h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e)}})});
+ const open=()=>{const c=document.getElementById(location.hash.slice(1));if(c&&c.classList.contains('acc')){cards.forEach(x=>set(x,false));set(c,true)}};addEventListener('hashchange',open);open();
+ document.querySelectorAll('.pr.fold').forEach(p=>{const u=p.querySelector('.unf');u.onclick=()=>{const o=p.classList.toggle('open');u.textContent=o?'לקפל':'לקרוא את כל הפרומפט'}});
+ document.querySelectorAll('.cp').forEach(b=>{const L=b.textContent;b.addEventListener('click',()=>setTimeout(()=>{if(b.textContent==='העתקה'&&L!=='העתקה')b.textContent=L},1700))});
+ const tb=document.getElementById('tipb');let cur=null;
+ document.querySelectorAll('.gt').forEach(t=>t.addEventListener('click',e=>{e.stopPropagation();if(cur===t&&tb.classList.contains('on')){tb.classList.remove('on');return}cur=t;tb.innerHTML='';const b=document.createElement('b');b.textContent=t.textContent.replace(/^ב/,'')+': ';tb.append(b,document.createTextNode(t.dataset.t));tb.classList.add('on')}));
+ document.addEventListener('click',e=>{if(!e.target.closest('.gt,.tipb'))tb.classList.remove('on')});})();</script>
 <script src="../_shared/signup.js" defer></script>
 <script>/* ovdim only: own photo in the shared signup strip (the shared gal-cut.png stays for all other magnets) */
 document.addEventListener('DOMContentLoaded',()=>{const i=document.querySelector('.vk-cut');if(i)i.src='gal-cut-ovdim.png'});</script>
